@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Api
 {
-    const VERSION = '0.9.0';
+    const VERSION = '0.9.1';
 
     const CATEGORY_NAMESPACE = 14;
 
@@ -56,7 +56,6 @@ class Category extends Api
         $this->setParam('cmlimit', self::MAX_LIMIT);
         $this->setParam('cmtitle', $categoryTitle); // cmtitle OR cmpageid
         $this->send();
-        $file = new File;
         return Tools::flatten($this->getResponse(['query', 'categorymembers']));
     }
 

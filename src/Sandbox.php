@@ -8,7 +8,7 @@ use Attogram\SharedMedia\Api\Page;
 
 class Sandbox
 {
-    const VERSION = '0.9.1';
+    const VERSION = '0.9.2';
 
     public $methods;
 
@@ -60,6 +60,7 @@ class Sandbox
         print '<br />Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION;
         print '<br />Attogram\SharedMedia\Api\Category v'. \Attogram\SharedMedia\Api\Category::VERSION;
         print '<br />Attogram\SharedMedia\Api\File     v'. \Attogram\SharedMedia\Api\File::VERSION;
+        print '<br />Attogram\SharedMedia\Api\Page     v'. \Attogram\SharedMedia\Api\Page::VERSION;
         print '<br />Attogram\SharedMedia\Api\Tools    v'. \Attogram\SharedMedia\Api\Tools::VERSION;
         print '<br />Attogram\SharedMedia\Api\Sources  v'. \Attogram\SharedMedia\Api\Sources::VERSION;
         print '<br />Attogram\SharedMedia\Api\Sandbox  v'. self::VERSION;
@@ -130,8 +131,8 @@ class Sandbox
                 return new Category;
             case 'File':
                 return new File;
-			case 'Page':
-				return new Page;
+            case 'Page':
+                return new Page;
             default:
                 return new \StdClass();
         }

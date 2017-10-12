@@ -14,7 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.1';
+    const VERSION = '0.9.2';
 
     public $log;
     private $endpoint;
@@ -44,7 +44,7 @@ class Api
             $this->log = $log;
             return;
         }
-        $this->log = new Logger('Api');
+        $this->log = new Logger('Log');
         $this->log->pushHandler(new StreamHandler('php://output'));
     }
 
