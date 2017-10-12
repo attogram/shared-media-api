@@ -1,0 +1,20 @@
+exclude_paths:
+- "vendor/"
+engines:
+  phpcodesniffer:
+    enabled: true
+    config:
+      file_extensions: "php"
+      standard: "PSR1,PSR2"
+  phpmd:
+    enabled: true
+    checks:
+      CleanCode/StaticAccess: # allow Object::method()
+        enabled: false
+      Controversial/Superglobals: # allow $_GET in sandbox
+        enabled: false
+      Design/DevelopmentCodeFragment: # allow print_r()
+        enabled: false
+ratings:
+  paths:
+  - "**.php"

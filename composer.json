@@ -1,0 +1,19 @@
+{
+    "name": "attogram/shared-media-api",
+    "description": "MediaWiki API wrapper, fine-tuned for WikiMedia Commons.  Gets Category and File information into a flat PHP array.",
+    "type": "library",
+    "license": "(MIT or GPL-3.0+)",
+    "homepage": "https://github.com/attogram/shared-media-api",
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.5",
+        "guzzlehttp/guzzle": "^6.3",
+        "psr/log": "~1.0",
+        "monolog/monolog": "^2.0@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Attogram\\SharedMedia\\Api\\": "src/"
+        }
+    }
+}
