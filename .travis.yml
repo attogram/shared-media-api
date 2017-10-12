@@ -23,4 +23,6 @@ before_script:
   - if [ $TRAVIS_PHP_VERSION = "nightly" ]; then composer install --no-dev; fi
 
 script:
-  - if find . -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi
+  - if [ $TRAVIS_PHP_VERSION = "5.5" ]; if find . -name "*.php" ! -name "autoload_static.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi; fi
+  - if [ $TRAVIS_PHP_VERSION != "5.5" ]; if find . -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi; fi
+  

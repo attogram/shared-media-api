@@ -15,6 +15,11 @@ engines:
         enabled: false
       Design/DevelopmentCodeFragment: # allow print_r()
         enabled: false
+  phan:
+    enabled: true
+    checks:
+      PhanUndeclaredClassInstanceof:
+        enabled: false
 ratings:
   paths:
   - "**.php"
