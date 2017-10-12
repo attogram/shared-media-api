@@ -27,7 +27,7 @@ class File extends Api
      *
      * @see https://www.mediawiki.org/wiki/API:Search
      * @param string $query
-     * @return array array of hydrated Orm\File objects
+     * @return array
      */
     public function search($query)
     {
@@ -51,7 +51,7 @@ class File extends Api
      * get meta information about File(s) via pageid
      *
      * @param array|string $pageids
-     * @return array array of hydrated Orm\File objects
+     * @return array
      */
     public function infoFromPageid($pageids)
     {
@@ -72,7 +72,7 @@ class File extends Api
      * get meta information about File(s) via title
      *
      * @param array|string $titles
-     * @return array array of hydrated Orm\File objects
+     * @return array
      */
     public function infoFromTitle($titles)
     {

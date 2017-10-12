@@ -4,6 +4,7 @@ namespace Attogram\SharedMedia\Api;
 
 use Attogram\SharedMedia\Api\Category;
 use Attogram\SharedMedia\Api\File;
+use Attogram\SharedMedia\Api\Page;
 
 class Sandbox
 {
@@ -31,6 +32,7 @@ class Sandbox
             ['File', 'search', '(string) query'],
             ['File', 'infoFromPageid', '(int) pageid | (string) pageid|... | (array) pageids'],
             ['File', 'infoFromTitle', '(string) File:Title | (string) File:Title|... | (array) titles'],
+            ['Page', 'search', '(string) query'],
         ];
         return $this->methods;
     }
@@ -128,8 +130,10 @@ class Sandbox
                 return new Category;
             case 'File':
                 return new File;
+			case 'Page':
+				return new Page;
             default:
-                return new StdClass();
+                return new \StdClass();
         }
     }
 }

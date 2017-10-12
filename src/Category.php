@@ -20,7 +20,7 @@ class Category extends Api
      *
      * @see https://www.mediawiki.org/wiki/API:Search
      * @param string $query
-     * @return array array of Orm\Category objects
+     * @return array
      */
     public function search($query)
     {
@@ -42,7 +42,7 @@ class Category extends Api
      *
      * @see https://www.mediawiki.org/wiki/API:Categorymembers
      * @param string $categoryTitle
-     * @return array array of Orm\File objects
+     * @return array
      */
     public function members($categoryTitle)
     {
@@ -65,7 +65,7 @@ class Category extends Api
      *
      * @see https://www.mediawiki.org/wiki/API:Categories
      * @param int $pageid
-     * @return array array of Orm\Category objects
+     * @return array
      */
     public function from($pageid)
     {
@@ -85,7 +85,7 @@ class Category extends Api
      * get category information
      *
      * @param string|array $categoryTitle
-     * @return array array of Orm\Category objects
+     * @return array
      */
     public function info($categoryTitle)
     {
@@ -104,7 +104,7 @@ class Category extends Api
      *
      * @see https://www.mediawiki.org/wiki/API:Categorymembers
      * @param string $categoryTitle
-     * @return object
+     * @return array
      */
     public function subcats($categoryTitle)
     {
