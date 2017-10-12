@@ -8,7 +8,7 @@ use GuzzleHttp\Exception\ConnectException;
 use Psr\Log\LoggerInterface;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
-aaa
+
 /**
  * Attogram SharedMedia API
  */
