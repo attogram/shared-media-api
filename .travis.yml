@@ -20,4 +20,4 @@ before_script:
   - if [ $TRAVIS_PHP_VERSION = "nightly" ]; then composer install --no-dev; fi
 
 script:
-  - find . -type f -name "*.php" -exec php -d error_reporting=32767 -l {} \; 2>&1 >&- | grep "^"
+  - ! find . -type f -name "*.php" -exec php -d error_reporting=32767 -l {} \; 2>&1 >&- | grep "^"
