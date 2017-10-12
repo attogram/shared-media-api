@@ -7,7 +7,7 @@ use Attogram\SharedMedia\Api\File;
 
 class Sandbox
 {
-    const VERSION = '0.9.0';
+    const VERSION = '0.9.1';
 
     public $methods;
 
@@ -73,17 +73,17 @@ class Sandbox
 
     public function menu()
     {
-        $last_class = null;
+        $lastClass = null;
         foreach ($this->getMethods() as list($class, $method, $info)) {
-            if ($last_class != $class) {
+            if ($lastClass != $class) {
                 print '<br />';
             }
             print '<div style="display:inline-block;border:1px solid black;padding:10px;">'
             .'<a href="'.$_SERVER['PHP_SELF']
-            .'?class='.$class.'&amp;method='.$method.'">'
+            .'?class='.$class.'&amp;method='.$method.'" title="'.$info.'">'
             .$class.'::'.$method
             .'</a></div>';
-            $last_class = $class;
+            $lastClass = $class;
         }
         print '<br /><br />';
     }

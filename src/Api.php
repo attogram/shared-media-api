@@ -14,7 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.0';
+    const VERSION = '0.9.1';
 
     public $log;
     private $endpoint;
@@ -106,10 +106,7 @@ class Api
             $this->log->error('Api::send: ConnectException: '.$exception->getMessage());
             return false;
         }
-        $this->log->debug(
-            'Api::send: '.$this->request->getStatusCode()
-            .': '.$this->request->getReasonPhrase()
-        );
+        $this->log->debug('Api::send: '.$this->request->getStatusCode().': '.$this->request->getReasonPhrase());
         if (!$this->decodeRequest()) {
             $this->log->error('Api::send: decode failed');
             return false;
