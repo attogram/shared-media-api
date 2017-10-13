@@ -125,11 +125,8 @@ class Sandbox
         $form .= '</select>'
         .'<br />'
         .'API limit: <input name="limit" value="'.$class::MAX_LIMIT.'" type="text" size="5" />'
-        .'<br />'
-        ;
-
+        .'<br />';
         return $form;
-
     }
 
     public function getResponse()

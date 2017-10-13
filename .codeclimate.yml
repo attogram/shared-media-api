@@ -20,6 +20,12 @@ engines:
     checks:
       PhanUndeclaredClassInstanceof:
         enabled: false
+      PhanUndeclaredClassMethod:
+        enabled: false
+      PhanUndeclaredTypeParameter:
+        enabled: false
+      PhanUndeclaredClassCatch:
+        enabled: false
 ratings:
   paths:
   - "**.php"
