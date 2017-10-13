@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Sources;
 
 class Sandbox
 {
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
 
     public $methods;
 
@@ -104,13 +104,9 @@ class Sandbox
             .'<input type="hidden" name="method" value="'.$method.'" />'
             .$this->apiForm()
             .$class.'::'.$method.': <input name="arg" type="text" size="30" value="" />'
-            .' <code>'.$info.'</code>'
-            .'<br />'
-            .'<br />'
+            .' <code>'.$info.'</code><br /><br />'
             .'<input type="submit" value="                     GO                     "/>'
-            .'<br />'
-            .'</form>'
-            ;
+            .'<br /></form>';
         }
     }
 
