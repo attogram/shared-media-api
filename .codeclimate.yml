@@ -18,17 +18,19 @@ engines:
   phan:
     enabled: true
     checks:
+      PhanTypeMismatchArgument:
+        enabled: false
+      PhanTypeMismatchProperty:
+        enabled: false
+      PhanUndeclaredClassCatch:
+        enabled: false
+      PhanUndeclaredClassConstant:
+        enabled: false
       PhanUndeclaredClassInstanceof:
         enabled: false
       PhanUndeclaredClassMethod:
         enabled: false
       PhanUndeclaredTypeParameter:
-        enabled: false
-      PhanUndeclaredClassCatch:
-        enabled: false
-      PhanTypeMismatchProperty:
-        enabled: false
-      PhanTypeMismatchArgument:
         enabled: false
 ratings:
   paths:
