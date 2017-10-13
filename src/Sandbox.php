@@ -5,10 +5,11 @@ namespace Attogram\SharedMedia\Api;
 use Attogram\SharedMedia\Api\Category;
 use Attogram\SharedMedia\Api\File;
 use Attogram\SharedMedia\Api\Page;
+use Attogram\SharedMedia\Api\Sources;
 
 class Sandbox
 {
-    const VERSION = '0.9.2';
+    const VERSION = '0.9.3';
 
     public $methods;
 
@@ -41,16 +42,15 @@ class Sandbox
     {
         print '<!DOCTYPE html><html><head><meta charset="UTF-8">'
         .'<title>'.$title.'</title>'
-        .'<style>a { text-decoration:none; } form { margin:4; padding:2; width:100%; background-color:#CCDDCC; }'
+        .'<style>'
+        .'a { text-decoration:none; }'
+        .'form { padding:10px; border:1px solid #AAAAAA; background-color:#EEEEEE; }'
         .'input { font-family:monospace; padding:2; }'
-        .'div.category { border:1px solid grey; }'
-        .'div.file { border:1px solid grey; }'
-        .'img.file { border:1px solid black; }'
-        .'.log { background-color:#ff9; margin:0; padding:0; }'
+        .'.menu { display:inline-block; border:1px solid #AAAAAA; background-color:#EEEEEE; margin:1px; padding:5px; }'
         .'</style>'
         .'</head><body><pre><b><a href="./">attogram/share-media-api</a>   '
         .'<a href="'.$_SERVER['PHP_SELF'].'">API Sandbox</a>'
-        .'</b><br /><br />';
+        .'</b><br />';
     }
 
     public function sandboxFooter()
@@ -81,14 +81,13 @@ class Sandbox
             if ($lastClass != $class) {
                 print '<br />';
             }
-            print '<div style="display:inline-block;border:1px solid black;padding:10px;">'
+            print '<div class="menu">'
             .'<a href="'.$_SERVER['PHP_SELF']
             .'?class='.$class.'&amp;method='.$method.'" title="'.$info.'">'
             .$class.'::'.$method
             .'</a></div>';
             $lastClass = $class;
         }
-        print '<br /><br />';
     }
 
     public function form()
@@ -100,13 +99,37 @@ class Sandbox
             if ($class != $_GET['class'] || $method != $_GET['method']) {
                 continue;
             }
-            print '<form><input type="submit" value="'.$class.'-&gt;'.$method.'"/>'
-            . '<input type="hidden" name="class" value="'.$class.'" />'
-            . '<input type="hidden" name="method" value="'.$method.'" />'
-            . '(<input name="arg" type="text" size="30" value="" />)'
-            . '<br />                       <code>'.$info.'</code></form>'
-            . '<br />';
+            print '<form>'
+            .'<input type="hidden" name="class" value="'.$class.'" />'
+            .'<input type="hidden" name="method" value="'.$method.'" />'
+            .$this->apiForm()
+            .$class.'::'.$method.': <input name="arg" type="text" size="30" value="" />'
+            .' <code>'.$info.'</code>'
+            .'<br />'
+            .'<br />'
+            .'<input type="submit" value="                     GO                     "/>'
+            .'<br />'
+            .'</form>'
+            ;
         }
+    }
+
+    public function apiForm()
+    {
+        $class = $this->getClass();
+        $form = '';
+        $form .= 'API Endpoint: <select name="endpoint">';
+        foreach (Sources::$sources as $source) {
+            $form .= '<option value="'.$source.'">'.$source.'</option>';
+        }
+        $form .= '</select>'
+        .'<br />'
+        .'API limit: <input name="limit" value="'.$class::MAX_LIMIT.'" type="text" size="5" />'
+        .'<br />'
+        ;
+
+        return $form;
+
     }
 
     public function getResponse()
