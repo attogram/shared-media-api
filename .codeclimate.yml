@@ -26,6 +26,8 @@ engines:
         enabled: false
       PhanUndeclaredClassCatch:
         enabled: false
+      PhanTypeMismatchProperty:
+        enabled: false
 ratings:
   paths:
   - "**.php"
