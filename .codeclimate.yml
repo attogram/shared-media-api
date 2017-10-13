@@ -28,6 +28,8 @@ engines:
         enabled: false
       PhanTypeMismatchProperty:
         enabled: false
+      PhanTypeMismatchArgument:
+        enabled: false
 ratings:
   paths:
   - "**.php"
