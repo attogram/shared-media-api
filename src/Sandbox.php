@@ -48,8 +48,7 @@ class Sandbox
         .'input { font-family:monospace; padding:2; }'
         .'.menu { display:inline-block; border:1px solid #AAAAAA; background-color:#EEEEEE; margin:1px; padding:5px; }'
         .'</style>'
-        .'</head><body><pre><b><a href="./">attogram/share-media-api</a>   '
-        .'<a href="'.$_SERVER['PHP_SELF'].'">API Sandbox</a>'
+        .'</head><body><pre><b><a href="./">share-media-api</a> - <a href="'.$_SERVER['PHP_SELF'].'">Sandbox</a>'
         .'</b><br />';
     }
 
@@ -115,12 +114,12 @@ class Sandbox
         $class = $this->getClass();
         $form = '';
         $form .= 'API Endpoint: <select name="endpoint">';
-        foreach (Sources::$sources as $source) {
+        foreach (Sources::$sources as $key => $source) {
 			$select = '';
 			if (isset($_GET['endpoint']) && $_GET['endpoint'] == $source) {
 				$select = ' selected ';
 			}
-            $form .= '<option value="'.$source.'"'.$select.'>'.$source.'</option>';
+            $form .= '<option value="'.$source.'"'.$select.'>'.$key.' -- '.$source.'</option>';
         }
         $form .= '</select>'
         .'<br />'
