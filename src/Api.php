@@ -14,7 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.2';
+    const VERSION = '0.9.3';
 
     public $log;
     private $endpoint;
@@ -55,7 +55,7 @@ class Api
     public function setEndpoint($endpoint)
     {
         $this->endpoint = $endpoint;
-        $this->log->debug('Api::setEndopint: '.$endpoint);
+        $this->log->debug('Api::setEndpoint: '.$endpoint);
     }
 
     /**

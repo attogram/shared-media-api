@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Sources;
 
 class Sandbox
 {
-    const VERSION = '0.9.4';
+    const VERSION = '0.9.5';
 
     public $methods;
 
@@ -116,7 +116,11 @@ class Sandbox
         $form = '';
         $form .= 'API Endpoint: <select name="endpoint">';
         foreach (Sources::$sources as $source) {
-            $form .= '<option value="'.$source.'">'.$source.'</option>';
+			$select = '';
+			if (isset($_GET['endpoint']) && $_GET['endpoint'] == $source) {
+				$select = ' selected ';
+			}
+            $form .= '<option value="'.$source.'"'.$select.'>'.$source.'</option>';
         }
         $form .= '</select>'
         .'<br />'
@@ -134,9 +138,11 @@ class Sandbox
         if (!method_exists($class, $_GET['method'])) {
             return 'ERROR: Class::Method not found';
         }
+		
+		$class->setEndpoint($_GET['endpoint']);
         $method = $_GET['method'];
         $arg = urldecode($_GET['arg']) ?: '';
-        $class->log->debug(get_class($class).'::'.$method.'('.$arg.')');
+        //$class->log->debug(get_class($class).'::'.$method.'('.$arg.')');
         return $this->sandboxResult($class->$method($arg));
     }
 
