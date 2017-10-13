@@ -14,7 +14,9 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
+
+    const MAX_LIMIT = 50;
 
     public $log;
     private $endpoint;
@@ -22,6 +24,7 @@ class Api
     private $params = array();
     private $request;
     private $response;
+    private $limit;
 
     /**
      * @return void
@@ -65,12 +68,24 @@ class Api
     public function getEndpoint()
     {
         if (!is_string($this->endpoint) || !$this->endpoint) {
-            //$this->setEndpoint('https://commons.wikimedia.org/w/api.php');
             $this->setEndpoint(Sources::getSource());
         }
         return $this->endpoint;
     }
 
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
+        $this->log->debug('Api::setLimit: '.$limit);
+    }
+
+    public function getLimit()
+    {
+        if (!is_numeric($this->limit) || !$this->limit) {
+            $this->setLimit(self::MAX_LIMIT);
+        }
+        return $this->limit;
+    }
     /**
      * @uses Api::$param
      * @return void

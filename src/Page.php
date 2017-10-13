@@ -9,12 +9,9 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Page extends Api
 {
-    const VERSION = '0.9.0';
+    const VERSION = '0.9.1';
 
     const PAGE_NAMESPACE = 0;
-
-    const MAX_LIMIT = 500;
-
 
     /**
      * search for Pages
@@ -31,7 +28,7 @@ class Page extends Api
         }
         $this->setParam('generator', 'search');
         $this->setParam('gsrnamespace', self::PAGE_NAMESPACE);
-        $this->setParam('gsrlimit', self::MAX_LIMIT);
+        $this->setParam('gsrlimit', $this->getLimit());
         $this->setParam('gsrsearch', $query);
         $this->setParam('prop', 'pageprops');
         $this->send();

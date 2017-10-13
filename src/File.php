@@ -9,11 +9,9 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class File extends Api
 {
-    const VERSION = '0.9.0';
+    const VERSION = '0.9.1';
 
     const FILE_NAMESPACE = 6;
-
-    const MAX_LIMIT = 500;
 
     public $width = 100;
 
@@ -37,7 +35,7 @@ class File extends Api
         }
         $this->setParam('generator', 'search');
         $this->setParam('gsrnamespace', self::FILE_NAMESPACE);
-        $this->setParam('gsrlimit', self::MAX_LIMIT);
+        $this->setParam('gsrlimit', $this->getLimit());
         $this->setParam('gsrsearch', $query);
         $this->setParam('prop', 'imageinfo');
         $this->setParam('iiprop', $this->iiprop);
@@ -99,6 +97,6 @@ class File extends Api
         $this->setParam('iiprop', $this->iiprop);
         $this->setParam('iiextmetadatafilter', $this->iiextmetadatafilter);
         $this->setParam('iiurlwidth', $this->width);
-        $this->setParam('iilimit', self::MAX_LIMIT);
+        $this->setParam('iilimit', $this->getLimit());
     }
 }

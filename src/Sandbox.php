@@ -139,6 +139,8 @@ class Sandbox
         }
 		
 		$class->setEndpoint($_GET['endpoint']);
+		$class->setLimit($_GET['limit']);
+		
         $method = $_GET['method'];
         $arg = urldecode($_GET['arg']) ?: '';
         //$class->log->debug(get_class($class).'::'.$method.'('.$arg.')');

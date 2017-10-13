@@ -9,11 +9,9 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Api
 {
-    const VERSION = '0.9.1';
+    const VERSION = '0.9.2';
 
     const CATEGORY_NAMESPACE = 14;
-
-    const MAX_LIMIT = 500;
 
     /**
      * search for categories
@@ -31,7 +29,7 @@ class Category extends Api
         $this->setParam('list', 'search');
         $this->setParam('srnamespace', self::CATEGORY_NAMESPACE);
         $this->setParam('srprop', 'size|snippet|timestamp'); // titlesnippet|title
-        $this->setParam('srlimit', self::MAX_LIMIT);
+        $this->setParam('srlimit', $this->getLimit());
         $this->setParam('srsearch', $query);
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'search']));
@@ -53,7 +51,7 @@ class Category extends Api
         $this->setParam('list', 'categorymembers');
         $this->setParam('cmtype', 'file');
         $this->setParam('cmprop', 'ids|title');
-        $this->setParam('cmlimit', self::MAX_LIMIT);
+        $this->setParam('cmlimit', $this->getLimit());
         $this->setParam('cmtitle', $categoryTitle); // cmtitle OR cmpageid
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'categorymembers']));
@@ -74,7 +72,7 @@ class Category extends Api
         }
         $this->setParam('prop', 'categories');
         $this->setParam('clprop', 'hidden'); // timestamp|hidden
-        $this->setParam('cllimit', self::MAX_LIMIT);
+        $this->setParam('cllimit', $this->getLimit());
         $this->setParam('pageids', $pageid);
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages', $pageid, 'categories']));
@@ -114,7 +112,7 @@ class Category extends Api
         $this->setParam('list', 'categorymembers');
         $this->setParam('cmtype', 'subcat');
         $this->setParam('cmprop', 'ids|title');
-        $this->setParam('cmlimit', self::MAX_LIMIT);
+        $this->setParam('cmlimit', $this->getLimit());
         $this->setParam('cmtitle', $categoryTitle); // cmtitle OR cmpageid
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'categorymembers']));
