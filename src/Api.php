@@ -14,7 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.6';
+    const VERSION = '0.9.7';
 
     const MAX_LIMIT = 50;
 
@@ -152,21 +152,25 @@ class Api
             $this->log->error('Api::getResponse: No Response Found');
             return [];
         }
+        $response = $this->getResponseFromKeys($keys);
+        $this->log->debug('Api::getResponse: count: '.count($response));
+        return $response;
+    }
+
+    public function getResponseFromKeys($keys)
+    {
         if (!is_array($keys) || !$keys) {
-            $this->log->debug('Api::getResponse: Full Response returned');
+            $this->log->debug('Api::getResponseFromKeys: Keys Not Found.');
             return $this->response;
         }
         $found = $this->response;
         foreach ($keys as $key) {
             if (!isset($found[$key])) {
-                $this->log->error('Api::getResponse: Key Not Found: '.$key);
+                $this->log->error('Api::getResponseFromKeys: Key Not Found: '.$key);
                 return $this->response;
-                //$this->log->error('Api::getResponse: raw:', $this->response);
-                //return [];
             }
             $found = $found[$key];
         }
-        $this->log->debug('Api::getResponse: count: '.count($found));
         return $found;
     }
 
