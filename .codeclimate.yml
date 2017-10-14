@@ -37,7 +37,7 @@ engines:
     config:
       languages:
         php:
-          mass_threshold: 32
+          mass_threshold: 48
   csslint:
     enabled: true
   stylelint:
