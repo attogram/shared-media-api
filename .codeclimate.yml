@@ -1,7 +1,7 @@
-# attogram/shared-media-api - codeclimate.yml - v0.9.1
-exclude_paths:
+# attogram/shared-media-api - codeclimate.yml - v0.9.2
+exclude_patterns:
 - "vendor/"
-engines:
+plugins:
   phpcodesniffer:
     enabled: true
     config:
@@ -47,8 +47,3 @@ engines:
     enabled: true
   git-legal:
     enabled: true
-ratings:
-  paths:
-  - "**.php"
-  - "**.css"
-  - "composer.json"
