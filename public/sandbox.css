@@ -1,4 +1,4 @@
-/* attogram/shared-media-api - sandbox.css - v0.9.4 */
+/* attogram/shared-media-api - sandbox.css - v0.9.5 */
 body {
     background-color:#ddd;
     color:#000;
@@ -9,8 +9,8 @@ body {
 a {
     background-color:lightyellow;
     color:#00F;
-    padding-right:5px;
     padding-left:5px;
+    padding-right:5px;
     text-decoration:none;
 }
 a:hover {
