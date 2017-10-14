@@ -11,7 +11,7 @@ use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.17';
+    const VERSION = '0.9.18';
 
     const DEFAULT_LIMIT = 10;
 
@@ -38,6 +38,7 @@ class Sandbox
     public function __construct()
     {
         $this->sandboxInit();
+        $this->sandboxDefaults();
         print $this->sandboxHeader();
         print $this->menu();
         print $this->form();
@@ -52,13 +53,17 @@ class Sandbox
         $this->self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null;
         $this->endpoint = isset($_GET['endpoint']) ? trim(urldecode($_GET['endpoint'])) : null;
         $this->limit = isset($_GET['limit']) ? trim(urldecode($_GET['limit'])) : null;
-        if (!$this->limit) {
-            $this->limit = self::DEFAULT_LIMIT;
-        }
         $this->class = isset($_GET['class']) ? trim(urldecode($_GET['class'])) : null;
         $this->method = isset($_GET['method']) ? trim(urldecode($_GET['method'])) : null;
         $this->arg = isset($_GET['arg']) ? trim(urldecode($_GET['arg'])) : null;
         $this->logLevel = isset($_GET['logLevel']) ? strtoupper(trim(urldecode($_GET['logLevel']))) : null;
+    }
+
+    public function sandboxDefaults()
+    {
+        if (!$this->limit) {
+            $this->limit = self::DEFAULT_LIMIT;
+        }
         if (!$this->logLevel) {
             $this->logLevel = 'NOTICE';
         }
