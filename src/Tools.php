@@ -7,8 +7,11 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
 
+    /**
+     * @param array $arrays
+     */
     public static function flatten($arrays)
     {
         if (!is_array($arrays)) {
@@ -56,10 +59,26 @@ class Tools
         return false;
     }
 
+    /**
+     * @param string $str1
+     * @param string $str2
+     */
     public function isSelected($str1, $str2)
     {
         if ($str1 == $str2) {
             return ' selected ';
         }
+    }
+
+    /**
+     * @param array|mixed $values
+     * @return string|mixed
+     */
+    public function valuesImplode($values)
+    {
+        if (!is_array($values)) {
+            return $values;
+        }
+        return implode('|', $values);
     }
 }

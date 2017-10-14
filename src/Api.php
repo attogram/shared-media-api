@@ -14,14 +14,14 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.8';
+    const VERSION = '0.9.9';
 
-    const MAX_LIMIT = 50;
+    const DEFAULT_LIMIT = 50;
 
-    public $log;
+    public $logger;
     private $endpoint;
     private $client;
-    private $params = array();
+    private $params = [];
     private $request;
     private $response;
     private $limit;
@@ -29,9 +29,9 @@ class Api
     /**
      * @return void
      */
-    public function __construct(LoggerInterface $log = null)
+    public function __construct(LoggerInterface $logger = null)
     {
-        $this->setLogger($log);
+        $this->setLogger($logger);
     }
 
     /**
@@ -41,14 +41,14 @@ class Api
      * @param mixed $log
      * @return void
      */
-    private function setLogger(LoggerInterface $log = null)
+    private function setLogger(LoggerInterface $logger = null)
     {
-        if ($log instanceof LoggerInterface) {
-            $this->log = $log;
+        if ($logger instanceof LoggerInterface) {
+            $this->logger = $logger;
             return;
         }
-        $this->log = new Logger('Log');
-        $this->log->pushHandler(new StreamHandler('php://output'));
+        $this->logger = new Logger('Log');
+        $this->logger->pushHandler(new StreamHandler('php://output'));
     }
 
     /**
@@ -58,7 +58,7 @@ class Api
     public function setEndpoint($endpoint)
     {
         $this->endpoint = $endpoint;
-        $this->log->debug('Api::setEndpoint: '.$endpoint);
+        $this->logger->debug('Api::setEndpoint: '.$endpoint);
     }
 
     /**
@@ -76,13 +76,13 @@ class Api
     public function setLimit($limit)
     {
         $this->limit = $limit;
-        $this->log->debug('Api::setLimit: '.$limit);
+        $this->logger->debug('Api::setLimit: '.$limit);
     }
 
     public function getLimit()
     {
         if (!is_numeric($this->limit) || !$this->limit) {
-            $this->setLimit(self::MAX_LIMIT);
+            $this->setLimit(self::DEFAULT_LIMIT);
         }
         return $this->limit;
     }
@@ -93,7 +93,7 @@ class Api
     public function setParam($paramName, $paramValue)
     {
         $this->params[$paramName] = $paramValue;
-        $this->log->debug('Api::setParam: '.$paramName.' = '.$paramValue);
+        $this->logger->debug('Api::setParam: '.$paramName.' = '.$paramValue);
     }
 
     /**
@@ -105,13 +105,13 @@ class Api
     public function send()
     {
         if (!$this->params || !is_array($this->params)) {
-            $this->log->error('Api::send: params is empty');
+            $this->logger->error('Api::send: params is empty');
             return false;
         }
         $this->setParam('action', 'query');
         $this->setParam('format', 'json');
         $this->setParam('formatversion', 2);
-        $this->log->info('Api::send: <a target="commons" href="'.$this->getUrl().'">'.$this->getUrl().'</a>');
+        $this->logger->info('Api::send: <a target="commons" href="'.$this->getUrl().'">'.$this->getUrl().'</a>');
         try {
             $this->request = $this->getClient()->request(
                 'GET',
@@ -119,12 +119,12 @@ class Api
                 ['query' => $this->params]
             );
         } catch (ConnectException $exception) {
-            $this->log->error('Api::send: ConnectException: '.$exception->getMessage());
+            $this->logger->error('Api::send: ConnectException: '.$exception->getMessage());
             return false;
         }
-        $this->log->info('Api::send: '.$this->request->getStatusCode().': '.$this->request->getReasonPhrase());
+        $this->logger->info('Api::send: '.$this->request->getStatusCode().': '.$this->request->getReasonPhrase());
         if (!$this->decodeRequest()) {
-            $this->log->error('Api::send: decode failed');
+            $this->logger->error('Api::send: decode failed');
             return false;
         };
         return true;
@@ -149,24 +149,24 @@ class Api
     public function getResponse($keys = null)
     {
         if (!is_array($this->response) || !$this->response) {
-            $this->log->error('Api::getResponse: No Response Found');
+            $this->logger->error('Api::getResponse: No Response Found');
             return [];
         }
         $response = $this->getResponseFromKeys($keys);
-        $this->log->info('Api::getResponse: count: '.count($response));
+        $this->logger->info('Api::getResponse: count: '.count($response));
         return $response;
     }
 
     public function getResponseFromKeys($keys)
     {
         if (!is_array($keys) || !$keys) {
-            $this->log->debug('Api::getResponseFromKeys: Keys Not Found.');
+            $this->logger->debug('Api::getResponseFromKeys: Keys Not Found.');
             return $this->response;
         }
         $found = $this->response;
         foreach ($keys as $key) {
             if (!isset($found[$key])) {
-                $this->log->error('Api::getResponseFromKeys: Key Not Found: '.$key);
+                $this->logger->error('Api::getResponseFromKeys: Key Not Found: '.$key);
                 return $this->response;
             }
             $found = $found[$key];

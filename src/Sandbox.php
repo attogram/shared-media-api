@@ -12,7 +12,7 @@ use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.20';
+    const VERSION = '0.9.21';
 
     const DEFAULT_LIMIT = 10;
 
@@ -23,8 +23,10 @@ class Sandbox
                 ['Category', 'subcats'],
                 ['Category', 'from'],
                 ['File',     'search'],
-                ['File',     'infoFromPageid'],
-                ['File',     'infoFromTitle'],
+                ['File',     'infoPageid'],
+                ['File',     'infoTitle'],
+                ['File',     'onPageid'],
+                ['File',     'onTitle'],
                 ['Page',     'search'],
             ];
     public $self;
@@ -93,7 +95,7 @@ class Sandbox
 
     public function sandboxFooter()
     {
-        return '<footer><br /><hr />'
+        return '<footer><hr />'
         .'<a href="./">shared-media-api</a> : <a href="'.$this->self.'">sandbox</a>'
         .'<small><pre>'
         .'Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION
@@ -115,7 +117,7 @@ class Sandbox
         $menu = '<p>';
         foreach ($this->methods as list($class, $method)) {
             if (!empty($lastClass) && $lastClass != $class) {
-                $menu .= ' &nbsp; ';
+                $menu .= '<br />';
             }
             $menu .= '<div class="menu">'
                 .'<a href="'.$this->self.'?class='.$class.'&amp;method='.$method.'">'
@@ -191,7 +193,7 @@ class Sandbox
         $class->setEndpoint($this->endpoint);
         $class->setLimit($this->limit);
         $results = $class->{$this->method}($this->arg);
-        return htmlentities(print_r($results, true));
+        return '<textarea cols="120" rows="20" style="width:98%">'.htmlentities(print_r($results, true)).'</textarea>';
     }
 
     public function getClass()
