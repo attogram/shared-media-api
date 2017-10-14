@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Sources;
 
 class Sandbox
 {
-    const VERSION = '0.9.5';
+    const VERSION = '0.9.6';
 
     public $methods;
 
@@ -18,7 +18,9 @@ class Sandbox
         $this->sandboxHeader();
         $this->menu();
         $this->form();
-        print PHP_EOL.$this->getResponse();
+        print '<pre>';
+        print $this->getResponse();
+        print '</pre>';
         $this->sandboxFooter();
     }
 
@@ -46,15 +48,15 @@ class Sandbox
         .'a { text-decoration:none; }'
         .'form { padding:10px; border:1px solid #AAAAAA; background-color:#EEEEEE; }'
         .'input { font-family:monospace; padding:2; }'
-        .'.menu { display:inline-block; border:1px solid #AAAAAA; background-color:#EEEEEE; margin:1px; padding:5px; }'
+        .'.menu { font-weight:bold; display:inline-block; border:1px solid #AAAAAA; background-color:#EEEEEE; margin:1px; padding:5px; }'
         .'</style>'
-        .'</head><body><pre><b><a href="./">share-media-api</a> - <a href="'.$_SERVER['PHP_SELF'].'">Sandbox</a>'
-        .'</b><br />';
+        .'</head><body>'
+        .'<p><a href="./">share-media-api</a> - <a href="'.$_SERVER['PHP_SELF'].'">Sandbox</a></p>';
     }
 
     public function sandboxFooter()
     {
-        print '<pre><br /><br /><hr /><b><a href="./">attogram/shared-media-api</a></b>';
+        print '<footer><pre><br /><br /><hr /><b><a href="./">attogram/shared-media-api</a></b>';
         print ' @ '.gmdate('Y-m-d H:i:s').' UTC<br />';
         print '<br />Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION;
         print '<br />Attogram\SharedMedia\Api\Category v'. \Attogram\SharedMedia\Api\Category::VERSION;
@@ -65,7 +67,7 @@ class Sandbox
         print '<br />Attogram\SharedMedia\Api\Sandbox  v'. self::VERSION;
         print '<br />GuzzleHttp\Client                 v'. \GuzzleHttp\Client::VERSION;
         print '<br />Monolog\Logger                    API v'. \Monolog\Logger::API;
-        print '</pre></body></html>';
+        print '</pre></footer></body></html>';
     }
 
     public function sandboxResult($results = [])
@@ -76,9 +78,10 @@ class Sandbox
     public function menu()
     {
         $lastClass = null;
+        print '<p>';
         foreach ($this->getMethods() as list($class, $method, $info)) {
-            if ($lastClass != $class) {
-                print '<br />';
+            if (!empty($lastClass) && $lastClass != $class) {
+                print ' &nbsp; ';
             }
             print '<div class="menu">'
             .'<a href="'.$_SERVER['PHP_SELF']
@@ -87,6 +90,7 @@ class Sandbox
             .'</a></div>';
             $lastClass = $class;
         }
+        print '</p>';
     }
 
     public function form()
@@ -98,14 +102,14 @@ class Sandbox
             if ($class != $_GET['class'] || $method != $_GET['method']) {
                 continue;
             }
-            print '<form>'
+            print '<p><form>'
             .'<input type="hidden" name="class" value="'.$class.'" />'
             .'<input type="hidden" name="method" value="'.$method.'" />'
             .$this->apiForm()
             .$class.'::'.$method.': <input name="arg" type="text" size="30" value="" />'
             .' <code>'.$info.'</code><br /><br />'
             .'<input type="submit" value="                     GO                     "/>'
-            .'<br /></form>';
+            .'</form></p>';
         }
     }
 
@@ -115,10 +119,10 @@ class Sandbox
         $form = '';
         $form .= 'API Endpoint: <select name="endpoint">';
         foreach (Sources::$sources as $key => $source) {
-			$select = '';
-			if (isset($_GET['endpoint']) && $_GET['endpoint'] == $source) {
-				$select = ' selected ';
-			}
+            $select = '';
+            if (isset($_GET['endpoint']) && $_GET['endpoint'] == $source) {
+                $select = ' selected ';
+            }
             $form .= '<option value="'.$source.'"'.$select.'>'.$key.' -- '.$source.'</option>';
         }
         $form .= '</select>'
@@ -137,10 +141,10 @@ class Sandbox
         if (!method_exists($class, $_GET['method'])) {
             return 'ERROR: Class::Method not found';
         }
-		
-		$class->setEndpoint($_GET['endpoint']);
-		$class->setLimit($_GET['limit']);
-		
+
+        $class->setEndpoint($_GET['endpoint']);
+        $class->setLimit($_GET['limit']);
+
         $method = $_GET['method'];
         $arg = urldecode($_GET['arg']) ?: '';
         //$class->log->debug(get_class($class).'::'.$method.'('.$arg.')');

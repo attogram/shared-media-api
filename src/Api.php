@@ -14,7 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.4';
+    const VERSION = '0.9.5';
 
     const MAX_LIMIT = 50;
 
@@ -111,6 +111,8 @@ class Api
         $this->setParam('action', 'query');
         $this->setParam('format', 'json');
         $this->setParam('formatversion', 2);
+
+        $this->log->debug('Api::send: <a target="commons" href="'.$this->getUrl().'">'.$this->getUrl().'</a>');
         try {
             $this->request = $this->getClient()->request(
                 'GET',
@@ -159,14 +161,20 @@ class Api
         foreach ($keys as $key) {
             if (!isset($found[$key])) {
                 $this->log->error('Api::getResponse: Key Not Found: '.$key);
-                return [];
+                return $this->response;
+                //$this->log->error('Api::getResponse: raw:', $this->response);
+                //return [];
             }
             $found = $found[$key];
         }
-        $this->log->debug('Api::getResponse: Response size: '.count($found));
+        $this->log->debug('Api::getResponse: count: '.count($found));
         return $found;
     }
 
+    public function getUrl()
+    {
+        return $this->getEndpoint().'?'.http_build_query($this->params);
+    }
     /**
      * @uses Api::$response
      * @return bool

@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '0.9.0';
+    const VERSION = '0.9.1';
 
     public static function flatten($arrays)
     {
@@ -30,6 +30,9 @@ class Tools
      */
     public static function flattenArray($array, $prefix = '')
     {
+        if (!is_array($array)) {
+            return $array;
+        }
         $result = [];
         foreach ($array as $key => $val) {
             if (is_array($val)) {
