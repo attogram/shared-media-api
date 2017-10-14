@@ -6,12 +6,13 @@ use Attogram\SharedMedia\Api\Category;
 use Attogram\SharedMedia\Api\File;
 use Attogram\SharedMedia\Api\Page;
 use Attogram\SharedMedia\Api\Sources;
+use Attogram\SharedMedia\Api\Tools;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.18';
+    const VERSION = '0.9.19';
 
     const DEFAULT_LIMIT = 10;
 
@@ -108,11 +109,6 @@ class Sandbox
         .'</footer></body></html>';
     }
 
-    public function sandboxResult($results = [])
-    {
-        return htmlentities(print_r($results, true));
-    }
-
     public function menu()
     {
         $lastClass = null;
@@ -172,22 +168,15 @@ class Sandbox
     public function logLevelSelect()
     {
         return '<select name="logLevel">'
-        .'<option value="debug"'.$this->isSelected('DEBUG', $this->logLevel).'>debug</option>'
-        .'<option value="info"'.$this->isSelected('INFO', $this->logLevel).'>info</option>'
-        .'<option value="notice"'.$this->isSelected('NOTICE', $this->logLevel).'>notice</option>'
-        .'<option value="warning"'.$this->isSelected('WARNING', $this->logLevel).'>warning</option>'
-        .'<option value="error"'.$this->isSelected('ERROR', $this->logLevel).'>error</option>'
-        .'<option value="critical"'.$this->isSelected('CRITICAL', $this->logLevel).'>critical</option>'
-        .'<option value="alert"'.$this->isSelected('ALERT', $this->logLevel).'>alert</option>'
-        .'<option value="emergency'.$this->isSelected('EMERGENCY', $this->logLevel).'">emergency</option>'
+        .'<option value="debug"'.Tools::isSelected('DEBUG', $this->logLevel).'>debug</option>'
+        .'<option value="info"'.Tools::isSelected('INFO', $this->logLevel).'>info</option>'
+        .'<option value="notice"'.Tools::isSelected('NOTICE', $this->logLevel).'>notice</option>'
+        .'<option value="warning"'.Tools::isSelected('WARNING', $this->logLevel).'>warning</option>'
+        .'<option value="error"'.Tools::isSelected('ERROR', $this->logLevel).'>error</option>'
+        .'<option value="critical"'.Tools::isSelected('CRITICAL', $this->logLevel).'>critical</option>'
+        .'<option value="alert"'.Tools::isSelected('ALERT', $this->logLevel).'>alert</option>'
+        .'<option value="emergency'.Tools::isSelected('EMERGENCY', $this->logLevel).'">emergency</option>'
         .'</select>';
-    }
-
-    public function isSelected($str1, $str2)
-    {
-        if ($str1 == $str2) {
-            return ' selected ';
-        }
     }
 
     public function getResponse()
@@ -201,7 +190,8 @@ class Sandbox
         }
         $class->setEndpoint($this->endpoint);
         $class->setLimit($this->limit);
-        return $this->sandboxResult($class->{$this->method}($this->arg));
+        $results = $class->{$this->method}($this->arg);
+        return htmlentities(print_r($results, true));
     }
 
     public function getClass()
