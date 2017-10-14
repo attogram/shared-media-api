@@ -32,6 +32,12 @@ engines:
         enabled: false
       PhanUndeclaredTypeParameter:
         enabled: false
+  duplication:
+    enabled: true
+    config:
+      languages:
+        php:
+          mass_threshold: 32
   csslint:
     enabled: true
   stylelint:
