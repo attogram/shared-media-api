@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class File extends Api
 {
-    const VERSION = '0.9.1';
+    const VERSION = '0.9.2';
 
     const FILE_NAMESPACE = 6;
 
@@ -33,6 +33,7 @@ class File extends Api
             $this->log->error('File::search: invalid query');
             return array();
         }
+        $this->log->debug('File::search: query: '.$query);
         $this->setParam('generator', 'search');
         $this->setParam('gsrnamespace', self::FILE_NAMESPACE);
         $this->setParam('gsrlimit', $this->getLimit());
@@ -60,6 +61,7 @@ class File extends Api
         if (is_array($pageids)) {
             $pageids = implode('|', $pageids);
         }
+        $this->log->debug('File::infoFromPageid: pageids: '.$pageids);
         $this->infoInit();
         $this->setParam('pageids', $pageids);
         $this->send();
@@ -81,6 +83,7 @@ class File extends Api
         if (is_array($titles)) {
             $titles = implode('|', $titles);
         }
+        $this->log->debug('File::infoFromTitle: titles: '.$titles);
         $this->infoInit();
         $this->setParam('titles', $titles);
         $this->send();

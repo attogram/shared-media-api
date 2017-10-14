@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Page extends Api
 {
-    const VERSION = '0.9.1';
+    const VERSION = '0.9.2';
 
     const PAGE_NAMESPACE = 0;
 
@@ -26,6 +26,7 @@ class Page extends Api
             $this->log->error('Page::search: invalid query');
             return array();
         }
+        $this->log->debug('Page::search: query: '.$query);
         $this->setParam('generator', 'search');
         $this->setParam('gsrnamespace', self::PAGE_NAMESPACE);
         $this->setParam('gsrlimit', $this->getLimit());

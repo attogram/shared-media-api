@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Sources;
 
 class Sandbox
 {
-    const VERSION = '0.9.7';
+    const VERSION = '0.9.8';
 
     public $methods = [
                 ['Category', 'search'],
@@ -24,7 +24,7 @@ class Sandbox
                 ['File',     'infoFromTitle'],
                 ['Page',     'search'],
             ];
-    public $php_self;
+    public $self;
     public $class;
     public $method;
     public $arg;
@@ -45,12 +45,12 @@ class Sandbox
 
     public function sandboxInit()
     {
-        $this->php_self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null;
-        $this->endpoint = isset($_GET['endpoint']) ? $_GET['endpoint'] : null;
-        $this->limit = isset($_GET['limit']) ? $_GET['limit'] : null;
-        $this->class = isset($_GET['class']) ? $_GET['class'] : null;
-        $this->method = isset($_GET['method']) ? $_GET['method'] : null;
-        $this->arg = isset($_GET['arg']) ? $_GET['arg'] : null;
+        $this->self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null;
+        $this->endpoint = isset($_GET['endpoint']) ? urldecode($_GET['endpoint']) : null;
+        $this->limit = isset($_GET['limit']) ? urldecode($_GET['limit']) : null;
+        $this->class = isset($_GET['class']) ? urldecode($_GET['class']) : null;
+        $this->method = isset($_GET['method']) ? urldecode($_GET['method']) : null;
+        $this->arg = isset($_GET['arg']) ? urldecode($_GET['arg']) : null;
     }
 
     public function getMethods()
@@ -66,15 +66,15 @@ class Sandbox
         if (file_exists($css)) {
             $header .= '<style>'.file_get_contents('./sandbox.css').'</style>';
         }
-        $header .='</head><body><h1><a href="'.$this->php_self.'">Sandbox</a>'
-        .' / <a href="./">share-media-api</a></h1>';
+        $header .='</head><body>'
+        .'<h1><a href="'.$this->self.'">Sandbox</a>'.' / <a href="./">share-media-api</a></h1>';
         return $header;
     }
 
     public function sandboxFooter()
     {
         return '<footer><br /><hr />'
-        .'<a href="'.$this->php_self.'">Sandbox</a> / <a href="./">share-media-api</a>'
+        .'<a href="'.$this->self.'">Sandbox</a> / <a href="./">share-media-api</a>'
         .'<small><pre>'
         .'Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION
         .'<br />Attogram\SharedMedia\Api\Category v'. \Attogram\SharedMedia\Api\Category::VERSION
@@ -103,7 +103,7 @@ class Sandbox
                 $menu .= ' &nbsp; ';
             }
             $menu .= '<div class="menu">'
-                .'<a href="'.$this->php_self.'?class='.$class.'&amp;method='.$method.'">'
+                .'<a href="'.$this->self.'?class='.$class.'&amp;method='.$method.'">'
                 .$class.'::'.$method.'</a></div>';
             $lastClass = $class;
         }
@@ -123,8 +123,9 @@ class Sandbox
             .'<input type="hidden" name="class" value="'.$this->class.'" />'
             .'<input type="hidden" name="method" value="'.$this->method.'" />'
             .$this->apiForm()
-            .$this->class.'::'.$this->method.': <input name="arg" type="text" size="30" value="" />'
-            .'<br /><br />'
+			.'<p><b>'
+            .$this->class.'::'.$this->method.'</b>: <input name="arg" type="text" size="50" value="" />'
+            .'</p>'
             .'<input type="submit" value="                     GO                     "/>'
             .'</form></p>';
     }
@@ -151,20 +152,16 @@ class Sandbox
     public function getResponse()
     {
         if (!$this->class || !$this->method || !$this->arg) {
-            return 'Welcome to the API Sandbox';
+            return 'Welcome to the Sandbox  Please select an action above.';
         }
         $class = $this->getClass();
         if (!method_exists($class, $this->method)) {
-            return 'ERROR: Class::Method not found';
+            return 'ERROR: Class::method not found';
         }
-
         $class->setEndpoint($this->endpoint);
         $class->setLimit($this->limit);
 
-        $method = $this->method;
-        $arg = urldecode($this->arg) ?: '';
-        //$class->log->debug(get_class($class).'::'.$method.'('.$arg.')');
-        return $this->sandboxResult($class->$method($arg));
+        return $this->sandboxResult($class->{$this->method}($this->arg));
     }
 
     public function getClass()
