@@ -11,7 +11,7 @@ use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.11';
+    const VERSION = '0.9.12';
 
     const MAX_LIMIT = 50;
 
@@ -65,22 +65,31 @@ class Sandbox
         switch ($this->logLevel) {
             default:
             case 'debug':
-                return Logger::DEBUG;
+                $level = Logger::DEBUG;
+                break;
             case 'info':
-                return Logger::INFO;
+                $level = Logger::INFO;
+                break;
             case 'notice':
-                return Logger::NOTICE;
+                $level = Logger::NOTICE;
+                break;
             case 'warning':
-                return Logger::WARNING;
+                $level = Logger::WARNING;
+                break;
             case 'error':
-                return Logger::ERROR;
+                $level = Logger::ERROR;
+                break;
             case 'critical':
-                return Logger::CRITICAL;
+                $level = Logger::CRITICAL;
+                break;
             case 'alert':
-                return Logger::ALERT;
+                $level = Logger::ALERT;
+                break;
             case 'emergency':
-                return Logger::EMERGENCY;
+                $level = Logger::EMERGENCY;
+                break;
         }
+        return $level;
     }
     public function sandboxHeader()
     {
