@@ -11,7 +11,7 @@ use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.14';
+    const VERSION = '0.9.15';
 
     const MAX_LIMIT = 50;
 
@@ -76,13 +76,13 @@ class Sandbox
         .'<meta http-equiv="X-UA-Compatible" content="IE=edge" />'
         .'<link rel="stylesheet" type="text/css" href="sandbox.css" />'
         .'<title>shared-media-api / sandbox</title>'
-        .'</head><body><h1><a href="./">shared-media-api</a> / <a href="'.$this->self.'">sandbox</a></h1>';
+        .'</head><body><h1><a href="./">shared-media-api</a> : <a href="'.$this->self.'">sandbox</a></h1>';
     }
 
     public function sandboxFooter()
     {
         return '<footer><br /><hr />'
-        .'<a href="./">shared-media-api</a> / <a href="'.$this->self.'">sandbox</a>'
+        .'<a href="./">shared-media-api</a> : <a href="'.$this->self.'">sandbox</a>'
         .'<small><pre>'
         .'Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION
         .'<br />Attogram\SharedMedia\Api\Category v'. \Attogram\SharedMedia\Api\Category::VERSION
