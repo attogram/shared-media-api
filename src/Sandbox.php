@@ -11,7 +11,7 @@ use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.12';
+    const VERSION = '0.9.13';
 
     const MAX_LIMIT = 50;
 
@@ -55,42 +55,19 @@ class Sandbox
         $this->class = isset($_GET['class']) ? trim(urldecode($_GET['class'])) : null;
         $this->method = isset($_GET['method']) ? trim(urldecode($_GET['method'])) : null;
         $this->arg = isset($_GET['arg']) ? trim(urldecode($_GET['arg'])) : null;
-        $this->logLevel = isset($_GET['logLevel']) ? trim(urldecode($_GET['logLevel'])) : null;
+        $this->logLevel = isset($_GET['logLevel']) ? strtoupper(trim(urldecode($_GET['logLevel']))) : null;
         $this->logger = new Logger('Log');
         $this->logger->pushHandler(new StreamHandler('php://output', $this->getLogerLevel()));
     }
 
     public function getLogerLevel()
     {
-        switch ($this->logLevel) {
-            default:
-            case 'debug':
-                $level = Logger::DEBUG;
-                break;
-            case 'info':
-                $level = Logger::INFO;
-                break;
-            case 'notice':
-                $level = Logger::NOTICE;
-                break;
-            case 'warning':
-                $level = Logger::WARNING;
-                break;
-            case 'error':
-                $level = Logger::ERROR;
-                break;
-            case 'critical':
-                $level = Logger::CRITICAL;
-                break;
-            case 'alert':
-                $level = Logger::ALERT;
-                break;
-            case 'emergency':
-                $level = Logger::EMERGENCY;
-                break;
+        if (defined('\Monolog\Logger::'.$this->logLevel)) {
+            return constant('\Monolog\Logger::'.$this->logLevel);
         }
-        return $level;
+        return Logger::DEBUG;
     }
+
     public function sandboxHeader()
     {
         $header = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>share-media-api / sandbox</title>';
