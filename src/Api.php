@@ -14,7 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.7';
+    const VERSION = '0.9.8';
 
     const MAX_LIMIT = 50;
 
@@ -111,7 +111,7 @@ class Api
         $this->setParam('action', 'query');
         $this->setParam('format', 'json');
         $this->setParam('formatversion', 2);
-        $this->log->debug('Api::send: <a target="commons" href="'.$this->getUrl().'">'.$this->getUrl().'</a>');
+        $this->log->info('Api::send: <a target="commons" href="'.$this->getUrl().'">'.$this->getUrl().'</a>');
         try {
             $this->request = $this->getClient()->request(
                 'GET',
@@ -153,7 +153,7 @@ class Api
             return [];
         }
         $response = $this->getResponseFromKeys($keys);
-        $this->log->debug('Api::getResponse: count: '.count($response));
+        $this->log->info('Api::getResponse: count: '.count($response));
         return $response;
     }
 

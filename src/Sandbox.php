@@ -11,9 +11,9 @@ use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.16';
+    const VERSION = '0.9.17';
 
-    const MAX_LIMIT = 50;
+    const DEFAULT_LIMIT = 10;
 
     public $methods = [
                 ['Category', 'search'],
@@ -52,10 +52,16 @@ class Sandbox
         $this->self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null;
         $this->endpoint = isset($_GET['endpoint']) ? trim(urldecode($_GET['endpoint'])) : null;
         $this->limit = isset($_GET['limit']) ? trim(urldecode($_GET['limit'])) : null;
+        if (!$this->limit) {
+            $this->limit = self::DEFAULT_LIMIT;
+        }
         $this->class = isset($_GET['class']) ? trim(urldecode($_GET['class'])) : null;
         $this->method = isset($_GET['method']) ? trim(urldecode($_GET['method'])) : null;
         $this->arg = isset($_GET['arg']) ? trim(urldecode($_GET['arg'])) : null;
         $this->logLevel = isset($_GET['logLevel']) ? strtoupper(trim(urldecode($_GET['logLevel']))) : null;
+        if (!$this->logLevel) {
+            $this->logLevel = 'NOTICE';
+        }
         $this->logger = new Logger('Log');
         $this->logger->pushHandler(new StreamHandler('php://output', $this->getLogerLevel()));
     }
@@ -131,7 +137,8 @@ class Sandbox
             .'<input type="hidden" name="class" value="'.$this->class.'" />'
             .'<input type="hidden" name="method" value="'.$this->method.'" />'
             .$this->apiForm()
-            .'<p><b>'.$this->class.'::'.$this->method.'</b>: <input name="arg" type="text" size="42" value="" /></p>'
+            .'<p><b>'.$this->class.'::'.$this->method.'</b>: '
+            .'<input name="arg" type="text" size="42" value="'.$this->arg.'" /></p>'
             .'<input type="submit" value="                  GO                  "/>'
             .'</form></p>';
     }
@@ -139,17 +146,8 @@ class Sandbox
     public function apiForm()
     {
         return 'Endpoint: '.$this->endpointSelect()
-        .'<br />Limit: <input name="limit" value="'.self::MAX_LIMIT.'" type="text" size="5" />'
-        .'<br />Log Level: <select name="logLevel">'
-        .'<option value="debug">debug</option>'
-        .'<option value="info">info</option>'
-        .'<option value="notice">notice</option>'
-        .'<option value="warning">warning</option>'
-        .'<option value="error">error</option>'
-        .'<option value="critical">critical</option>'
-        .'<option value="alert">alert</option>'
-        .'<option value="emergency">emergency</option>'
-        .'</select>';
+        .'<br />Limit: <input name="limit" value="'.$this->limit.'" type="text" size="5" />'
+        .'<br />Log Level: '.$this->logLevelSelect();
     }
 
     public function endpointSelect()
@@ -164,6 +162,27 @@ class Sandbox
         }
         $select .= '</select>';
         return $select;
+    }
+
+    public function logLevelSelect()
+    {
+        return '<select name="logLevel">'
+        .'<option value="debug"'.$this->isSelected('DEBUG', $this->logLevel).'>debug</option>'
+        .'<option value="info"'.$this->isSelected('INFO', $this->logLevel).'>info</option>'
+        .'<option value="notice"'.$this->isSelected('NOTICE', $this->logLevel).'>notice</option>'
+        .'<option value="warning"'.$this->isSelected('WARNING', $this->logLevel).'>warning</option>'
+        .'<option value="error"'.$this->isSelected('ERROR', $this->logLevel).'>error</option>'
+        .'<option value="critical"'.$this->isSelected('CRITICAL', $this->logLevel).'>critical</option>'
+        .'<option value="alert"'.$this->isSelected('ALERT', $this->logLevel).'>alert</option>'
+        .'<option value="emergency'.$this->isSelected('EMERGENCY', $this->logLevel).'">emergency</option>'
+        .'</select>';
+    }
+
+    public function isSelected($str1, $str2)
+    {
+        if ($str1 == $str2) {
+            return ' selected ';
+        }
     }
 
     public function getResponse()
