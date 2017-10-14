@@ -58,23 +58,22 @@ class Sandbox
         return $this->methods;
     }
 
-    public function sandboxHeader($title = 'Sandbox')
+    public function sandboxHeader()
     {
-        $header = '<!DOCTYPE html><html><head><meta charset="UTF-8">'
-        .'<title>'.$title.'</title>';
+        $header = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>share-media-api / sandbox</title>';
         $css = './sandbox.css';
         if (file_exists($css)) {
-            $header .= '<style>'.file_get_contents('./sandbox.css').'</style>';
+            $header .= '<style>'.file_get_contents($css).'</style>';
         }
         $header .='</head><body>'
-        .'<h1><a href="'.$this->self.'">Sandbox</a>'.' / <a href="./">share-media-api</a></h1>';
+        .'<h1><a href="./">share-media-api</a> / <a href="'.$this->self.'">sandbox</a></h1>';
         return $header;
     }
 
     public function sandboxFooter()
     {
         return '<footer><br /><hr />'
-        .'<a href="'.$this->self.'">Sandbox</a> / <a href="./">share-media-api</a>'
+        .'<a href="./">share-media-api</a> / <a href="'.$this->self.'">sandbox</a>'
         .'<small><pre>'
         .'Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION
         .'<br />Attogram\SharedMedia\Api\Category v'. \Attogram\SharedMedia\Api\Category::VERSION
