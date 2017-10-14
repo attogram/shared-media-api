@@ -1,3 +1,4 @@
+# attogram/shared-media-api - codeclimate.yml - v0.9.1
 exclude_paths:
 - "vendor/"
 engines:
@@ -37,7 +38,7 @@ engines:
     config:
       languages:
         php:
-          mass_threshold: 42
+          mass_threshold: 40
   csslint:
     enabled: true
   stylelint:
