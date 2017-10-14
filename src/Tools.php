@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '0.9.2';
+    const VERSION = '0.9.3';
 
     public static function flatten($arrays)
     {
@@ -62,5 +62,4 @@ class Tools
             return ' selected ';
         }
     }
-
 }
