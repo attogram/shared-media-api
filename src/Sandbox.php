@@ -12,7 +12,7 @@ use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.19';
+    const VERSION = '0.9.20';
 
     const DEFAULT_LIMIT = 10;
 
@@ -138,8 +138,8 @@ class Sandbox
             .'<input type="hidden" name="class" value="'.$this->class.'" />'
             .'<input type="hidden" name="method" value="'.$this->method.'" />'
             .$this->apiForm()
-            .'<p><b>'.$this->class.'::'.$this->method.'</b>: '
-            .'<input name="arg" type="text" size="42" value="'.$this->arg.'" /></p>'
+            .'<br /><b>'.$this->class.'::'.$this->method.'</b>: '
+            .'<input name="arg" type="text" size="42" value="'.$this->arg.'" /><br />'
             .'<input type="submit" value="                  GO                  "/>'
             .'</form></p>';
     }
@@ -148,7 +148,7 @@ class Sandbox
     {
         return 'Endpoint: '.$this->endpointSelect()
         .'<br />Limit: <input name="limit" value="'.$this->limit.'" type="text" size="5" />'
-        .'<br />Log Level: '.$this->logLevelSelect();
+        .' &nbsp; Log Level: '.$this->logLevelSelect();
     }
 
     public function endpointSelect()
