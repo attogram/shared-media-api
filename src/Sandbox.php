@@ -11,7 +11,9 @@ use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.9';
+    const VERSION = '0.9.10';
+
+    const MAX_LIMIT = 50;
 
     public $methods = [
                 ['Category', 'search'],
@@ -143,19 +145,15 @@ class Sandbox
             .'<input type="hidden" name="class" value="'.$this->class.'" />'
             .'<input type="hidden" name="method" value="'.$this->method.'" />'
             .$this->apiForm()
-            .'<p><b>'
-            .$this->class.'::'.$this->method.'</b>: <input name="arg" type="text" size="50" value="" />'
-            .'</p>'
-            .'<input type="submit" value="                     GO                     "/>'
+            .'<p><b>'.$this->class.'::'.$this->method.'</b>: <input name="arg" type="text" size="50" value="" /></p>'
+            .'<input type="submit" value="                         GO                         "/>'
             .'</form></p>';
     }
 
     public function apiForm()
     {
-        $class = $this->getClass();
-        $form = '';
-        $form .= 'Endpoint: '.$this->endpointSelect();
-        $form .= '<br />Limit: <input name="limit" value="'.$class::MAX_LIMIT.'" type="text" size="5" />'
+        return 'Endpoint: '.$this->endpointSelect()
+        .'<br />Limit: <input name="limit" value="'.self::MAX_LIMIT.'" type="text" size="5" />'
         .'<br />Log Level: <select name="log_level">'
         .'<option value="debug">debug</option>'
         .'<option value="info">info</option>'
@@ -165,7 +163,7 @@ class Sandbox
         .'<option value="critical">critical</option>'
         .'<option value="alert">alert</option>'
         .'<option value="emergency">emergency</option>'
-        .'</select><br />';
+        .'</select>';
         return $form;
     }
 
