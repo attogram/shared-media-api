@@ -6,17 +6,17 @@ use Attogram\SharedMedia\Api\Category;
 use Attogram\SharedMedia\Api\File;
 use Attogram\SharedMedia\Api\Page;
 use Attogram\SharedMedia\Api\Sources;
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.8';
+    const VERSION = '0.9.9';
 
     public $methods = [
                 ['Category', 'search'],
                 ['Category', 'members'],
                 ['Category', 'info'],
-                //['Category', 'infoFromPageid'],
-                //['Category', 'infoFromTitle'],
                 ['Category', 'subcats'],
                 ['Category', 'from'],
                 ['File',     'search'],
@@ -30,6 +30,8 @@ class Sandbox
     public $arg;
     public $endpoint;
     public $limit;
+    public $log_level;
+    public $logger;
 
     public function __construct()
     {
@@ -46,18 +48,38 @@ class Sandbox
     public function sandboxInit()
     {
         $this->self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null;
-        $this->endpoint = isset($_GET['endpoint']) ? urldecode($_GET['endpoint']) : null;
-        $this->limit = isset($_GET['limit']) ? urldecode($_GET['limit']) : null;
-        $this->class = isset($_GET['class']) ? urldecode($_GET['class']) : null;
-        $this->method = isset($_GET['method']) ? urldecode($_GET['method']) : null;
-        $this->arg = isset($_GET['arg']) ? urldecode($_GET['arg']) : null;
+        $this->endpoint = isset($_GET['endpoint']) ? trim(urldecode($_GET['endpoint'])) : null;
+        $this->limit = isset($_GET['limit']) ? trim(urldecode($_GET['limit'])) : null;
+        $this->class = isset($_GET['class']) ? trim(urldecode($_GET['class'])) : null;
+        $this->method = isset($_GET['method']) ? trim(urldecode($_GET['method'])) : null;
+        $this->arg = isset($_GET['arg']) ? trim(urldecode($_GET['arg'])) : null;
+        $this->log_level = isset($_GET['log_level']) ? trim(urldecode($_GET['log_level'])) : null;
+        $this->logger = new Logger('Log');
+        $this->logger->pushHandler(new StreamHandler('php://output', $this->getLogerLevel()));
     }
 
-    public function getMethods()
+    public function getLogerLevel()
     {
-        return $this->methods;
+        switch ($this->log_level) {
+            default:
+            case 'debug':
+                return Logger::DEBUG;
+            case 'info':
+                return Logger::INFO;
+            case 'notice':
+                return Logger::NOTICE;
+            case 'warning':
+                return Logger::WARNING;
+            case 'error':
+                return Logger::ERROR;
+            case 'critical':
+                return Logger::CRITICAL;
+            case 'alert':
+                return Logger::ALERT;
+            case 'emergency':
+                return Logger::EMERGENCY;
+        }
     }
-
     public function sandboxHeader()
     {
         $header = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>share-media-api / sandbox</title>';
@@ -65,8 +87,7 @@ class Sandbox
         if (file_exists($css)) {
             $header .= '<style>'.file_get_contents($css).'</style>';
         }
-        $header .='</head><body>'
-        .'<h1><a href="./">share-media-api</a> / <a href="'.$this->self.'">sandbox</a></h1>';
+        $header .='</head><body><h1><a href="./">share-media-api</a> / <a href="'.$this->self.'">sandbox</a></h1>';
         return $header;
     }
 
@@ -90,7 +111,7 @@ class Sandbox
 
     public function sandboxResult($results = [])
     {
-            return htmlentities(print_r($results, true));
+        return htmlentities(print_r($results, true));
     }
 
     public function menu()
@@ -133,25 +154,39 @@ class Sandbox
     {
         $class = $this->getClass();
         $form = '';
-        $form .= 'API Endpoint: <select name="endpoint">';
-        foreach (Sources::$sources as $key => $source) {
-            $select = '';
-            if (isset($this->endpoint) && $this->endpoint == $source) {
-                $select = ' selected ';
-            }
-            $form .= '<option value="'.$source.'"'.$select.'>'.$key.' -- '.$source.'</option>';
-        }
-        $form .= '</select>'
-        .'<br />'
-        .'API limit: <input name="limit" value="'.$class::MAX_LIMIT.'" type="text" size="5" />'
-        .'<br />';
+        $form .= 'Endpoint: '.$this->endpointSelect();
+        $form .= '<br />Limit: <input name="limit" value="'.$class::MAX_LIMIT.'" type="text" size="5" />'
+        .'<br />Log Level: <select name="log_level">'
+        .'<option value="debug">debug</option>'
+        .'<option value="info">info</option>'
+        .'<option value="notice">notice</option>'
+        .'<option value="warning">warning</option>'
+        .'<option value="error">error</option>'
+        .'<option value="critical">critical</option>'
+        .'<option value="alert">alert</option>'
+        .'<option value="emergency">emergency</option>'
+        .'</select><br />';
         return $form;
+    }
+
+    public function endpointSelect()
+    {
+        $select = '<select name="endpoint">';
+        foreach (Sources::$sources as $key => $source) {
+            $selected = '';
+            if (isset($this->endpoint) && $this->endpoint == $source) {
+                $selected = ' selected ';
+            }
+            $select .= '<option value="'.$source.'"'.$selected.'>'.$key.' -- '.$source.'</option>';
+        }
+        $select .= '</select>';
+        return $select;
     }
 
     public function getResponse()
     {
         if (!$this->class || !$this->method || !$this->arg) {
-            return 'Welcome to the Sandbox  Please select an action above.';
+            return;
         }
         $class = $this->getClass();
         if (!method_exists($class, $this->method)) {
@@ -159,7 +194,6 @@ class Sandbox
         }
         $class->setEndpoint($this->endpoint);
         $class->setLimit($this->limit);
-
         return $this->sandboxResult($class->{$this->method}($this->arg));
     }
 
@@ -167,11 +201,11 @@ class Sandbox
     {
         switch ($this->class) {
             case 'Category':
-                return new Category;
+                return new Category($this->logger);
             case 'File':
-                return new File;
+                return new File($this->logger);
             case 'Page':
-                return new Page;
+                return new Page($this->logger);
             default:
                 return new \StdClass();
         }

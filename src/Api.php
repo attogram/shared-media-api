@@ -14,7 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.5';
+    const VERSION = '0.9.6';
 
     const MAX_LIMIT = 50;
 
@@ -111,7 +111,6 @@ class Api
         $this->setParam('action', 'query');
         $this->setParam('format', 'json');
         $this->setParam('formatversion', 2);
-
         $this->log->debug('Api::send: <a target="commons" href="'.$this->getUrl().'">'.$this->getUrl().'</a>');
         try {
             $this->request = $this->getClient()->request(
@@ -123,7 +122,7 @@ class Api
             $this->log->error('Api::send: ConnectException: '.$exception->getMessage());
             return false;
         }
-        $this->log->debug('Api::send: '.$this->request->getStatusCode().': '.$this->request->getReasonPhrase());
+        $this->log->info('Api::send: '.$this->request->getStatusCode().': '.$this->request->getReasonPhrase());
         if (!$this->decodeRequest()) {
             $this->log->error('Api::send: decode failed');
             return false;
