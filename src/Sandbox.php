@@ -11,7 +11,7 @@ use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.15';
+    const VERSION = '0.9.16';
 
     const MAX_LIMIT = 50;
 
@@ -76,7 +76,7 @@ class Sandbox
         .'<meta http-equiv="X-UA-Compatible" content="IE=edge" />'
         .'<link rel="stylesheet" type="text/css" href="sandbox.css" />'
         .'<title>shared-media-api / sandbox</title>'
-        .'</head><body><h1><a href="./">shared-media-api</a> : <a href="'.$this->self.'">sandbox</a></h1>';
+        .'</head><body><h1><a href="./">shared-media-api</a></h1> <h2><a href="'.$this->self.'">sandbox</a></h2>';
     }
 
     public function sandboxFooter()
@@ -131,8 +131,8 @@ class Sandbox
             .'<input type="hidden" name="class" value="'.$this->class.'" />'
             .'<input type="hidden" name="method" value="'.$this->method.'" />'
             .$this->apiForm()
-            .'<p><b>'.$this->class.'::'.$this->method.'</b>: <input name="arg" type="text" size="50" value="" /></p>'
-            .'<input type="submit" value="                         GO                         "/>'
+            .'<p><b>'.$this->class.'::'.$this->method.'</b>: <input name="arg" type="text" size="42" value="" /></p>'
+            .'<input type="submit" value="                  GO                  "/>'
             .'</form></p>';
     }
 
