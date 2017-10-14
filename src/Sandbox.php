@@ -11,7 +11,7 @@ use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.13';
+    const VERSION = '0.9.14';
 
     const MAX_LIMIT = 50;
 
@@ -70,19 +70,19 @@ class Sandbox
 
     public function sandboxHeader()
     {
-        $header = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>share-media-api / sandbox</title>';
-        $css = './sandbox.css';
-        if (file_exists($css)) {
-            $header .= '<style>'.file_get_contents($css).'</style>';
-        }
-        $header .='</head><body><h1><a href="./">share-media-api</a> / <a href="'.$this->self.'">sandbox</a></h1>';
-        return $header;
+        return '<!DOCTYPE html><html><head>'
+        .'<meta charset="UTF-8">'
+        .'<meta name="viewport" content="initial-scale=1" />'
+        .'<meta http-equiv="X-UA-Compatible" content="IE=edge" />'
+        .'<link rel="stylesheet" type="text/css" href="sandbox.css" />'
+        .'<title>shared-media-api / sandbox</title>'
+        .'</head><body><h1><a href="./">shared-media-api</a> / <a href="'.$this->self.'">sandbox</a></h1>';
     }
 
     public function sandboxFooter()
     {
         return '<footer><br /><hr />'
-        .'<a href="./">share-media-api</a> / <a href="'.$this->self.'">sandbox</a>'
+        .'<a href="./">shared-media-api</a> / <a href="'.$this->self.'">sandbox</a>'
         .'<small><pre>'
         .'Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION
         .'<br />Attogram\SharedMedia\Api\Category v'. \Attogram\SharedMedia\Api\Category::VERSION

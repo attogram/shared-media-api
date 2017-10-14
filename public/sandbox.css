@@ -1,5 +1,9 @@
+/* attogram/shared-media-api - sandbox.css - v0.9.1 */
 body {
-    font-family:monospace;
+    background-color:#eef;
+    font-family:sans-serif;
+    margin:0px;
+    padding:5px 20px 5px 20px;
 }
 a {
     text-decoration:none;
@@ -11,9 +15,13 @@ a:hover {
 h1 {
     margin:0;
 }
+li {
+    margin:5px 0;
+}
 form {
     background-color:#eee;
     border:1px solid #aaa;
+    font-family:monospace;
     padding:10px;
 }
 input {
@@ -24,6 +32,7 @@ input {
     background-color:#eee;
     border:1px solid black;
     display:inline-block;
+    font-family:monospace;
     font-weight:bold;
     margin:1px;
     padding:5px;
