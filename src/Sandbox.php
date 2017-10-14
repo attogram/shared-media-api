@@ -123,7 +123,7 @@ class Sandbox
             .'<input type="hidden" name="class" value="'.$this->class.'" />'
             .'<input type="hidden" name="method" value="'.$this->method.'" />'
             .$this->apiForm()
-			.'<p><b>'
+            .'<p><b>'
             .$this->class.'::'.$this->method.'</b>: <input name="arg" type="text" size="50" value="" />'
             .'</p>'
             .'<input type="submit" value="                     GO                     "/>'

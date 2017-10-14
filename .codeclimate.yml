@@ -32,6 +32,16 @@ engines:
         enabled: false
       PhanUndeclaredTypeParameter:
         enabled: false
+  csslint:
+    enabled: true
+  stylelint:
+    enabled: true 
+  fixme:
+    enabled: true
+  git-legal:
+    enabled: true
 ratings:
   paths:
   - "**.php"
+  - "**.css"
+  - "composer.json"
