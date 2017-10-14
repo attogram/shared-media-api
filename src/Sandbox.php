@@ -11,7 +11,7 @@ use Monolog\Handler\StreamHandler;
 
 class Sandbox
 {
-    const VERSION = '0.9.10';
+    const VERSION = '0.9.11';
 
     const MAX_LIMIT = 50;
 
@@ -32,7 +32,7 @@ class Sandbox
     public $arg;
     public $endpoint;
     public $limit;
-    public $log_level;
+    public $logLevel;
     public $logger;
 
     public function __construct()
@@ -55,14 +55,14 @@ class Sandbox
         $this->class = isset($_GET['class']) ? trim(urldecode($_GET['class'])) : null;
         $this->method = isset($_GET['method']) ? trim(urldecode($_GET['method'])) : null;
         $this->arg = isset($_GET['arg']) ? trim(urldecode($_GET['arg'])) : null;
-        $this->log_level = isset($_GET['log_level']) ? trim(urldecode($_GET['log_level'])) : null;
+        $this->logLevel = isset($_GET['logLevel']) ? trim(urldecode($_GET['logLevel'])) : null;
         $this->logger = new Logger('Log');
         $this->logger->pushHandler(new StreamHandler('php://output', $this->getLogerLevel()));
     }
 
     public function getLogerLevel()
     {
-        switch ($this->log_level) {
+        switch ($this->logLevel) {
             default:
             case 'debug':
                 return Logger::DEBUG;
@@ -154,7 +154,7 @@ class Sandbox
     {
         return 'Endpoint: '.$this->endpointSelect()
         .'<br />Limit: <input name="limit" value="'.self::MAX_LIMIT.'" type="text" size="5" />'
-        .'<br />Log Level: <select name="log_level">'
+        .'<br />Log Level: <select name="logLevel">'
         .'<option value="debug">debug</option>'
         .'<option value="info">info</option>'
         .'<option value="notice">notice</option>'
@@ -164,7 +164,6 @@ class Sandbox
         .'<option value="alert">alert</option>'
         .'<option value="emergency">emergency</option>'
         .'</select>';
-        return $form;
     }
 
     public function endpointSelect()

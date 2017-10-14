@@ -5,26 +5,26 @@ a {
     text-decoration:none;
 }
 a:hover {
-    color:black;
     background-color:yellow;
+    color:black;
 }
 h1 {
     margin:0;
 }
 form {
-    padding:10px;
-    border:1px solid #aaa;
     background-color:#eee;
+    border:1px solid #aaa;
+    padding:10px;
 }
 input {
     font-family:monospace;
     padding:2;
 }
 .menu {
+    background-color:#eee;
+    border:1px solid black;
     display:inline-block;
     font-weight:bold;
-    border:1px solid black;
-    background-color:#eee;
     margin:1px;
     padding:5px;
 }
