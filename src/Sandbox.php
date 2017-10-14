@@ -9,65 +9,84 @@ use Attogram\SharedMedia\Api\Sources;
 
 class Sandbox
 {
-    const VERSION = '0.9.6';
+    const VERSION = '0.9.7';
 
-    public $methods;
+    public $methods = [
+                ['Category', 'search'],
+                ['Category', 'members'],
+                ['Category', 'info'],
+                //['Category', 'infoFromPageid'],
+                //['Category', 'infoFromTitle'],
+                ['Category', 'subcats'],
+                ['Category', 'from'],
+                ['File',     'search'],
+                ['File',     'infoFromPageid'],
+                ['File',     'infoFromTitle'],
+                ['Page',     'search'],
+            ];
+    public $php_self;
+    public $class;
+    public $method;
+    public $arg;
+    public $endpoint;
+    public $limit;
 
     public function __construct()
     {
-        $this->sandboxHeader();
-        $this->menu();
-        $this->form();
+        $this->sandboxInit();
+        print $this->sandboxHeader();
+        print $this->menu();
+        print $this->form();
         print '<pre>';
         print $this->getResponse();
         print '</pre>';
-        $this->sandboxFooter();
+        print $this->sandboxFooter();
+    }
+
+    public function sandboxInit()
+    {
+        $this->php_self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null;
+        $this->endpoint = isset($_GET['endpoint']) ? $_GET['endpoint'] : null;
+        $this->limit = isset($_GET['limit']) ? $_GET['limit'] : null;
+        $this->class = isset($_GET['class']) ? $_GET['class'] : null;
+        $this->method = isset($_GET['method']) ? $_GET['method'] : null;
+        $this->arg = isset($_GET['arg']) ? $_GET['arg'] : null;
     }
 
     public function getMethods()
     {
-        $this->methods = [
-            ['Category', 'search', '(string) query'],
-            ['Category', 'members', '(string) Category:Title'],
-            ['Category', 'info', '(string) Category:Title | (string) Category:Title|...'],
-            ['Category', 'subcats', '(string) Category:Title'],
-            ['Category', 'from', '(int) pageid'],
-            ['File', 'search', '(string) query'],
-            ['File', 'infoFromPageid', '(int) pageid | (string) pageid|... | (array) pageids'],
-            ['File', 'infoFromTitle', '(string) File:Title | (string) File:Title|... | (array) titles'],
-            ['Page', 'search', '(string) query'],
-        ];
         return $this->methods;
     }
 
     public function sandboxHeader($title = 'Sandbox')
     {
-        print '<!DOCTYPE html><html><head><meta charset="UTF-8">'
-        .'<title>'.$title.'</title>'
-        .'<style>'
-        .'a { text-decoration:none; }'
-        .'form { padding:10px; border:1px solid #AAAAAA; background-color:#EEEEEE; }'
-        .'input { font-family:monospace; padding:2; }'
-        .'.menu { font-weight:bold; display:inline-block; border:1px solid #AAAAAA; background-color:#EEEEEE; margin:1px; padding:5px; }'
-        .'</style>'
-        .'</head><body>'
-        .'<p><a href="./">share-media-api</a> - <a href="'.$_SERVER['PHP_SELF'].'">Sandbox</a></p>';
+        $header = '<!DOCTYPE html><html><head><meta charset="UTF-8">'
+        .'<title>'.$title.'</title>';
+        $css = './sandbox.css';
+        if (file_exists($css)) {
+            $header .= '<style>'.file_get_contents('./sandbox.css').'</style>';
+        }
+        $header .='</head><body><h1><a href="'.$this->php_self.'">Sandbox</a>'
+        .' / <a href="./">share-media-api</a></h1>';
+        return $header;
     }
 
     public function sandboxFooter()
     {
-        print '<footer><pre><br /><br /><hr /><b><a href="./">attogram/shared-media-api</a></b>';
-        print ' @ '.gmdate('Y-m-d H:i:s').' UTC<br />';
-        print '<br />Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION;
-        print '<br />Attogram\SharedMedia\Api\Category v'. \Attogram\SharedMedia\Api\Category::VERSION;
-        print '<br />Attogram\SharedMedia\Api\File     v'. \Attogram\SharedMedia\Api\File::VERSION;
-        print '<br />Attogram\SharedMedia\Api\Page     v'. \Attogram\SharedMedia\Api\Page::VERSION;
-        print '<br />Attogram\SharedMedia\Api\Tools    v'. \Attogram\SharedMedia\Api\Tools::VERSION;
-        print '<br />Attogram\SharedMedia\Api\Sources  v'. \Attogram\SharedMedia\Api\Sources::VERSION;
-        print '<br />Attogram\SharedMedia\Api\Sandbox  v'. self::VERSION;
-        print '<br />GuzzleHttp\Client                 v'. \GuzzleHttp\Client::VERSION;
-        print '<br />Monolog\Logger                    API v'. \Monolog\Logger::API;
-        print '</pre></footer></body></html>';
+        return '<footer><br /><hr />'
+        .'<a href="'.$this->php_self.'">Sandbox</a> / <a href="./">share-media-api</a>'
+        .'<small><pre>'
+        .'Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION
+        .'<br />Attogram\SharedMedia\Api\Category v'. \Attogram\SharedMedia\Api\Category::VERSION
+        .'<br />Attogram\SharedMedia\Api\File     v'. \Attogram\SharedMedia\Api\File::VERSION
+        .'<br />Attogram\SharedMedia\Api\Page     v'. \Attogram\SharedMedia\Api\Page::VERSION
+        .'<br />Attogram\SharedMedia\Api\Tools    v'. \Attogram\SharedMedia\Api\Tools::VERSION
+        .'<br />Attogram\SharedMedia\Api\Sources  v'. \Attogram\SharedMedia\Api\Sources::VERSION
+        .'<br />Attogram\SharedMedia\Api\Sandbox  v'. self::VERSION
+        .'<br />GuzzleHttp\Client                 v'. \GuzzleHttp\Client::VERSION
+        .'<br />Monolog\Logger                    API v'. \Monolog\Logger::API
+        .'</pre></small>'
+        .'</footer></body></html>';
     }
 
     public function sandboxResult($results = [])
@@ -78,39 +97,36 @@ class Sandbox
     public function menu()
     {
         $lastClass = null;
-        print '<p>';
-        foreach ($this->getMethods() as list($class, $method, $info)) {
+        $menu = '<p>';
+        foreach ($this->methods as list($class, $method)) {
             if (!empty($lastClass) && $lastClass != $class) {
-                print ' &nbsp; ';
+                $menu .= ' &nbsp; ';
             }
-            print '<div class="menu">'
-            .'<a href="'.$_SERVER['PHP_SELF']
-            .'?class='.$class.'&amp;method='.$method.'" title="'.$info.'">'
-            .$class.'::'.$method
-            .'</a></div>';
+            $menu .= '<div class="menu">'
+                .'<a href="'.$this->php_self.'?class='.$class.'&amp;method='.$method.'">'
+                .$class.'::'.$method.'</a></div>';
             $lastClass = $class;
         }
-        print '</p>';
+        $menu .= '</p>';
+        return $menu;
     }
 
     public function form()
     {
-        if (!isset($_GET['class']) || !isset($_GET['method'])) {
+        if (!$this->class || !$this->method) {
             return;
         }
-        foreach ($this->getMethods() as list($class, $method, $info)) {
-            if ($class != $_GET['class'] || $method != $_GET['method']) {
-                continue;
-            }
-            print '<p><form>'
-            .'<input type="hidden" name="class" value="'.$class.'" />'
-            .'<input type="hidden" name="method" value="'.$method.'" />'
+        if (array_search([$this->class,$this->method], $this->methods) === false) {
+            return 'ERROR: form: class::method not found';
+        }
+        return '<p><form>'
+            .'<input type="hidden" name="class" value="'.$this->class.'" />'
+            .'<input type="hidden" name="method" value="'.$this->method.'" />'
             .$this->apiForm()
-            .$class.'::'.$method.': <input name="arg" type="text" size="30" value="" />'
-            .' <code>'.$info.'</code><br /><br />'
+            .$this->class.'::'.$this->method.': <input name="arg" type="text" size="30" value="" />'
+            .'<br /><br />'
             .'<input type="submit" value="                     GO                     "/>'
             .'</form></p>';
-        }
     }
 
     public function apiForm()
@@ -120,7 +136,7 @@ class Sandbox
         $form .= 'API Endpoint: <select name="endpoint">';
         foreach (Sources::$sources as $key => $source) {
             $select = '';
-            if (isset($_GET['endpoint']) && $_GET['endpoint'] == $source) {
+            if (isset($this->endpoint) && $this->endpoint == $source) {
                 $select = ' selected ';
             }
             $form .= '<option value="'.$source.'"'.$select.'>'.$key.' -- '.$source.'</option>';
@@ -134,26 +150,26 @@ class Sandbox
 
     public function getResponse()
     {
-        if (!isset($_GET['class']) || !isset($_GET['method']) || !isset($_GET['arg'])) {
+        if (!$this->class || !$this->method || !$this->arg) {
             return 'Welcome to the API Sandbox';
         }
         $class = $this->getClass();
-        if (!method_exists($class, $_GET['method'])) {
+        if (!method_exists($class, $this->method)) {
             return 'ERROR: Class::Method not found';
         }
 
-        $class->setEndpoint($_GET['endpoint']);
-        $class->setLimit($_GET['limit']);
+        $class->setEndpoint($this->endpoint);
+        $class->setLimit($this->limit);
 
-        $method = $_GET['method'];
-        $arg = urldecode($_GET['arg']) ?: '';
+        $method = $this->method;
+        $arg = urldecode($this->arg) ?: '';
         //$class->log->debug(get_class($class).'::'.$method.'('.$arg.')');
         return $this->sandboxResult($class->$method($arg));
     }
 
     public function getClass()
     {
-        switch ($_GET['class']) {
+        switch ($this->class) {
             case 'Category':
                 return new Category;
             case 'File':
