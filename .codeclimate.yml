@@ -32,6 +32,8 @@ plugins:
         enabled: false
       PhanUndeclaredClassMethod:
         enabled: false
+      PhanUndeclaredExtendedClass:
+        enabled: false
       PhanUndeclaredTypeParameter:
         enabled: false
   duplication:
