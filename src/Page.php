@@ -9,9 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Page extends Api
 {
-    const VERSION = '0.9.3';
-
-    const PAGE_NAMESPACE = 0;
+    const VERSION = '0.9.4';
 
     /**
      * search for Pages

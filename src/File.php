@@ -10,9 +10,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class File extends Api
 {
-    const VERSION = '0.9.4';
-
-    const FILE_NAMESPACE = 6;
+    const VERSION = '0.9.5';
 
     public $width = 100;
 

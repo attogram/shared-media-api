@@ -14,7 +14,11 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.9';
+    const VERSION = '0.9.10';
+
+    const CATEGORY_NAMESPACE = 14;
+    const FILE_NAMESPACE = 6;
+    const PAGE_NAMESPACE = 0;
 
     const DEFAULT_LIMIT = 50;
 

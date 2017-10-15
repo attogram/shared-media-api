@@ -9,9 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Api
 {
-    const VERSION = '0.9.4';
-
-    const CATEGORY_NAMESPACE = 14;
+    const VERSION = '0.9.5';
 
     /**
      * search for categories
