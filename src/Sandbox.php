@@ -7,12 +7,12 @@ use Attogram\SharedMedia\Api\File;
 use Attogram\SharedMedia\Api\Page;
 use Attogram\SharedMedia\Api\Sources;
 use Attogram\SharedMedia\Api\Tools;
-use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.21';
+    const VERSION = '0.9.22';
 
     const DEFAULT_LIMIT = 10;
 
@@ -114,7 +114,7 @@ class Sandbox
     public function menu()
     {
         $lastClass = null;
-        $menu = '<p>';
+        $menu = '<br />';
         foreach ($this->methods as list($class, $method)) {
             if (!empty($lastClass) && $lastClass != $class) {
                 $menu .= '<br />';
@@ -124,7 +124,6 @@ class Sandbox
                 .$class.'::'.$method.'</a></div>';
             $lastClass = $class;
         }
-        $menu .= '</p>';
         return $menu;
     }
 
@@ -136,32 +135,32 @@ class Sandbox
         if (array_search([$this->class,$this->method], $this->methods) === false) {
             return 'ERROR: form: class::method not found';
         }
-        return '<p><form>'
+        return '<form>'
             .'<input type="hidden" name="class" value="'.$this->class.'" />'
             .'<input type="hidden" name="method" value="'.$this->method.'" />'
             .$this->apiForm()
-            .'<br /><b>'.$this->class.'::'.$this->method.'</b>: '
+            .'<br /><b>'.$this->class.'::'.$this->method.'</b>:'
             .'<input name="arg" type="text" size="42" value="'.$this->arg.'" /><br />'
             .'<input type="submit" value="                  GO                  "/>'
-            .'</form></p>';
+            .'</form>';
     }
 
     public function apiForm()
     {
-        return 'Endpoint: '.$this->endpointSelect()
-        .'<br />Limit: <input name="limit" value="'.$this->limit.'" type="text" size="5" />'
-        .' &nbsp; Log Level: '.$this->logLevelSelect();
+        return 'endpoint:'.$this->endpointSelect()
+        .'&nbsp; <nobr>limit:<input name="limit" value="'.$this->limit.'" type="text" size="5" /></nobr>'
+        .'&nbsp; <nobr>logLevel:'.$this->logLevelSelect().'</nobr>';
     }
 
     public function endpointSelect()
     {
         $select = '<select name="endpoint">';
-        foreach (Sources::$sources as $key => $source) {
+        foreach (Sources::$sources as $source) {
             $selected = '';
             if (isset($this->endpoint) && $this->endpoint == $source) {
                 $selected = ' selected ';
             }
-            $select .= '<option value="'.$source.'"'.$selected.'>'.$key.' -- '.$source.'</option>';
+            $select .= '<option value="'.$source.'"'.$selected.'>'.$source.'</option>';
         }
         $select .= '</select>';
         return $select;
@@ -193,7 +192,7 @@ class Sandbox
         $class->setEndpoint($this->endpoint);
         $class->setLimit($this->limit);
         $results = $class->{$this->method}($this->arg);
-        return '<textarea cols="120" rows="20" style="width:98%">'.htmlentities(print_r($results, true)).'</textarea>';
+        return htmlentities(print_r($results, true));
     }
 
     public function getClass()
