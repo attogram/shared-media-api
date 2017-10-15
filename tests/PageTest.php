@@ -1,5 +1,7 @@
 <?php
 
+namespace Attogram\SharedMedia\Api;
+
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
@@ -8,7 +10,7 @@ use Psr\Log\NullLogger;
  */
 class PageTest extends TestCase
 {
-    const VERSION = '0.9.1';
+    const VERSION = '0.9.2';
 
     /**
      * @covers ::__construct

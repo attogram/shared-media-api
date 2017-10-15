@@ -1,5 +1,7 @@
 <?php
 
+namespace Attogram\SharedMedia\Api;
+
 use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
@@ -8,8 +10,11 @@ use Psr\Log\NullLogger;
  */
 class ApiTest extends TestCase
 {
-    const VERSION = '0.9.1';
-
+    const VERSION = '0.9.2';
+	
+	public $defaultEndpoint;
+	public $testingUrl;
+	
     public function setUp()
     {
         $this->defaultEndpoint = 'https://commons.wikimedia.org/w/api.php';
