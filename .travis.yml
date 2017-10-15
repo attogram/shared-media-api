@@ -1,3 +1,5 @@
+# attogram/shared-media-api - .travis.yml - v0.9.1
+
 language: php
 
 php:
@@ -18,4 +20,6 @@ before_script:
   - composer install --no-dev
 
 script:
-  - if find . -name "*.php" ! -name "autoload_static.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
+  - if find src/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
+  - if find web/ name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
+  - if find vendor/ name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
