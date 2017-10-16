@@ -10,7 +10,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class File extends Api
 {
-    const VERSION = '0.9.5';
+    const VERSION = '0.9.6';
 
     public $width = 100;
 
@@ -36,69 +36,25 @@ class File extends Api
     }
 
     /**
-     * get File information from a pageid or list of pageids
+     * get File information
      *
-     * @param array|string $pageids
      * @return array
      */
-    public function infoPageid($pageids)
+    public function info()
     {
-        if (empty($pageids)) {
-            $this->logger->error('File::infoPageid: invalid pageids');
-            return [];
-        }
-        $pageids = Tools::valuesImplode($pageids);
-        $this->logger->debug('File::infoPageid: pageids: '.$pageids);
-        $this->setParam('pageids', $pageids);
         return $this->getInfoResponse();
     }
 
     /**
-     * get File information from a title or list of titles
+     * Get API response from a files-info request
      *
-     * @param array|string $titles
      * @return array
      */
-    public function infoTitle($titles)
+    private function getInfoResponse()
     {
-        if (empty($titles)) {
-            $this->logger->error('File::infoTitle: invalid titles');
-            return [];
-        }
-        $titles = Tools::valuesImplode($titles);
-        $this->logger->debug('File::infoTitle: titles: '.$titles);
-        $this->setParam('titles', $titles);
-        return $this->getInfoResponse();
-    }
-
-    /**
-     * get File information of Files embedded on a Page, from a pageid or list of pageids
-     *
-     * @see https://www.mediawiki.org/wiki/API:Images
-     * @param array|string $pageids
-     * @return array
-     */
-    public function onPageid($pageids)
-    {
-        $pageids = Tools::valuesImplode($pageids);
-        $this->logger->debug('File::embeddedOnPageid: pageids: '.$pageids);
-        $this->setParam('pageids', $pageids);
-        return $this->getOnResponse();
-    }
-
-    /**
-     * get File information of Files embedded on a Page, from a title or list of titles
-     *
-     * @see https://www.mediawiki.org/wiki/API:Images
-     * @param array|string $titles
-     * @return array
-     */
-    public function onTitle($titles)
-    {
-        $titles = Tools::valuesImplode($titles);
-        $this->logger->debug('File::embeddedOnPageid: titles: '.$titles);
-        $this->setParam('titles', $titles);
-        return $this->getOnResponse();
+        $this->setImageinfoParams();
+        $this->send();
+        return Tools::flatten($this->getResponse(['query', 'pages']));
     }
 
     /**
@@ -116,26 +72,18 @@ class File extends Api
         $this->setParam('iiurlwidth', $this->width);
     }
 
-    /**
-     * Get API response from a files-info request
-     *
-     * @return array
-     */
-    private function getInfoResponse()
-    {
-        $this->setImageinfoParams();
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'pages']));
-    }
 
     /**
-     * Get API response from a files-embedded-on-page request
+     * get File information of Files embedded on a Page
+     *
+     * @see https://www.mediawiki.org/wiki/API:Images
      * @return array
      */
-    private function getOnResponse()
+    public function on()
     {
         $this->setParam('generator', 'images');
         $this->setParam('gimlimit', $this->getLimit());
         return $this->getInfoResponse();
     }
+
 }

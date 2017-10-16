@@ -14,7 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.10';
+    const VERSION = '0.9.11';
 
     const CATEGORY_NAMESPACE = 14;
     const FILE_NAMESPACE = 6;
@@ -182,14 +182,14 @@ class Api
     {
         return $this->getEndpoint().'?'.http_build_query($this->params);
     }
+
     /**
      * @uses Api::$response
      * @return bool
      */
     public function isBatchcomplete()
     {
-        return isset($this->response['batchcomplete'])
-            ? true : false;
+        return isset($this->response['batchcomplete']) ? true : false;
     }
 
     /**
@@ -240,4 +240,43 @@ class Api
         return isset($this->response['continue']['sroffset'])
             ? $this->response['continue']['sroffset'] : false;
     }
+
+    /**
+     * @param string|array|null $pageids
+     * @param string|array|null $titles
+     * @return bool
+     */
+    public function setIdentifier($pageids = null, $titles = null)
+    {
+        if ($pageids && (is_string($pageids) || is_array($pageids))) {
+            $this->setIdentifierPageid($pageids);
+            return true;
+        }
+        if ($titles && (is_string($titles) || is_array($titles))) {
+            $this->setIdentifierTitle($titles);
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param string|array $pageids
+     */
+    public function setIdentifierPageid($pageids)
+    {
+        $pageids = Tools::valuesImplode($pageids);
+        $this->logger->debug('Api::setIdentifierPageid: '.$pageids);
+        $this->setParam('pageids', $pageids);
+    }
+
+    /**
+     * @param string|array $titles
+     */
+    public function setIdentifierTitle($titles)
+    {
+        $titles = Tools::valuesImplode($titles);
+        $this->logger->debug('Api::setIdentifierTitle: '.$titles);
+        $this->setParam('titles', $titles);
+    }
+
 }

@@ -12,29 +12,24 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.23';
+    const VERSION = '0.9.24';
 
     const DEFAULT_LIMIT = 10;
 
-    public $methods = [
-                ['Category', 'search'],
-                ['Category', 'members'],
-                ['Category', 'info'],
-                //['Category', 'infoPageid'],
-                //['Category', 'infoTitle'],
-                ['Category', 'subcats'],
-                //['Category', 'subcatsPageid'],
-                //['Category', 'subcatsTitle'],
-                ['Category', 'from'],
-                //['Category', 'onPageid'],
-                //['Category', 'onTitle'],
-                ['File',     'search'],
-                ['File',     'infoPageid'],
-                ['File',     'infoTitle'],
-                ['File',     'onPageid'],
-                ['File',     'onTitle'],
-                ['Page',     'search'],
-            ];
+    public $methods = [ // Class, Method, Has Arg, Use Identifiers
+
+        ['Category', 'search',     'query',  false],
+        ['Category', 'members',    false,    true],
+        ['Category', 'info',       false,    true],
+        ['Category', 'subcats',    false,    true],
+        ['Category', 'from',       false,    true],
+
+        ['File',     'search',     'query',  false],
+        ['File',     'info',       false,    true],
+        ['File',     'on',         false,    true],
+
+        ['Page',     'search',     'query',  false],
+    ];
     public $self;
     public $class;
     public $method;
@@ -43,6 +38,7 @@ class Sandbox
     public $limit;
     public $logLevel;
     public $logger;
+    public $isSubmitted;
 
     public function play()
     {
@@ -51,9 +47,11 @@ class Sandbox
         print $this->sandboxHeader();
         print $this->menu();
         print $this->form();
-        print '<pre>';
-        print $this->getResponse();
-        print '</pre>';
+        if ($this->isSubmitted) {
+            print '<pre>';
+            print $this->getResponse();
+            print '</pre>';
+        }
         print $this->sandboxFooter();
     }
 
@@ -65,7 +63,10 @@ class Sandbox
         $this->class = isset($_GET['class']) ? trim(urldecode($_GET['class'])) : null;
         $this->method = isset($_GET['method']) ? trim(urldecode($_GET['method'])) : null;
         $this->arg = isset($_GET['arg']) ? trim(urldecode($_GET['arg'])) : null;
+        $this->pageids = isset($_GET['pageids']) ? trim(urldecode($_GET['pageids'])) : null;
+        $this->titles = isset($_GET['titles']) ? trim(urldecode($_GET['titles'])) : null;
         $this->logLevel = isset($_GET['logLevel']) ? strtoupper(trim(urldecode($_GET['logLevel']))) : null;
+        $this->isSubmitted =  isset($_GET['play']) ? true : false;
     }
 
     public function sandboxDefaults()
@@ -129,30 +130,46 @@ class Sandbox
                 $menu .= '<div class="menubox">'.$class.'::';
             }
             $menu .= '<div class="menu">'
-                .'<a href="'.$this->self.'?class='.$class.'&amp;method='.$method.'">'
-                .$method.'</a></div>';
+                .'<a href="'.$this->self.'?class='.$class.'&amp;method='.$method.'">'.$method.'</a>'
+                .'</div>';
             $lastClass = $class;
         }
         $menu .= '</div>';
         return $menu;
     }
 
-    public function form()
+    public function getMethodInfo()
     {
         if (!$this->class || !$this->method) {
+            return false;
+        }
+        foreach ($this->methods as $key => $val) {
+            if ($val[0] == $this->class && $val[1] == $this->method) {
+                return $this->methods[$key];
+            }
+        }
+    }
+
+    public function form()
+    {
+        $action = $this->getMethodInfo();
+        if (!$action) {
             return;
         }
-        if (array_search([$this->class,$this->method], $this->methods) === false) {
-            return 'ERROR: form: class::method not found';
-        }
-        return '<form>'
+        $form = '<form>'
+            .'<input type="hidden" name="play" value="1" />'
             .'<input type="hidden" name="class" value="'.$this->class.'" />'
             .'<input type="hidden" name="method" value="'.$this->method.'" />'
-            .$this->apiForm()
-            .'<br /><b>'.$this->class.'::'.$this->method.'</b>:'
-            .'<input name="arg" type="text" size="42" value="'.$this->arg.'" /><br />'
-            .'<input type="submit" value="                  GO                  "/>'
-            .'</form>';
+            .$this->apiForm().'<br />';
+        if ($action[3]) {
+            $form .= $this->identifierForm().'<br />';
+        }
+        $form .= '<b>'.$this->class.'::'.$this->method.'</b>:';
+        if ($action[2]) {
+            $form .= '<input name="arg" type="text" size="42" value="'.$this->arg.'" />';
+        }
+        $form .= '<br /><input type="submit" value="                  GO                  "/></form>';
+        return $form;
     }
 
     public function apiForm()
@@ -160,6 +177,13 @@ class Sandbox
         return 'endpoint:'.$this->endpointSelect()
         .'&nbsp; <nobr>limit:<input name="limit" value="'.$this->limit.'" type="text" size="5" /></nobr>'
         .'&nbsp; <nobr>logLevel:'.$this->logLevelSelect().'</nobr>';
+    }
+
+    public function identifierForm()
+    {
+        return 'Identifier: '
+        . 'Pageids:<input name="pageids" value="" type="text" size="30" />'
+        . ' OR: Titles:<input name="titles" value="" type="text" size="30" />';
     }
 
     public function endpointSelect()
@@ -192,12 +216,21 @@ class Sandbox
 
     public function getResponse()
     {
-        if (!$this->class || !$this->method || !$this->arg) {
-            return;
+        $action = $this->getMethodInfo();
+        if (!$action) {
+            return 'ERROR: Class::method not allowed';
+        }
+        if ($action[2] && !$this->arg) {
+            return 'ERROR: Missing Arg: '.$action[2];
         }
         $class = $this->getClass();
         if (!method_exists($class, $this->method)) {
             return 'ERROR: Class::method not found';
+        }
+        if ($action[3] ) {
+            if (!$class->setIdentifier($this->pageids, $this->titles)) {
+                return 'ERROR: Missing Identifier (pageids OR titltes)';
+            }
         }
         $class->setEndpoint($this->endpoint);
         $class->setLimit($this->limit);
