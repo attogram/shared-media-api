@@ -278,5 +278,4 @@ class Api
         $this->logger->debug('Api::setIdentifierTitle: '.$titles);
         $this->setParam('titles', $titles);
     }
-
 }

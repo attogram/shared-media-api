@@ -12,7 +12,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.24';
+    const VERSION = '0.9.25';
 
     const DEFAULT_LIMIT = 10;
 
@@ -39,6 +39,8 @@ class Sandbox
     public $logLevel;
     public $logger;
     public $isSubmitted;
+	public $pageids;
+	public $titles;
 
     public function play()
     {
@@ -227,7 +229,7 @@ class Sandbox
         if (!method_exists($class, $this->method)) {
             return 'ERROR: Class::method not found';
         }
-        if ($action[3] ) {
+        if ($action[3]) {
             if (!$class->setIdentifier($this->pageids, $this->titles)) {
                 return 'ERROR: Missing Identifier (pageids OR titltes)';
             }
