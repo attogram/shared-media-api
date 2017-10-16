@@ -1,4 +1,4 @@
-<?php // attogram/shared-media-api - sandbox.php - v0.9.0
+<?php // attogram/shared-media-api - sandbox.php - v0.9.1
 
 use Attogram\SharedMedia\Api\Sandbox;
 
@@ -9,4 +9,5 @@ if (!is_readable($autoload)) {
 }
 require_once($autoload);
 
-new Sandbox();
+$sandbox = new Sandbox();
+$sandbox->play();

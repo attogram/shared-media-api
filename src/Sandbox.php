@@ -12,7 +12,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.22';
+    const VERSION = '0.9.23';
 
     const DEFAULT_LIMIT = 10;
 
@@ -20,8 +20,14 @@ class Sandbox
                 ['Category', 'search'],
                 ['Category', 'members'],
                 ['Category', 'info'],
+                //['Category', 'infoPageid'],
+                //['Category', 'infoTitle'],
                 ['Category', 'subcats'],
+                //['Category', 'subcatsPageid'],
+                //['Category', 'subcatsTitle'],
                 ['Category', 'from'],
+                //['Category', 'onPageid'],
+                //['Category', 'onTitle'],
                 ['File',     'search'],
                 ['File',     'infoPageid'],
                 ['File',     'infoTitle'],
@@ -38,7 +44,7 @@ class Sandbox
     public $logLevel;
     public $logger;
 
-    public function __construct()
+    public function play()
     {
         $this->sandboxInit();
         $this->sandboxDefaults();
@@ -90,7 +96,7 @@ class Sandbox
         .'<meta http-equiv="X-UA-Compatible" content="IE=edge" />'
         .'<link rel="stylesheet" type="text/css" href="sandbox.css" />'
         .'<title>shared-media-api / sandbox</title>'
-        .'</head><body><h1><a href="./">shared-media-api</a></h1> <h2><a href="'.$this->self.'">sandbox</a></h2>';
+        .'</head><body><h1><a href="./">shared-media-api</a></h1><h2><a href="'.$this->self.'">sandbox</a></h2>';
     }
 
     public function sandboxFooter()
@@ -116,14 +122,18 @@ class Sandbox
         $lastClass = null;
         $menu = '<br />';
         foreach ($this->methods as list($class, $method)) {
-            if (!empty($lastClass) && $lastClass != $class) {
-                $menu .= '<br />';
+            if ($lastClass != $class) {
+                if (!empty($lastClass)) {
+                    $menu .= '</div>';
+                }
+                $menu .= '<div class="menubox">'.$class.'::';
             }
             $menu .= '<div class="menu">'
                 .'<a href="'.$this->self.'?class='.$class.'&amp;method='.$method.'">'
-                .$class.'::'.$method.'</a></div>';
+                .$method.'</a></div>';
             $lastClass = $class;
         }
+        $menu .= '</div>';
         return $menu;
     }
 

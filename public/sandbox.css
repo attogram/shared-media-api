@@ -1,4 +1,4 @@
-/* attogram/shared-media-api - sandbox.css - v0.9.5 */
+/* attogram/shared-media-api - sandbox.css - v0.9.6 */
 body {
     background-color:#ddd;
     color:#000;
@@ -35,17 +35,26 @@ input {
     padding:2;
 }
 ul {
-    line-height: 2;
+    line-height: 1.5;
 }
 .menu {
     background-color:lightyellow;
     border:1px solid black;
     display:inline-block;
     font-family:monospace;
-    font-weight:bold;
+    font-weight:normal;
     margin:1px;
     padding:5px;
 }
 .menu a {
     color:#300;
+}
+.menubox {
+    background-color:#eee;
+    border:1px solid black;
+    display:inline-block;
+    font-family:monospace;
+    font-weight:bold;
+    margin:1px;
+    padding:5px;
 }

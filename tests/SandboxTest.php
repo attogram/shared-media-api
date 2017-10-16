@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
  */
 class SandboxTest extends TestCase
 {
-    const VERSION = '0.9.2';
+    const VERSION = '0.9.3';
 
     /**
      * @covers ::__construct
@@ -24,5 +24,7 @@ class SandboxTest extends TestCase
             defined('\Attogram\SharedMedia\Api\Sandbox::VERSION'),
             'constant \Attogram\SharedMedia\Api\Sandbox::VERSION not found'
         );
+        $sandbox = new \Attogram\SharedMedia\Api\Sandbox();
+        $this->assertTrue(is_object($sandbox), 'instantiation of Sandbox failed');
     }
 }
