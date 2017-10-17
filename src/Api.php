@@ -14,7 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.11';
+    const VERSION = '0.9.12';
 
     const CATEGORY_NAMESPACE = 14;
     const FILE_NAMESPACE = 6;
@@ -23,6 +23,8 @@ class Api
     const DEFAULT_LIMIT = 50;
 
     public $logger;
+    public $identifierRequired = true;
+
     private $endpoint;
     private $client;
     private $params = [];
@@ -77,12 +79,18 @@ class Api
         return $this->endpoint;
     }
 
+    /**
+     * @return void
+     */
     public function setLimit($limit)
     {
         $this->limit = $limit;
         $this->logger->debug('Api::setLimit: '.$limit);
     }
 
+    /**
+     * @return int
+     */
     public function getLimit()
     {
         if (!is_numeric($this->limit) || !$this->limit) {
@@ -90,14 +98,42 @@ class Api
         }
         return $this->limit;
     }
+
     /**
-     * @uses Api::$param
+     * @uses Api::$params
      * @return void
      */
     public function setParam($paramName, $paramValue)
     {
         $this->params[$paramName] = $paramValue;
-        $this->logger->debug('Api::setParam: '.$paramName.' = '.$paramValue);
+        $this->logger->debug('Api::setParam: '.Tools::safeString($paramName)
+            .' = '.Tools::safeString($paramValue));
+    }
+
+    /**
+     * @uses Api::$params
+     * @return bool
+     */
+    private function hasParams()
+    {
+        if (!$this->params || !is_array($this->params)) {
+            $this->logger->error('Api::hasParams: params Not Found');
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @uses Api::$params
+     * @return bool
+     */
+    private function hasParamsIdentifier()
+    {
+        if (!isset($this->params['pageids']) && !isset($this->params['titles'])) {
+            $this->logger->error('Api::hasParamsIdentifier: Identifier Not Found (pageids OR titles)');
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -108,8 +144,12 @@ class Api
      */
     public function send()
     {
-        if (!$this->params || !is_array($this->params)) {
-            $this->logger->error('Api::send: params is empty');
+        if (!$this->hasParams()) {
+            $this->logger->error('Api::send: invalid params');
+            return false;
+        }
+        if ($this->identifierRequired && !$this->hasParamsIdentifier()) {
+            $this->logger->error('Api::send: required identifier Not Found');
             return false;
         }
         $this->setParam('action', 'query');
@@ -152,9 +192,13 @@ class Api
      */
     public function getResponse($keys = null)
     {
-        if (!is_array($this->response) || !$this->response) {
+        if (!$this->response) {
             $this->logger->error('Api::getResponse: No Response Found');
             return [];
+        }
+        if (!is_array($this->response)) {
+            $this->logger->error('Api::getResponse: Response Not Array');
+            return [$this->response];
         }
         $response = $this->getResponseFromKeys($keys);
         $this->logger->info('Api::getResponse: count: '.count($response));
@@ -163,8 +207,12 @@ class Api
 
     public function getResponseFromKeys($keys)
     {
-        if (!is_array($keys) || !$keys) {
+        if (!$keys) {
             $this->logger->debug('Api::getResponseFromKeys: Keys Not Found.');
+            return $this->response;
+        }
+        if (!is_array($keys)) {
+            $this->logger->debug('Api::getResponseFromKeys: Keys Not Array.');
             return $this->response;
         }
         $found = $this->response;

@@ -12,21 +12,22 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.25';
+    const VERSION = '0.9.26';
 
     const DEFAULT_LIMIT = 10;
 
     public $methods = [ // Class, Method, Has Arg, Use Identifiers
 
         ['Category', 'search',     'query',  false],
-        ['Category', 'members',    false,    true],
         ['Category', 'info',       false,    true],
+        ['Category', 'members',    false,    true],
         ['Category', 'subcats',    false,    true],
         ['Category', 'from',       false,    true],
 
         ['File',     'search',     'query',  false],
         ['File',     'info',       false,    true],
-        ['File',     'on',         false,    true],
+        ['File',     'inCategory', false,    true],
+        ['File',     'onPage',     false,    true],
 
         ['Page',     'search',     'query',  false],
     ];
@@ -39,8 +40,8 @@ class Sandbox
     public $logLevel;
     public $logger;
     public $isSubmitted;
-	public $pageids;
-	public $titles;
+    public $pageids;
+    public $titles;
 
     public function play()
     {
@@ -184,8 +185,8 @@ class Sandbox
     public function identifierForm()
     {
         return 'Identifier: '
-        . 'Pageids:<input name="pageids" value="" type="text" size="30" />'
-        . ' OR: Titles:<input name="titles" value="" type="text" size="30" />';
+        . 'Pageids:<input name="pageids" value="'.$this->pageids.'" type="text" size="30" />'
+        . ' OR: Titles:<input name="titles" value="'.$this->titles.'" type="text" size="30" />';
     }
 
     public function endpointSelect()

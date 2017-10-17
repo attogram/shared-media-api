@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Api
 {
-    const VERSION = '0.9.5';
+    const VERSION = '0.9.6';
 
     /**
      * search for categories
@@ -24,7 +24,6 @@ class Category extends Api
             $this->logger->error('Category::search: invalid query');
             return [];
         }
-        $this->logger->debug('Category::search: query: '.$query);
         $this->setParam('list', 'search');
         $this->setParam('srnamespace', self::CATEGORY_NAMESPACE);
         $this->setParam('srprop', 'size|snippet|timestamp'); // titlesnippet|title
@@ -47,7 +46,6 @@ class Category extends Api
             $this->logger->error('Category::members: invalid categoryTitle');
             return [];
         }
-        $this->logger->debug('Category::members: categoryTitle: '.$categoryTitle);
         $this->setParam('list', 'categorymembers');
         $this->setParam('cmtype', 'file');
         $this->setParam('cmprop', 'ids|title');
@@ -70,7 +68,6 @@ class Category extends Api
             $this->logger->error('Category::from: invalid pageid');
             return [];
         }
-        $this->logger->debug('Category::from: pageid: '.$pageid);
         $this->setParam('prop', 'categories');
         $this->setParam('clprop', 'hidden'); // timestamp|hidden
         $this->setParam('cllimit', $this->getLimit());
@@ -82,18 +79,15 @@ class Category extends Api
     /**
      * get category information
      *
-     * @param string|array $categoryTitle
      * @return array
      */
-    public function info($categoryTitle)
+    public function info()
     {
         if (!Tools::isGoodString($categoryTitle)) {
             $this->logger->error('Category::info: invalid categoryTitle');
             return [];
         }
-        $this->logger->debug('Category::info: categoryTitle: '.$categoryTitle);
         $this->setParam('prop', 'categoryinfo');
-        $this->setParam('titles', $categoryTitle);
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));
     }
@@ -111,7 +105,6 @@ class Category extends Api
             $this->logger->error('Category::subcats: invalid categoryTitle');
             return [];
         }
-        $this->logger->debug('Category::subcats: categoryTitle: '.$categoryTitle);
         $this->setParam('list', 'categorymembers');
         $this->setParam('cmtype', 'subcat');
         $this->setParam('cmprop', 'ids|title');

@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '0.9.4';
+    const VERSION = '0.9.5';
 
     /**
      * @param array $arrays
@@ -15,11 +15,11 @@ class Tools
     public static function flatten($arrays)
     {
         if (!is_array($arrays)) {
-            return [];
+            return $arrays;
         }
         $flat = [];
-        foreach ($arrays as $array) {
-            $flat[] = self::flattenArray($array);
+        foreach ($arrays as $key => $val) {
+            $flat[$key] = self::flattenArray($val);
         }
         return $flat;
     }
@@ -71,6 +71,8 @@ class Tools
     }
 
     /**
+     * implode an array, using | as the glue
+     *
      * @param array|mixed $values
      * @return string|mixed
      */
@@ -80,5 +82,18 @@ class Tools
             return $values;
         }
         return implode('|', $values);
+    }
+
+    /**
+     * make a string safe for web output
+     *
+     * @param string|mixed $string
+     */
+    public function safeString($string)
+    {
+        if (!is_string($string)) {
+            return $string;
+        }
+        return htmlentities($string);
     }
 }

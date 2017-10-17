@@ -10,7 +10,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class File extends Api
 {
-    const VERSION = '0.9.6';
+    const VERSION = '0.9.7';
 
     public $width = 100;
 
@@ -27,11 +27,11 @@ class File extends Api
             $this->logger->error('File::search: invalid query');
             return [];
         }
-        $this->logger->debug('File::search: query: '.$query);
         $this->setParam('generator', 'search');
         $this->setParam('gsrnamespace', self::FILE_NAMESPACE);
         $this->setParam('gsrlimit', $this->getLimit());
         $this->setParam('gsrsearch', $query);
+        $this->identifierRequired = false;
         return $this->getInfoResponse();
     }
 
@@ -43,6 +43,24 @@ class File extends Api
     public function info()
     {
         return $this->getInfoResponse();
+    }
+
+    /**
+     * get Files embedded on a Page
+     *
+     * @see https://www.mediawiki.org/wiki/API:Images
+     * @return array
+     */
+    public function onPage()
+    {
+        $this->setParam('generator', 'images');
+        $this->setParam('gimlimit', $this->getLimit());
+        return $this->getInfoResponse();
+    }
+
+    public function inCategory()
+    {
+        return ['inCategory in dev'];
     }
 
     /**
@@ -71,19 +89,4 @@ class File extends Api
                         .'Restrictions|Artist|ImageDescription|DateTimeOriginal');
         $this->setParam('iiurlwidth', $this->width);
     }
-
-
-    /**
-     * get File information of Files embedded on a Page
-     *
-     * @see https://www.mediawiki.org/wiki/API:Images
-     * @return array
-     */
-    public function on()
-    {
-        $this->setParam('generator', 'images');
-        $this->setParam('gimlimit', $this->getLimit());
-        return $this->getInfoResponse();
-    }
-
 }
