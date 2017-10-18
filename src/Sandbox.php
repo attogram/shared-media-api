@@ -185,8 +185,8 @@ class Sandbox
     public function identifierForm()
     {
         return 'Identifier: '
-		. 'Titles:<input name="titles" value="'.$this->titles.'" type="text" size="30" />'
-		. ' OR: '
+        . 'Titles:<input name="titles" value="'.$this->titles.'" type="text" size="30" />'
+        . ' OR: '
         . 'Pageids:<input name="pageids" value="'.$this->pageids.'" type="text" size="30" />';
     }
 
@@ -231,8 +231,8 @@ class Sandbox
         if (!method_exists($class, $this->method)) {
             return 'ERROR: Class::method not found';
         }
-		$class->pageid = $this->pageids;
-		$class->title = $this->titles;
+        $class->pageid = $this->pageids;
+        $class->title = $this->titles;
         $class->setEndpoint($this->endpoint);
         $class->setLimit($this->limit);
         $results = $class->{$this->method}($this->arg);

@@ -15,18 +15,18 @@ class Base extends Api
     const FILE_NAMESPACE = 6;
     const PAGE_NAMESPACE = 0;
 
-	public $pageid;
-	public $title;
-	
+    public $pageid;
+    public $title;
+
 
     /**
-	 * @param string|null $prefix
-	 * @param string|null $postfix
+     * @param string|null $prefix
+     * @param string|null $postfix
      * @return bool
      */
     public function setIdentifier($prefix = '', $postfix = '')
     {
-		$this->logger->debug('Base::setIdentifier');
+        $this->logger->debug('Base::setIdentifier');
         if ($this->pageid && (is_string($this->pageid) || is_array($this->pageid))) {
             $this->setIdentifierPageid($prefix, $postfix);
             return true;
@@ -35,40 +35,40 @@ class Base extends Api
             $this->setIdentifierTitle($prefix, $postfix);
             return true;
         }
-		$this->logger->error('Base::setIdentifier: Identifier Not Found');
+        $this->logger->error('Base::setIdentifier: Identifier Not Found');
         return false;
     }
 
     /**
-	 * @param string|null $prefix
-	 * @param string|null $postfix
+     * @param string|null $prefix
+     * @param string|null $postfix
      */
     public function setIdentifierPageid($prefix = '', $postfix = '')
     {
-		$this->logger->debug('Base::setIdentifierPageid');
+        $this->logger->debug('Base::setIdentifierPageid');
         $pageid = Tools::valuesImplode($this->pageid);
         $this->setParam($prefix.'pageid'.$postfix, $pageid);
     }
 
     /**
-	 * @param string|null $prefix
-	 * @param string|null $postfix
+     * @param string|null $prefix
+     * @param string|null $postfix
      */
     public function setIdentifierTitle($prefix = '', $postfix = '')
     {
-		$this->logger->debug('Base::setIdentifierTitle');
+        $this->logger->debug('Base::setIdentifierTitle');
         $title = Tools::valuesImplode($this->title);
         $this->setParam($prefix.'title'.$postfix, $title);
     }
-	
+
     /**
      * @uses Api::$params
      * @return bool
      */
     private function hasParamsIdentifier()
     {
-        if (!isset($this->params[$this->identifierPrefix.'pageid'.$this->identifierPostfix]) 
-			&& !isset($this->params[$this->identifierPrefix.'titles'.$this->identifierPostfix])) {
+        if (!isset($this->params[$this->identifierPrefix.'pageid'.$this->identifierPostfix])
+            && !isset($this->params[$this->identifierPrefix.'titles'.$this->identifierPostfix])) {
             $this->logger->error('Api::hasParamsIdentifier: Identifier Not Found');
             return false;
         }
@@ -124,6 +124,4 @@ class Base extends Api
         return isset($this->response['continue']['sroffset'])
             ? $this->response['continue']['sroffset'] : false;
     }
-
-	
 }

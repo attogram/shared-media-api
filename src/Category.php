@@ -106,7 +106,7 @@ class Category extends Base
         $this->setParam('generator', 'categories');
         $this->setParam('clprop', 'hidden'); // timestamp|hidden
         $this->setParam('cllimit', $this->getLimit());
-		$this->setParam('prop', 'categoryinfo');
+        $this->setParam('prop', 'categoryinfo');
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));
     }

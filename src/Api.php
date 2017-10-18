@@ -19,7 +19,7 @@ class Api
     const DEFAULT_LIMIT = 50;
 
     public $logger;
-	
+
     private $endpoint;
     private $client;
     private $params = [];
@@ -98,9 +98,9 @@ class Api
     {
         $this->params[$paramName] = $paramValue;
         $this->logger->debug(
-			Tools::safeString('Api::setParam: '.$paramName.':'), 
-			[Tools::safeString($paramValue)]
-		);
+            Tools::safeString('Api::setParam: '.$paramName.':'),
+            [Tools::safeString($paramValue)]
+        );
     }
 
     /**
@@ -162,7 +162,7 @@ class Api
      */
     public function getResponse($keys = null)
     {
-		$this->logger->debug('Api::getResponse', [$this->response]);
+        $this->logger->debug('Api::getResponse', [$this->response]);
         if (!$this->response) {
             $this->logger->error('Api::getResponse: No Response Found');
             return [];
@@ -197,9 +197,9 @@ class Api
         return $found;
     }
 
-	/**
-	 * @return string
-	 */
+    /**
+     * @return string
+     */
     public function getUrl()
     {
         return $this->getEndpoint().'?'.http_build_query($this->params);

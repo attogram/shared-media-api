@@ -60,10 +60,10 @@ class File extends Base
 
     public function inCategory()
     {
-		$this->logger->debug('File::inCategory');
-		$category = new Category($this->logger);
-		$category->pageid = $this->pageid;
-		$category->title = $this->title;
+        $this->logger->debug('File::inCategory');
+        $category = new Category($this->logger);
+        $category->pageid = $this->pageid;
+        $category->title = $this->title;
         return $category->members();
     }
 
