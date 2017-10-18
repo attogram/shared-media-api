@@ -5,11 +5,11 @@ namespace Attogram\SharedMedia\Api;
 use Attogram\SharedMedia\Api\Tools;
 
 /**
- * Attogram Commons Page
+ * Page Object
  */
-class Page extends Api
+class Page extends Base
 {
-    const VERSION = '0.9.4';
+    const VERSION = '0.9.5';
 
     /**
      * search for Pages

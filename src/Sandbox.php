@@ -12,7 +12,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.26';
+    const VERSION = '0.9.27';
 
     const DEFAULT_LIMIT = 10;
 
@@ -20,9 +20,9 @@ class Sandbox
 
         ['Category', 'search',     'query',  false],
         ['Category', 'info',       false,    true],
-        ['Category', 'members',    false,    true],
         ['Category', 'subcats',    false,    true],
-        ['Category', 'from',       false,    true],
+        ['Category', 'members',    false,    true],
+        ['Category', 'fromPage',   false,    true],
 
         ['File',     'search',     'query',  false],
         ['File',     'info',       false,    true],
@@ -107,8 +107,8 @@ class Sandbox
     {
         return '<footer><hr />'
         .'<a href="./">shared-media-api</a> : <a href="'.$this->self.'">sandbox</a>'
-        .'<small><pre>'
-        .'Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION
+        .'<small><pre>Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION
+        .'<br />Attogram\SharedMedia\Api\Base     v'. \Attogram\SharedMedia\Api\Base::VERSION
         .'<br />Attogram\SharedMedia\Api\Category v'. \Attogram\SharedMedia\Api\Category::VERSION
         .'<br />Attogram\SharedMedia\Api\File     v'. \Attogram\SharedMedia\Api\File::VERSION
         .'<br />Attogram\SharedMedia\Api\Page     v'. \Attogram\SharedMedia\Api\Page::VERSION
@@ -185,8 +185,9 @@ class Sandbox
     public function identifierForm()
     {
         return 'Identifier: '
-        . 'Pageids:<input name="pageids" value="'.$this->pageids.'" type="text" size="30" />'
-        . ' OR: Titles:<input name="titles" value="'.$this->titles.'" type="text" size="30" />';
+		. 'Titles:<input name="titles" value="'.$this->titles.'" type="text" size="30" />'
+		. ' OR: '
+        . 'Pageids:<input name="pageids" value="'.$this->pageids.'" type="text" size="30" />';
     }
 
     public function endpointSelect()
@@ -230,11 +231,8 @@ class Sandbox
         if (!method_exists($class, $this->method)) {
             return 'ERROR: Class::method not found';
         }
-        if ($action[3]) {
-            if (!$class->setIdentifier($this->pageids, $this->titles)) {
-                return 'ERROR: Missing Identifier (pageids OR titltes)';
-            }
-        }
+		$class->pageid = $this->pageids;
+		$class->title = $this->titles;
         $class->setEndpoint($this->endpoint);
         $class->setLimit($this->limit);
         $results = $class->{$this->method}($this->arg);

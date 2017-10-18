@@ -3,14 +3,14 @@
 namespace Attogram\SharedMedia\Api;
 
 use Attogram\SharedMedia\Api\Tools;
+use Attogram\SharedMedia\Api\Category;
 
 /**
  * File object
- * Attogram SharedMedia API
  */
-class File extends Api
+class File extends Base
 {
-    const VERSION = '0.9.7';
+    const VERSION = '0.9.8';
 
     public $width = 100;
 
@@ -60,7 +60,11 @@ class File extends Api
 
     public function inCategory()
     {
-        return ['inCategory in dev'];
+		$this->logger->debug('File::inCategory');
+		$category = new Category($this->logger);
+		$category->pageid = $this->pageid;
+		$category->title = $this->title;
+        return $category->members();
     }
 
     /**

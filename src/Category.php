@@ -5,11 +5,11 @@ namespace Attogram\SharedMedia\Api;
 use Attogram\SharedMedia\Api\Tools;
 
 /**
- * Attogram Commons Category
+ * Category object
  */
-class Category extends Api
+class Category extends Base
 {
-    const VERSION = '0.9.6';
+    const VERSION = '0.9.7';
 
     /**
      * search for categories
@@ -20,60 +20,18 @@ class Category extends Api
      */
     public function search($query)
     {
+        $this->logger->debug('Category::search');
         if (!Tools::isGoodString($query)) {
             $this->logger->error('Category::search: invalid query');
             return [];
         }
-        $this->setParam('list', 'search');
-        $this->setParam('srnamespace', self::CATEGORY_NAMESPACE);
-        $this->setParam('srprop', 'size|snippet|timestamp'); // titlesnippet|title
-        $this->setParam('srlimit', $this->getLimit());
-        $this->setParam('srsearch', $query);
+        $this->setParam('generator', 'search');
+        $this->setParam('gsrnamespace', self::CATEGORY_NAMESPACE);
+        $this->setParam('gsrlimit', $this->getLimit());
+        $this->setParam('gsrsearch', $query);
+        $this->setParam('prop', 'categoryinfo');
         $this->send();
-        return Tools::flatten($this->getResponse(['query', 'search']));
-    }
-
-    /**
-     * get a list of files in a category
-     *
-     * @see https://www.mediawiki.org/wiki/API:Categorymembers
-     * @param string $categoryTitle
-     * @return array
-     */
-    public function members($categoryTitle)
-    {
-        if (!Tools::isGoodString($categoryTitle)) {
-            $this->logger->error('Category::members: invalid categoryTitle');
-            return [];
-        }
-        $this->setParam('list', 'categorymembers');
-        $this->setParam('cmtype', 'file');
-        $this->setParam('cmprop', 'ids|title');
-        $this->setParam('cmlimit', $this->getLimit());
-        $this->setParam('cmtitle', $categoryTitle); // cmtitle OR cmpageid
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'categorymembers']));
-    }
-
-    /**
-     * get categories from a pageid
-     *
-     * @see https://www.mediawiki.org/wiki/API:Categories
-     * @param int $pageid
-     * @return array
-     */
-    public function from($pageid)
-    {
-        if (!is_numeric($pageid)) {
-            $this->logger->error('Category::from: invalid pageid');
-            return [];
-        }
-        $this->setParam('prop', 'categories');
-        $this->setParam('clprop', 'hidden'); // timestamp|hidden
-        $this->setParam('cllimit', $this->getLimit());
-        $this->setParam('pageids', $pageid);
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'pages', $pageid, 'categories']));
+        return Tools::flatten($this->getResponse(['query', 'pages']));
     }
 
     /**
@@ -83,8 +41,8 @@ class Category extends Api
      */
     public function info()
     {
-        if (!Tools::isGoodString($categoryTitle)) {
-            $this->logger->error('Category::info: invalid categoryTitle');
+        $this->logger->debug('Category::info');
+        if (!$this->setIdentifier('', 's')) {
             return [];
         }
         $this->setParam('prop', 'categoryinfo');
@@ -96,21 +54,60 @@ class Category extends Api
      * get a list of subcategories of a category
      *
      * @see https://www.mediawiki.org/wiki/API:Categorymembers
-     * @param string $categoryTitle
      * @return array
      */
-    public function subcats($categoryTitle)
+    public function subcats()
     {
-        if (!Tools::isGoodString($categoryTitle)) {
-            $this->logger->error('Category::subcats: invalid categoryTitle');
+        $this->logger->debug('Category::subcats');
+        if (!$this->setIdentifier('cm')) {
             return [];
         }
         $this->setParam('list', 'categorymembers');
         $this->setParam('cmtype', 'subcat');
         $this->setParam('cmprop', 'ids|title');
         $this->setParam('cmlimit', $this->getLimit());
-        $this->setParam('cmtitle', $categoryTitle); // cmtitle OR cmpageid
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'categorymembers']));
+    }
+
+
+    /**
+     * get a list of files in a category
+     *
+     * @see https://www.mediawiki.org/wiki/API:Categorymembers
+     * @return array
+     */
+    public function members()
+    {
+        $this->logger->debug('Category::members');
+        if (!$this->setIdentifier('cm')) {
+            return [];
+        }
+        $this->setParam('list', 'categorymembers');
+        $this->setParam('cmtype', 'file');
+        $this->setParam('cmprop', 'ids|title');
+        $this->setParam('cmlimit', $this->getLimit());
+        $this->send();
+        return Tools::flatten($this->getResponse(['query', 'categorymembers']));
+    }
+
+    /**
+     * get categories from a page
+     *
+     * @see https://www.mediawiki.org/wiki/API:Categories
+     * @return array
+     */
+    public function fromPage()
+    {
+        $this->logger->debug('Category::fromPage');
+        if (!$this->setIdentifier('', 's')) {
+            return [];
+        }
+        $this->setParam('generator', 'categories');
+        $this->setParam('clprop', 'hidden'); // timestamp|hidden
+        $this->setParam('cllimit', $this->getLimit());
+		$this->setParam('prop', 'categoryinfo');
+        $this->send();
+        return Tools::flatten($this->getResponse(['query', 'pages']));
     }
 }

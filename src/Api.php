@@ -14,17 +14,12 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.12';
-
-    const CATEGORY_NAMESPACE = 14;
-    const FILE_NAMESPACE = 6;
-    const PAGE_NAMESPACE = 0;
+    const VERSION = '0.9.13';
 
     const DEFAULT_LIMIT = 50;
 
     public $logger;
-    public $identifierRequired = true;
-
+	
     private $endpoint;
     private $client;
     private $params = [];
@@ -43,7 +38,6 @@ class Api
     /**
      * Set a PSR3 logger
      *
-     * @uses Api::$log
      * @param mixed $log
      * @return void
      */
@@ -58,17 +52,15 @@ class Api
     }
 
     /**
-     * @uses Api::$endpoint
      * @return void
      */
     public function setEndpoint($endpoint)
     {
         $this->endpoint = $endpoint;
-        $this->logger->debug('Api::setEndpoint: '.$endpoint);
+        $this->logger->debug('Api::setEndpoint:', [$endpoint]);
     }
 
     /**
-     * @uses Api::$endpoint
      * @return string
      */
     public function getEndpoint()
@@ -85,7 +77,7 @@ class Api
     public function setLimit($limit)
     {
         $this->limit = $limit;
-        $this->logger->debug('Api::setLimit: '.$limit);
+        $this->logger->debug('Api::setLimit:', [$limit]);
     }
 
     /**
@@ -100,18 +92,18 @@ class Api
     }
 
     /**
-     * @uses Api::$params
      * @return void
      */
     public function setParam($paramName, $paramValue)
     {
         $this->params[$paramName] = $paramValue;
-        $this->logger->debug('Api::setParam: '.Tools::safeString($paramName)
-            .' = '.Tools::safeString($paramValue));
+        $this->logger->debug(
+			Tools::safeString('Api::setParam: '.$paramName.':'), 
+			[Tools::safeString($paramValue)]
+		);
     }
 
     /**
-     * @uses Api::$params
      * @return bool
      */
     private function hasParams()
@@ -124,32 +116,12 @@ class Api
     }
 
     /**
-     * @uses Api::$params
-     * @return bool
-     */
-    private function hasParamsIdentifier()
-    {
-        if (!isset($this->params['pageids']) && !isset($this->params['titles'])) {
-            $this->logger->error('Api::hasParamsIdentifier: Identifier Not Found (pageids OR titles)');
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * @uses Api::$request
-     * @uses Api::$endpoint
-     * @uses Api::$params
      * @return bool
      */
     public function send()
     {
         if (!$this->hasParams()) {
-            $this->logger->error('Api::send: invalid params');
-            return false;
-        }
-        if ($this->identifierRequired && !$this->hasParamsIdentifier()) {
-            $this->logger->error('Api::send: required identifier Not Found');
+            $this->logger->error('Api::send: params Not Found');
             return false;
         }
         $this->setParam('action', 'query');
@@ -175,7 +147,6 @@ class Api
     }
 
     /**
-     * @uses Api::$response
      * @return bool
      */
     private function decodeRequest()
@@ -187,11 +158,11 @@ class Api
     }
 
     /**
-     * @uses Api::$response
      * @return array|mixed
      */
     public function getResponse($keys = null)
     {
+		$this->logger->debug('Api::getResponse', [$this->response]);
         if (!$this->response) {
             $this->logger->error('Api::getResponse: No Response Found');
             return [];
@@ -226,104 +197,19 @@ class Api
         return $found;
     }
 
+	/**
+	 * @return string
+	 */
     public function getUrl()
     {
         return $this->getEndpoint().'?'.http_build_query($this->params);
     }
 
     /**
-     * @uses Api::$response
-     * @return bool
-     */
-    public function isBatchcomplete()
-    {
-        return isset($this->response['batchcomplete']) ? true : false;
-    }
-
-    /**
-     * @uses Api::$client
      * @return object \GuzzleHttp\Client
      */
     public function getClient()
     {
         return $this->client ?: new Client();
-    }
-
-    /**
-     * @uses Api::$response
-     * @return string|false
-     */
-    public function getTotalhits()
-    {
-        return isset($this->response['query']['searchinfo']['totalhits'])
-            ? $this->response['query']['searchinfo']['totalhits'] : false;
-    }
-
-    /**
-     * @uses Api::$response
-     * @return mixed
-     */
-    public function getWarnings()
-    {
-        return isset($this->response['warnings'])
-            ? $this->response['warnings'] : false;
-    }
-
-    /**
-     * @uses Api::$response
-     * @return string|false
-     */
-    public function getContinue()
-    {
-        return isset($this->response['continue']['continue'])
-            ? $this->response['continue']['continue'] : false;
-    }
-
-    /**
-     * @uses Api::$response
-     * @return int|false
-     */
-    public function getSroffset()
-    {
-        return isset($this->response['continue']['sroffset'])
-            ? $this->response['continue']['sroffset'] : false;
-    }
-
-    /**
-     * @param string|array|null $pageids
-     * @param string|array|null $titles
-     * @return bool
-     */
-    public function setIdentifier($pageids = null, $titles = null)
-    {
-        if ($pageids && (is_string($pageids) || is_array($pageids))) {
-            $this->setIdentifierPageid($pageids);
-            return true;
-        }
-        if ($titles && (is_string($titles) || is_array($titles))) {
-            $this->setIdentifierTitle($titles);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * @param string|array $pageids
-     */
-    public function setIdentifierPageid($pageids)
-    {
-        $pageids = Tools::valuesImplode($pageids);
-        $this->logger->debug('Api::setIdentifierPageid: '.$pageids);
-        $this->setParam('pageids', $pageids);
-    }
-
-    /**
-     * @param string|array $titles
-     */
-    public function setIdentifierTitle($titles)
-    {
-        $titles = Tools::valuesImplode($titles);
-        $this->logger->debug('Api::setIdentifierTitle: '.$titles);
-        $this->setParam('titles', $titles);
     }
 }
