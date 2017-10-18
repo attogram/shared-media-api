@@ -27,6 +27,7 @@ class BaseTest extends TestCase
             'constant \Attogram\SharedMedia\Api\Base::VERSION not found'
         );
         $base = new \Attogram\SharedMedia\Api\Base(new NullLogger);
+        $this->assertTrue(is_object($base), 'instantiation of Base failed');
     }
 
     /**
