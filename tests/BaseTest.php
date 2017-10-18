@@ -10,7 +10,7 @@ use Psr\Log\NullLogger;
  */
 class BaseTest extends TestCase
 {
-    const VERSION = '0.9.0';
+    const VERSION = '0.9.1';
 
     /**
      * @covers ::__construct
@@ -26,7 +26,6 @@ class BaseTest extends TestCase
             defined('\Attogram\SharedMedia\Api\Base::VERSION'),
             'constant \Attogram\SharedMedia\Api\Base::VERSION not found'
         );
-        $this->assertClassHasAttribute('endpoint', \Attogram\SharedMedia\Api\Base::class);
         $base = new \Attogram\SharedMedia\Api\Base(new NullLogger);
         $this->assertObjectHasAttribute('endpoint', $base);
     }
