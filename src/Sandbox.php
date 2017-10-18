@@ -14,7 +14,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.29';
+    const VERSION = '0.9.30';
 
     const DEFAULT_LIMIT = 10;
 
@@ -63,20 +63,15 @@ class Sandbox
     public function sandboxInit()
     {
         $this->self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null;
-        $this->endpoint = $this->getGet('endpoint');
-        $this->limit = $this->getGet('limit');
-        $this->class = $this->getGet('class');
-        $this->method = $this->getGet('method');
-        $this->arg = $this->getGet('arg');
-        $this->pageids = $this->getGet('pageids');
-        $this->titles = $this->getGet('titles');
-        $this->logLevel = $this->getGet('logLevel');
+        $this->endpoint = Tools::getGet('endpoint');
+        $this->limit = Tools::getGet('limit');
+        $this->class = Tools::getGet('class');
+        $this->method = Tools::getGet('method');
+        $this->arg = Tools::getGet('arg');
+        $this->pageids = Tools::getGet('pageids');
+        $this->titles = Tools::getGet('titles');
+        $this->logLevel = Tools::getGet('logLevel');
         $this->isSubmitted = isset($_GET['play']) ? true : false;
-    }
-
-    private function getGet($name)
-    {
-        return isset($_GET[$name]) ? trim(urldecode($_GET[$name])) : null;
     }
 
     public function sandboxDefaults()
