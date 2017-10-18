@@ -10,7 +10,7 @@ use Attogram\SharedMedia\Api\Category;
  */
 class File extends Base
 {
-    const VERSION = '0.9.8';
+    const VERSION = '0.9.9';
 
     public $width = 100;
 
@@ -31,7 +31,6 @@ class File extends Base
         $this->setParam('gsrnamespace', self::FILE_NAMESPACE);
         $this->setParam('gsrlimit', $this->getLimit());
         $this->setParam('gsrsearch', $query);
-        $this->identifierRequired = false;
         return $this->getInfoResponse();
     }
 
@@ -42,6 +41,9 @@ class File extends Base
      */
     public function info()
     {
+        if (!$this->setIdentifier()) {
+            return [];
+        }
         return $this->getInfoResponse();
     }
 
@@ -53,6 +55,10 @@ class File extends Base
      */
     public function onPage()
     {
+        $this->logger->debug('File::onPage');
+        if (!$this->setIdentifier('gm')) {
+            return [];
+        }
         $this->setParam('generator', 'images');
         $this->setParam('gimlimit', $this->getLimit());
         return $this->getInfoResponse();
