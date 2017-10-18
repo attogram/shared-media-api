@@ -14,7 +14,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.30';
+    const VERSION = '0.9.31';
 
     const DEFAULT_LIMIT = 10;
 
@@ -49,7 +49,7 @@ class Sandbox
     {
         $this->sandboxInit();
         $this->sandboxDefaults();
-        print $this->sandboxHeader();
+        print $this->getHeader();
         print $this->menu();
         print $this->form();
         if ($this->isSubmitted) {
@@ -57,7 +57,7 @@ class Sandbox
             print $this->getResponse();
             print '</pre>';
         }
-        print $this->sandboxFooter();
+        print $this->getFooter();
     }
 
     public function sandboxInit()
@@ -94,7 +94,7 @@ class Sandbox
         return Logger::DEBUG;
     }
 
-    public function sandboxHeader()
+    public function getHeader()
     {
         return '<!DOCTYPE html><html><head>'
         .'<meta charset="UTF-8">'
@@ -105,7 +105,7 @@ class Sandbox
         .'</head><body><h1><a href="./">shared-media-api</a></h1><h2><a href="'.$this->self.'">sandbox</a></h2>';
     }
 
-    public function sandboxFooter()
+    public function getFooter()
     {
         return '<footer><hr />'
         .'<a href="./">shared-media-api</a> : <a href="'.$this->self.'">sandbox</a>'

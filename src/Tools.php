@@ -105,5 +105,4 @@ class Tools
     {
         return isset($_GET[$name]) ? trim(urldecode($_GET[$name])) : null;
     }
-
 }
