@@ -62,13 +62,13 @@ class Sandbox
     {
         $this->self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null;
         $this->endpoint = $this->getGet('endpoint');
-        $this->limit = $this->getGet('limit']);
-        $this->class = $this->getGet('class']);
-        $this->method = $this->getGet('method']);
-        $this->arg = $this->getGet('arg']);
-        $this->pageids = $this->getGet('pageids']);
-        $this->titles = $this->getGet('titles']);
-        $this->logLevel = $this->getGet('logLevel']);
+        $this->limit = $this->getGet('limit');
+        $this->class = $this->getGet('class');
+        $this->method = $this->getGet('method');
+        $this->arg = $this->getGet('arg');
+        $this->pageids = $this->getGet('pageids');
+        $this->titles = $this->getGet('titles');
+        $this->logLevel = $this->getGet('logLevel');
         $this->isSubmitted = isset($_GET['play']) ? true : false;
     }
 
