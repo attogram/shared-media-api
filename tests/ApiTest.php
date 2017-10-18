@@ -10,7 +10,7 @@ use Psr\Log\NullLogger;
  */
 class ApiTest extends TestCase
 {
-    const VERSION = '0.9.2';
+    const VERSION = '0.9.3';
 
     public $defaultEndpoint;
     public $testingUrl;
@@ -84,28 +84,6 @@ class ApiTest extends TestCase
             '\GuzzleHttp\Client',
             $client2,
             'second client is not instance of \GuzzleHttp\Client'
-        );
-    }
-        $call = new \Attogram\SharedMedia\Api\Api(new NullLogger);
-        $this->assertFalse(
-            $call->getWarnings(),
-            'getWarnings without valid call, not returning false'
-        );
-        $this->assertFalse(
-            $call->isBatchcomplete(),
-            'isBatchcomplete without valid call, not returning false'
-        );
-        $this->assertFalse(
-            $call->getContinue(),
-            'getContinue without valid call, not returning false'
-        );
-        $this->assertFalse(
-            $call->getSroffset(),
-            'getSroffset without valid call, not returning false'
-        );
-        $this->assertFalse(
-            $call->getTotalhits(),
-            'getTotalhits without valid call, not returning false'
         );
     }
 }
