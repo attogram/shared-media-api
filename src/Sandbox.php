@@ -12,7 +12,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.27';
+    const VERSION = '0.9.28';
 
     const DEFAULT_LIMIT = 10;
 
@@ -61,15 +61,20 @@ class Sandbox
     public function sandboxInit()
     {
         $this->self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null;
-        $this->endpoint = isset($_GET['endpoint']) ? trim(urldecode($_GET['endpoint'])) : null;
-        $this->limit = isset($_GET['limit']) ? trim(urldecode($_GET['limit'])) : null;
-        $this->class = isset($_GET['class']) ? trim(urldecode($_GET['class'])) : null;
-        $this->method = isset($_GET['method']) ? trim(urldecode($_GET['method'])) : null;
-        $this->arg = isset($_GET['arg']) ? trim(urldecode($_GET['arg'])) : null;
-        $this->pageids = isset($_GET['pageids']) ? trim(urldecode($_GET['pageids'])) : null;
-        $this->titles = isset($_GET['titles']) ? trim(urldecode($_GET['titles'])) : null;
-        $this->logLevel = isset($_GET['logLevel']) ? strtoupper(trim(urldecode($_GET['logLevel']))) : null;
-        $this->isSubmitted =  isset($_GET['play']) ? true : false;
+        $this->endpoint = $this->getGet('endpoint');
+        $this->limit = $this->getGet('limit']);
+        $this->class = $this->getGet('class']);
+        $this->method = $this->getGet('method']);
+        $this->arg = $this->getGet('arg']);
+        $this->pageids = $this->getGet('pageids']);
+        $this->titles = $this->getGet('titles']);
+        $this->logLevel = $this->getGet('logLevel']);
+        $this->isSubmitted = isset($_GET['play']) ? true : false;
+    }
+
+    private function getGet($name)
+    {
+        return isset($_GET[$name]) ? trim(urldecode($_GET[$name])) : null;
     }
 
     public function sandboxDefaults()
