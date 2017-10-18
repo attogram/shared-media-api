@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Base extends Api
 {
-    const VERSION = '0.9.1';
+    const VERSION = '0.9.2';
 
     const CATEGORY_NAMESPACE = 14;
     const FILE_NAMESPACE = 6;
@@ -24,38 +24,40 @@ class Base extends Api
     public function setIdentifier($prefix = '', $postfix = '')
     {
         $this->logger->debug('Base::setIdentifier');
-        if ($this->pageid && (is_string($this->pageid) || is_array($this->pageid))) {
-            $this->setIdentifierPageid($prefix, $postfix);
-            return true;
+        if (!$this->pageid && !$this->title) {
+            $this->logger->error('Base::setIdentifier: Identifier Not Found');
+            return false;
         }
-        if ($this->title && (is_string($this->title) || is_array($this->title))) {
-            $this->setIdentifierTitle($prefix, $postfix);
-            return true;
+        if ($this->pageid) {
+            return $this->setIdentifierPageid($prefix, $postfix);
         }
-        $this->logger->error('Base::setIdentifier: Identifier Not Found');
-        return false;
+        return $this->setIdentifierTitle($prefix, $postfix);
     }
 
     /**
      * @param string|null $prefix
      * @param string|null $postfix
+     * @return bool
      */
     public function setIdentifierPageid($prefix = '', $postfix = '')
     {
         $this->logger->debug('Base::setIdentifierPageid');
         $pageid = Tools::valuesImplode($this->pageid);
         $this->setParam($prefix.'pageid'.$postfix, $pageid);
+        return true;
     }
 
     /**
      * @param string|null $prefix
      * @param string|null $postfix
+     * @return bool
      */
     public function setIdentifierTitle($prefix = '', $postfix = '')
     {
         $this->logger->debug('Base::setIdentifierTitle');
         $title = Tools::valuesImplode($this->title);
         $this->setParam($prefix.'title'.$postfix, $title);
+        return true;
     }
 
     /**
