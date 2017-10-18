@@ -2,6 +2,8 @@
 
 namespace Attogram\SharedMedia\Api;
 
+use Attogram\SharedMedia\Api\Api;
+use Attogram\SharedMedia\Api\Base;
 use Attogram\SharedMedia\Api\Category;
 use Attogram\SharedMedia\Api\File;
 use Attogram\SharedMedia\Api\Page;
@@ -12,7 +14,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.28';
+    const VERSION = '0.9.29';
 
     const DEFAULT_LIMIT = 10;
 
@@ -112,17 +114,16 @@ class Sandbox
     {
         return '<footer><hr />'
         .'<a href="./">shared-media-api</a> : <a href="'.$this->self.'">sandbox</a>'
-        .'<small><pre>Attogram\SharedMedia\Api\Api      v'. \Attogram\SharedMedia\Api\Api::VERSION
-        .'<br />Attogram\SharedMedia\Api\Base     v'. \Attogram\SharedMedia\Api\Base::VERSION
-        .'<br />Attogram\SharedMedia\Api\Category v'. \Attogram\SharedMedia\Api\Category::VERSION
-        .'<br />Attogram\SharedMedia\Api\File     v'. \Attogram\SharedMedia\Api\File::VERSION
-        .'<br />Attogram\SharedMedia\Api\Page     v'. \Attogram\SharedMedia\Api\Page::VERSION
-        .'<br />Attogram\SharedMedia\Api\Tools    v'. \Attogram\SharedMedia\Api\Tools::VERSION
-        .'<br />Attogram\SharedMedia\Api\Sources  v'. \Attogram\SharedMedia\Api\Sources::VERSION
-        .'<br />Attogram\SharedMedia\Api\Sandbox  v'. self::VERSION
-        .'<br />GuzzleHttp\Client                 v'. \GuzzleHttp\Client::VERSION
-        .'<br />Monolog\Logger                    API v'. \Monolog\Logger::API
-        .'</pre></small>'
+        .'<pre>Attogram\SharedMedia\Api'
+        .'<br />Api      v'.Api::VERSION
+        .'<br />Base     v'.Base::VERSION
+        .'<br />Category v'.Category::VERSION
+        .'<br />File     v'.File::VERSION
+        .'<br />Page     v'.Page::VERSION
+        .'<br />Tools    v'.Tools::VERSION
+        .'<br />Sources  v'.Sources::VERSION
+        .'<br />Sandbox  v'. self::VERSION
+        .'</pre>'
         .'</footer></body></html>';
     }
 
@@ -142,8 +143,7 @@ class Sandbox
                 .'</div>';
             $lastClass = $class;
         }
-        $menu .= '</div>';
-        return $menu;
+        return $menu.'</div>';
     }
 
     public function getMethodInfo()
