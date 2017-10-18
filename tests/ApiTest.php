@@ -86,16 +86,6 @@ class ApiTest extends TestCase
             'second client is not instance of \GuzzleHttp\Client'
         );
     }
-
-    /**
-     * @covers ::getWarnings
-     * @covers ::isBatchcomplete
-     * @covers ::getContinue
-     * @covers ::getSroffset
-     * @covers ::getTotalhits
-     */
-    public function testCallPreGets()
-    {
         $call = new \Attogram\SharedMedia\Api\Api(new NullLogger);
         $this->assertFalse(
             $call->getWarnings(),
