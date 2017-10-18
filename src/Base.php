@@ -2,14 +2,12 @@
 
 namespace Attogram\SharedMedia\Api;
 
-//use Attogram\SharedMedia\Api\Tools;
-
 /**
  * Base Object
  */
 class Base extends Api
 {
-    const VERSION = '0.9.0';
+    const VERSION = '0.9.1';
 
     const CATEGORY_NAMESPACE = 14;
     const FILE_NAMESPACE = 6;
@@ -17,7 +15,6 @@ class Base extends Api
 
     public $pageid;
     public $title;
-
 
     /**
      * @param string|null $prefix
@@ -60,21 +57,6 @@ class Base extends Api
         $title = Tools::valuesImplode($this->title);
         $this->setParam($prefix.'title'.$postfix, $title);
     }
-
-    /**
-     * @uses Api::$params
-     * @return bool
-     */
-    private function hasParamsIdentifier()
-    {
-        if (!isset($this->params[$this->identifierPrefix.'pageid'.$this->identifierPostfix])
-            && !isset($this->params[$this->identifierPrefix.'titles'.$this->identifierPostfix])) {
-            $this->logger->error('Api::hasParamsIdentifier: Identifier Not Found');
-            return false;
-        }
-        return true;
-    }
-
 
     /**
      * @uses Api::$response
