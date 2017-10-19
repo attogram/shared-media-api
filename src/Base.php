@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Base extends Api
 {
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
 
     const CATEGORY_NAMESPACE = 14;
     const FILE_NAMESPACE = 6;
@@ -67,7 +67,7 @@ class Base extends Api
     public function setLimit($limit)
     {
         $this->limit = $limit;
-        $this->logger->debug('Api::setLimit:', [$limit]);
+        $this->logger->debug('Base::setLimit:', [$limit]);
     }
 
     /**
@@ -82,7 +82,6 @@ class Base extends Api
     }
 
     /**
-     * @uses Api::$response
      * @return bool
      */
     public function isBatchcomplete()
@@ -91,7 +90,6 @@ class Base extends Api
     }
 
     /**
-     * @uses Api::$response
      * @return string|false
      */
     public function getTotalhits()
@@ -101,7 +99,6 @@ class Base extends Api
     }
 
     /**
-     * @uses Api::$response
      * @return mixed
      */
     public function getWarnings()
@@ -111,7 +108,6 @@ class Base extends Api
     }
 
     /**
-     * @uses Api::$response
      * @return string|false
      */
     public function getContinue()
@@ -121,7 +117,6 @@ class Base extends Api
     }
 
     /**
-     * @uses Api::$response
      * @return int|false
      */
     public function getSroffset()
