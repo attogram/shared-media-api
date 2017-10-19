@@ -28,11 +28,6 @@ class BaseTest extends TestCase
     }
 
     /**
-     * @covers Base::getWarnings
-     * @covers Base::isBatchcomplete
-     * @covers Base::getContinue
-     * @covers Base::getSroffset
-     * @covers Base::getTotalhits
      */
     public function testCallPreGets()
     {
