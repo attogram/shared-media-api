@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Base extends Api
 {
-    const VERSION = '0.9.2';
+    const VERSION = '0.9.3';
 
     const CATEGORY_NAMESPACE = 14;
     const FILE_NAMESPACE = 6;
@@ -15,6 +15,7 @@ class Base extends Api
 
     public $pageid;
     public $title;
+    private $limit;
 
     /**
      * @param string|null $prefix
@@ -58,6 +59,26 @@ class Base extends Api
         $title = Tools::valuesImplode($this->title);
         $this->setParam($prefix.'title'.$postfix, $title);
         return true;
+    }
+
+    /**
+     * @return void
+     */
+    public function setLimit($limit)
+    {
+        $this->limit = $limit;
+        $this->logger->debug('Api::setLimit:', [$limit]);
+    }
+
+    /**
+     * @return int
+     */
+    public function getLimit()
+    {
+        if (!is_numeric($this->limit) || !$this->limit) {
+            $this->setLimit(self::DEFAULT_LIMIT);
+        }
+        return $this->limit;
     }
 
     /**

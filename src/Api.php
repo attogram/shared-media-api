@@ -14,7 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.13';
+    const VERSION = '0.9.14';
 
     const DEFAULT_LIMIT = 50;
 
@@ -25,7 +25,6 @@ class Api
     private $params = [];
     private $request;
     private $response;
-    private $limit;
 
     /**
      * @return void
@@ -69,26 +68,6 @@ class Api
             $this->setEndpoint(Sources::getSource());
         }
         return $this->endpoint;
-    }
-
-    /**
-     * @return void
-     */
-    public function setLimit($limit)
-    {
-        $this->limit = $limit;
-        $this->logger->debug('Api::setLimit:', [$limit]);
-    }
-
-    /**
-     * @return int
-     */
-    public function getLimit()
-    {
-        if (!is_numeric($this->limit) || !$this->limit) {
-            $this->setLimit(self::DEFAULT_LIMIT);
-        }
-        return $this->limit;
     }
 
     /**
