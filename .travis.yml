@@ -1,4 +1,4 @@
-# attogram/shared-media-api - .travis.yml - v0.9.5
+# attogram/shared-media-api - .travis.yml - v0.9.7
 
 language: php
 
@@ -29,4 +29,6 @@ script:
   - if find tests/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find vendor/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - phpunit --coverage-clover ./clover.xml
+  
+after-script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
