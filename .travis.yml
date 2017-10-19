@@ -1,4 +1,4 @@
-# attogram/shared-media-api - .travis.yml - v0.9.3
+# attogram/shared-media-api - .travis.yml - v0.9.4
 
 language: php
 
@@ -13,12 +13,20 @@ matrix:
   allow_failures:
     - php: nightly
 
+env:
+  global:
+    - CC_TEST_REPORTER_ID=7b2d0320142673b6292fc5eb079361000d527797b67a6a1981a6daad1a58eea1
+
 before_script:
   - composer install --no-dev
-
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+  
 script:
   - if find src/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find web/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find tests/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find vendor/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
-  - phpunit
+  - phpunit --coverage-clover clover.xml
+  - ./cc-test-reporter after-build  -t clover --exit-code $TRAVIS_TEST_RESULT
