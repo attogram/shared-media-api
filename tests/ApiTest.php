@@ -6,7 +6,6 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 /**
- *
  */
 class ApiTest extends TestCase
 {
@@ -22,7 +21,6 @@ class ApiTest extends TestCase
     }
 
     /**
-     * @covers Api
      */
     public function testConstruct()
     {
@@ -40,8 +38,6 @@ class ApiTest extends TestCase
     }
 
     /**
-     * @covers Api::getEndpoint
-     * @covers Api::setEndpoint
      */
     public function testSetEndpoint()
     {
@@ -55,7 +51,6 @@ class ApiTest extends TestCase
     }
 
     /**
-     * @covers Api::getClient
      */
     public function testClient()
     {

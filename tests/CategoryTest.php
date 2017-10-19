@@ -6,14 +6,12 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 /**
- *
  */
 class CategoryTest extends TestCase
 {
     const VERSION = '0.9.4';
 
     /**
-     * @covers Category
      */
     public function testConstruct()
     {

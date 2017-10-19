@@ -6,14 +6,12 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 /**
- *
  */
 class BaseTest extends TestCase
 {
     const VERSION = '0.9.5';
 
     /**
-     * @covers Base
      */
     public function testConstruct()
     {

@@ -5,14 +5,12 @@ namespace Attogram\SharedMedia\Api;
 use PHPUnit\Framework\TestCase;
 
 /**
- *
  */
 class SandboxTest extends TestCase
 {
     const VERSION = '0.9.5';
 
     /**
-     * @covers Sandbox
      */
     public function testConstruct()
     {

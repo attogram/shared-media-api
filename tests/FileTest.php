@@ -6,14 +6,12 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 /**
- *
  */
 class FileTest extends TestCase
 {
     const VERSION = '0.9.4';
 
     /**
-     * @covers File
      */
     public function testConstruct()
     {

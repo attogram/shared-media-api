@@ -5,14 +5,12 @@ namespace Attogram\SharedMedia\Api;
 use PHPUnit\Framework\TestCase;
 
 /**
- *
  */
 class ToolsTest extends TestCase
 {
     const VERSION = '0.9.4';
 
     /**
-     * @covers Tools
      */
     public function testConstruct()
     {
