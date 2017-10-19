@@ -28,6 +28,5 @@ script:
   - if find web/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find tests/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find vendor/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
-  - phpunit --coverage-clover clover.xml
-  - cat clover.xml
-  - ./cc-test-reporter after-build  -t clover --exit-code $TRAVIS_TEST_RESULT
+  - phpunit --coverage-clover ./clover.xml
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
