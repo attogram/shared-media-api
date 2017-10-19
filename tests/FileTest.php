@@ -6,14 +6,14 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 /**
- * @coversDefaultClass \Attogram\SharedMedia\Api\File
+ *
  */
 class FileTest extends TestCase
 {
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
 
     /**
-     * @covers File::__construct
+     * @covers File
      */
     public function testConstruct()
     {

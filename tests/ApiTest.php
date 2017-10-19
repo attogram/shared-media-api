@@ -6,11 +6,11 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 /**
- * @coversDefaultClass \Attogram\SharedMedia\Api
+ *
  */
 class ApiTest extends TestCase
 {
-    const VERSION = '0.9.4';
+    const VERSION = '0.9.5';
 
     public $defaultEndpoint;
     public $testingUrl;
@@ -22,8 +22,7 @@ class ApiTest extends TestCase
     }
 
     /**
-     * @covers Api::__construct
-     * @covers Api::getEndpoint
+     * @covers Api
      */
     public function testConstruct()
     {

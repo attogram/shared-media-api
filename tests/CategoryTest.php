@@ -6,14 +6,14 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 /**
- * @coversDefaultClass \Attogram\SharedMedia\Api\Category
+ *
  */
 class CategoryTest extends TestCase
 {
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
 
     /**
-     * @covers Category::__construct
+     * @covers Category
      */
     public function testConstruct()
     {

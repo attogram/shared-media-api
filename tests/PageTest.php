@@ -6,14 +6,14 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\NullLogger;
 
 /**
- * @coversDefaultClass \Attogram\SharedMedia\Api\Page
+ *
  */
 class PageTest extends TestCase
 {
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
 
     /**
-     * @covers Page::__construct
+     * @covers Page
      */
     public function testConstruct()
     {
