@@ -10,7 +10,7 @@ use Psr\Log\NullLogger;
  */
 class ApiTest extends TestCase
 {
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
 
     public $defaultEndpoint;
     public $testingUrl;
@@ -22,8 +22,8 @@ class ApiTest extends TestCase
     }
 
     /**
-     * @covers ::__construct
-     * @covers ::getEndpoint
+     * @covers Api::__construct
+     * @covers Api::getEndpoint
      */
     public function testConstruct()
     {
@@ -41,8 +41,8 @@ class ApiTest extends TestCase
     }
 
     /**
-     * @covers ::getEndpoint
-     * @covers ::setEndpoint
+     * @covers Api::getEndpoint
+     * @covers Api::setEndpoint
      */
     public function testSetEndpoint()
     {
@@ -56,7 +56,7 @@ class ApiTest extends TestCase
     }
 
     /**
-     * @covers ::getClient
+     * @covers Api::getClient
      */
     public function testClient()
     {

@@ -10,10 +10,10 @@ use Psr\Log\NullLogger;
  */
 class FileTest extends TestCase
 {
-    const VERSION = '0.9.2';
+    const VERSION = '0.9.3';
 
     /**
-     * @covers ::__construct
+     * @covers File::__construct
      */
     public function testConstruct()
     {

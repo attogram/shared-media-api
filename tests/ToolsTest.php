@@ -9,10 +9,10 @@ use PHPUnit\Framework\TestCase;
  */
 class ToolsTest extends TestCase
 {
-    const VERSION = '0.9.2';
+    const VERSION = '0.9.3';
 
     /**
-     * @covers ::__construct
+     * @covers Tools::__construct
      */
     public function testConstruct()
     {

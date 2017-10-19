@@ -10,11 +10,10 @@ use Psr\Log\NullLogger;
  */
 class BaseTest extends TestCase
 {
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
 
     /**
-     * @covers ::__construct
-     * @covers ::getEndpoint
+     * @covers Base::__construct
      */
     public function testConstruct()
     {
@@ -31,11 +30,11 @@ class BaseTest extends TestCase
     }
 
     /**
-     * @covers ::getWarnings
-     * @covers ::isBatchcomplete
-     * @covers ::getContinue
-     * @covers ::getSroffset
-     * @covers ::getTotalhits
+     * @covers Base::getWarnings
+     * @covers Base::isBatchcomplete
+     * @covers Base::getContinue
+     * @covers Base::getSroffset
+     * @covers Base::getTotalhits
      */
     public function testCallPreGets()
     {

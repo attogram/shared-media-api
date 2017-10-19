@@ -9,10 +9,10 @@ use PHPUnit\Framework\TestCase;
  */
 class SourcesTest extends TestCase
 {
-    const VERSION = '0.9.2';
+    const VERSION = '0.9.4';
 
     /**
-     * @covers ::__construct
+     * @covers Sources::__construct
      */
     public function testConstruct()
     {

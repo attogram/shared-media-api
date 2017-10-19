@@ -9,10 +9,10 @@ use PHPUnit\Framework\TestCase;
  */
 class SandboxTest extends TestCase
 {
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
 
     /**
-     * @covers ::__construct
+     * @covers Sandbox::__construct
      */
     public function testConstruct()
     {

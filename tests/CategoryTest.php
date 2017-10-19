@@ -10,10 +10,10 @@ use Psr\Log\NullLogger;
  */
 class CategoryTest extends TestCase
 {
-    const VERSION = '0.9.2';
+    const VERSION = '0.9.3';
 
     /**
-     * @covers ::__construct
+     * @covers Category::__construct
      */
     public function testConstruct()
     {
