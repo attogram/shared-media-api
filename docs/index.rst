@@ -1,4 +1,13 @@
-Documentation for attogram/shared-media-api
-=======================================
+attogram/shared-media-api docs
+==============================
 
-Welcome to the documentation for the ``attogram/shared-media-api`` package!
+Welcome to the ``attogram/shared-media-api`` docs
+
+.. toctree::
+   :maxdepth: 2
+
+   usage
+   category
+   file
+   page
+   sandbox
