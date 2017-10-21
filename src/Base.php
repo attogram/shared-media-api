@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Base extends Api
 {
-    const VERSION = '0.9.4';
+    const VERSION = '0.9.5';
 
     const CATEGORY_NAMESPACE = 14;
     const FILE_NAMESPACE = 6;
@@ -30,34 +30,25 @@ class Base extends Api
             return false;
         }
         if ($this->pageid) {
-            return $this->setIdentifierPageid($prefix, $postfix);
+            return $this->setIdentifierValue('pageid', $prefix, $postfix);
         }
-        return $this->setIdentifierTitle($prefix, $postfix);
+        return $this->setIdentifierValue('title', $prefix, $postfix);
     }
 
     /**
+     * @param string $type 'pageid' or 'title'
      * @param string|null $prefix
      * @param string|null $postfix
      * @return bool
      */
-    public function setIdentifierPageid($prefix = '', $postfix = '')
+    public function setIdentifierValue($type, $prefix = '', $postfix = '')
     {
-        $this->logger->debug('Base::setIdentifierPageid');
-        $pageid = Tools::valuesImplode($this->pageid);
-        $this->setParam($prefix.'pageid'.$postfix, $pageid);
-        return true;
-    }
-
-    /**
-     * @param string|null $prefix
-     * @param string|null $postfix
-     * @return bool
-     */
-    public function setIdentifierTitle($prefix = '', $postfix = '')
-    {
-        $this->logger->debug('Base::setIdentifierTitle');
-        $title = Tools::valuesImplode($this->title);
-        $this->setParam($prefix.'title'.$postfix, $title);
+        $this->logger->debug('Base::setIdentifierValue');
+        if (!in_array($type, ['pageid', 'title'])) {
+            $this->logger->error('Base::setIdentifierValue: invalid type');
+            return false;
+        }
+        $this->setParam($prefix.$type.$postfix, Tools::valuesImplode($this->{$type}));
         return true;
     }
 
