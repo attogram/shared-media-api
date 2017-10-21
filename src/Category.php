@@ -29,7 +29,7 @@ class Category extends Base
         $this->setParam('gsrnamespace', self::CATEGORY_NAMESPACE);
         $this->setParam('gsrlimit', $this->getLimit());
         $this->setParam('gsrsearch', $query);
-        return $this->getCategoryinfoResponse();;
+        return $this->getCategoryinfoResponse();
     }
 
     /**
