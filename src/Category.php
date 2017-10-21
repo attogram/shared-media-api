@@ -75,12 +75,12 @@ class Category extends Base
         $this->logger->debug('Category::subcats');
         if (!$this->setIdentifier('gcm', '')) {
             return [];
-        }		
-		$this->setParam('generator', 'categorymembers');
+        }
+        $this->setParam('generator', 'categorymembers');
         $this->setParam('gcmprop', 'ids|title');
         $this->setParam('gcmlimit', $this->getLimit());
-		$this->setParam('cmtype', 'subcat');
-		return $this->getCategoryinfoResponse();
+        $this->setParam('cmtype', 'subcat');
+        return $this->getCategoryinfoResponse();
     }
 
     /**
@@ -94,22 +94,22 @@ class Category extends Base
         $this->logger->debug('Category::members');
         if (!$this->setIdentifier('gcm', '')) {
             return [];
-        }		
-		$this->setParam('generator', 'categorymembers');
+        }
+        $this->setParam('generator', 'categorymembers');
         $this->setParam('gcmprop', 'ids|title');
         $this->setParam('gcmlimit', $this->getLimit());
-		$this->setParam('cmtype', 'file');
-		return $this->getCategoryinfoResponse();
+        $this->setParam('cmtype', 'file');
+        return $this->getCategoryinfoResponse();
     }
 
     /**
      * @return array
-     */	
-	private function getCategoryinfoResponse()
-	{
-		$this->logger->debug('Category::getCategoryinfoResponse');
+     */
+    private function getCategoryinfoResponse()
+    {
+        $this->logger->debug('Category::getCategoryinfoResponse');
         $this->setParam('prop', 'categoryinfo');
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));
-	}
+    }
 }
