@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Base
 {
-    const VERSION = '0.9.7';
+    const VERSION = '0.9.8';
 
     /**
      * search for categories
@@ -30,6 +30,7 @@ class Category extends Base
         $this->setParam('gsrlimit', $this->getLimit());
         $this->setParam('gsrsearch', $query);
         $this->setParam('prop', 'categoryinfo');
+        $this->setCategorymembersParams();
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));
     }
@@ -51,47 +52,6 @@ class Category extends Base
     }
 
     /**
-     * get a list of subcategories of a category
-     *
-     * @see https://www.mediawiki.org/wiki/API:Categorymembers
-     * @return array
-     */
-    public function subcats()
-    {
-        $this->logger->debug('Category::subcats');
-        if (!$this->setIdentifier('cm')) {
-            return [];
-        }
-        $this->setParam('list', 'categorymembers');
-        $this->setParam('cmtype', 'subcat');
-        $this->setParam('cmprop', 'ids|title');
-        $this->setParam('cmlimit', $this->getLimit());
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'categorymembers']));
-    }
-
-
-    /**
-     * get a list of files in a category
-     *
-     * @see https://www.mediawiki.org/wiki/API:Categorymembers
-     * @return array
-     */
-    public function members()
-    {
-        $this->logger->debug('Category::members');
-        if (!$this->setIdentifier('cm')) {
-            return [];
-        }
-        $this->setParam('list', 'categorymembers');
-        $this->setParam('cmtype', 'file');
-        $this->setParam('cmprop', 'ids|title');
-        $this->setParam('cmlimit', $this->getLimit());
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'categorymembers']));
-    }
-
-    /**
      * get categories from a page
      *
      * @see https://www.mediawiki.org/wiki/API:Categories
@@ -109,5 +69,49 @@ class Category extends Base
         $this->setParam('prop', 'categoryinfo');
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));
+    }
+
+    /**
+     * get a list of subcategories of a category
+     *
+     * @see https://www.mediawiki.org/wiki/API:Categorymembers
+     * @return array
+     */
+    public function subcats()
+    {
+        $this->logger->debug('Category::subcats');
+        $this->setCategorymembersParams();
+        $this->setParam('cmtype', 'subcat');
+        $this->send();
+        return Tools::flatten($this->getResponse(['query', 'categorymembers']));
+    }
+
+    /**
+     * get a list of files in a category
+     *
+     * @see https://www.mediawiki.org/wiki/API:Categorymembers
+     * @return array
+     */
+    public function members()
+    {
+        $this->logger->debug('Category::members');
+        $this->setCategorymembersParams();
+        $this->setParam('cmtype', 'file');
+        $this->send();
+        return Tools::flatten($this->getResponse(['query', 'categorymembers']));
+    }
+
+    /**
+     * @return bool
+     */
+    private function setCategorymembersParams()
+    {
+        if (!$this->setIdentifier('cm')) {
+            return false;
+        }
+        $this->setParam('list', 'categorymembers');
+        $this->setParam('cmprop', 'ids|title');
+        $this->setParam('cmlimit', $this->getLimit());
+        return true;
     }
 }
