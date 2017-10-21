@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Base
 {
-    const VERSION = '0.9.8';
+    const VERSION = '0.9.9';
 
     /**
      * search for categories
@@ -29,10 +29,7 @@ class Category extends Base
         $this->setParam('gsrnamespace', self::CATEGORY_NAMESPACE);
         $this->setParam('gsrlimit', $this->getLimit());
         $this->setParam('gsrsearch', $query);
-        $this->setParam('prop', 'categoryinfo');
-        $this->setCategorymembersParams();
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'pages']));
+        return $this->getCategoryinfoResponse();;
     }
 
     /**
@@ -46,9 +43,7 @@ class Category extends Base
         if (!$this->setIdentifier('', 's')) {
             return [];
         }
-        $this->setParam('prop', 'categoryinfo');
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'pages']));
+        return $this->getCategoryinfoResponse();
     }
 
     /**
@@ -64,11 +59,9 @@ class Category extends Base
             return [];
         }
         $this->setParam('generator', 'categories');
-        $this->setParam('clprop', 'hidden'); // timestamp|hidden
+        $this->setParam('clprop', 'hidden|timestamp');
         $this->setParam('cllimit', $this->getLimit());
-        $this->setParam('prop', 'categoryinfo');
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'pages']));
+        return $this->getCategoryinfoResponse();
     }
 
     /**
@@ -80,10 +73,14 @@ class Category extends Base
     public function subcats()
     {
         $this->logger->debug('Category::subcats');
-        $this->setCategorymembersParams();
-        $this->setParam('cmtype', 'subcat');
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'categorymembers']));
+        if (!$this->setIdentifier('gcm', '')) {
+            return [];
+        }		
+		$this->setParam('generator', 'categorymembers');
+        $this->setParam('gcmprop', 'ids|title');
+        $this->setParam('gcmlimit', $this->getLimit());
+		$this->setParam('cmtype', 'subcat');
+		return $this->getCategoryinfoResponse();
     }
 
     /**
@@ -95,23 +92,24 @@ class Category extends Base
     public function members()
     {
         $this->logger->debug('Category::members');
-        $this->setCategorymembersParams();
-        $this->setParam('cmtype', 'file');
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'categorymembers']));
+        if (!$this->setIdentifier('gcm', '')) {
+            return [];
+        }		
+		$this->setParam('generator', 'categorymembers');
+        $this->setParam('gcmprop', 'ids|title');
+        $this->setParam('gcmlimit', $this->getLimit());
+		$this->setParam('cmtype', 'file');
+		return $this->getCategoryinfoResponse();
     }
 
     /**
-     * @return bool
-     */
-    private function setCategorymembersParams()
-    {
-        if (!$this->setIdentifier('cm')) {
-            return false;
-        }
-        $this->setParam('list', 'categorymembers');
-        $this->setParam('cmprop', 'ids|title');
-        $this->setParam('cmlimit', $this->getLimit());
-        return true;
-    }
+     * @return array
+     */	
+	private function getCategoryinfoResponse()
+	{
+		$this->logger->debug('Category::getCategoryinfoResponse');
+        $this->setParam('prop', 'categoryinfo');
+        $this->send();
+        return Tools::flatten($this->getResponse(['query', 'pages']));
+	}
 }

@@ -14,7 +14,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.31';
+    const VERSION = '0.9.32';
 
     const DEFAULT_LIMIT = 10;
 
@@ -83,15 +83,7 @@ class Sandbox
             $this->logLevel = 'NOTICE';
         }
         $this->logger = new Logger('Log');
-        $this->logger->pushHandler(new StreamHandler('php://output', $this->getLogerLevel()));
-    }
-
-    public function getLogerLevel()
-    {
-        if (defined('\Monolog\Logger::'.$this->logLevel)) {
-            return constant('\Monolog\Logger::'.$this->logLevel);
-        }
-        return Logger::DEBUG;
+        $this->logger->pushHandler(new StreamHandler('php://output', $this->logLevel));
     }
 
     public function getHeader()
