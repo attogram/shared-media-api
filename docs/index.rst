@@ -14,6 +14,7 @@ shared-media-api gets Category and File information into a flat PHP array.
 .. image:: https://codeclimate.com/github/attogram/shared-media-api/badges/issue_count.svg
     :target: https://codeclimate.com/github/attogram/shared-media-api
     :alt: Issue Count
+
 .. image:: https://poser.pugx.org/attogram/shared-media-api/v/stable)
     :target: https://packagist.org/packages/attogram/shared-media-api
     :alt: Latest Stable Version
