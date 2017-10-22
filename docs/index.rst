@@ -4,7 +4,7 @@ shared-media-api v0.9
 ``shared-media-api`` is a MediaWiki API wrapper that easily gets Category and File
 information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
 
-.. code-block:: php
+Example:: php
 
     // Example: Search categories
     $category = new Category();
@@ -13,7 +13,7 @@ information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
         print_r($result);
     }
 
-::
+result::
 	Array
 	(
 		[pageid] => 970886
