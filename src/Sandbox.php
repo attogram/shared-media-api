@@ -14,7 +14,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.33';
+    const VERSION = '0.9.34';
 
     const DEFAULT_LIMIT = 10;
 
@@ -49,13 +49,9 @@ class Sandbox
     {
         $this->sandboxInit();
         $this->sandboxDefaults();
-        print $this->getHeader();
-        print $this->menu();
-        print $this->form();
+        print $this->getHeader().'<br />'.$this->menu().$this->form();
         if ($this->isSubmitted) {
-            print '<pre>';
-            print $this->getResponse();
-            print '</pre>';
+            print '<pre>'.$this->getResponse().'</pre>';
         }
         print $this->getFooter();
     }
@@ -117,19 +113,17 @@ class Sandbox
     public function menu()
     {
         $lastClass = null;
-        $menu = '<br />';
+        $menu = '';
         foreach ($this->methods as list($class, $method)) {
             if ($lastClass != $class) {
-                if (!empty($lastClass)) {
-                    $menu .= '</div>';
-                }
-                $menu .= '<div class="menubox">'.$class.'::';
+                $menu .= '</div><div class="menubox">'.$class.'::';
             }
             $menu .= '<div class="menu">'
                 .'<a href="'.$this->self.'?class='.$class.'&amp;method='.$method.'">'.$method.'</a>'
                 .'</div>';
             $lastClass = $class;
         }
+        $menu = substr($menu, 6); // remove unmatched first </div>
         return $menu.'</div>';
     }
 
