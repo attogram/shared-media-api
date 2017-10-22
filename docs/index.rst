@@ -9,7 +9,7 @@ Example: search categories:
 .. code-block:: php
 
     $category = new Category();
-	$category->setLimit(2);
+    $category->setLimit(2);
     $results = $category->search('Albert Einstein');
     foreach ($results as $result) {
         print_r($result);
@@ -62,7 +62,7 @@ Result:
     file
     page
     base
-	api
+    api
     sandbox
     tools
     sources
