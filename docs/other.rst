@@ -1,7 +1,8 @@
 Other stuff
 ===========
 
-# Similar open source projects:
+Similar open source projects:
+-----------------------------
 
 * https://github.com/addwiki/mediawiki-api
 * https://github.com/gbirke/mediawiki-api-client
@@ -9,7 +10,8 @@ Other stuff
 * https://github.com/haosblog/mediawiki_sdk
 
 
-# Open source projects using MediaWiki API
+Open source projects using MediaWiki API
+----------------------------------------
 
 * https://github.com/attogram/shared-media-tagger
 * https://github.com/attogram/wiib
@@ -17,7 +19,8 @@ Other stuff
 * https://github.com/pcaisse/mediawiki
 * https://github.com/samwilson/commons-category-downloader
 
-# Other related open source projects
+Other related open source projects
+----------------------------------
 
 * https://github.com/joomla-framework/mediawiki-api
 * https://github.com/gtonye/library-mediawiki-api
