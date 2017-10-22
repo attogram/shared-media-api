@@ -17,11 +17,11 @@ information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
 Project links
 -------------
 
-* ``shared-media-api`` project home: https://github.com/attogram/``shared-media-api``
-* ``shared-media-api`` documentation: https://``shared-media-api``.readthedocs.io/en/latest/
-* ``shared-media-api`` packagist: https://packagist.org/packages/attogram/``shared-media-api``
-* ``shared-media-api`` travis-ci: https://travis-ci.org/attogram/``shared-media-api``
-* ``shared-media-api`` codeclimate: https://codeclimate.com/github/attogram/``shared-media-api``
+* ``shared-media-api`` project home: https://github.com/attogram/shared-media-api
+* ``shared-media-api`` documentation: https://shared-media-api.readthedocs.io/en/latest/
+* ``shared-media-api`` packagist: https://packagist.org/packages/attogram/shared-media-api
+* ``shared-media-api`` travis-ci: https://travis-ci.org/attogram/shared-media-api
+* ``shared-media-api`` codeclimate: https://codeclimate.com/github/attogram/shared-media-api
 
 License
 -------
