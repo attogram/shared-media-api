@@ -14,7 +14,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.32';
+    const VERSION = '0.9.33';
 
     const DEFAULT_LIMIT = 10;
 
@@ -135,7 +135,7 @@ class Sandbox
 
     public function getMethodInfo()
     {
-        if (!$this->class || !$this->method) {
+        if (!$this->hasMethodInfo()) {
             return false;
         }
         foreach ($this->methods as $key => $val) {
@@ -143,6 +143,14 @@ class Sandbox
                 return $this->methods[$key];
             }
         }
+    }
+
+    public function hasMethodInfo()
+    {
+        if ($this->class && $this->method) {
+            return true;
+        }
+        return false;
     }
 
     public function form()
