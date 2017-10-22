@@ -4,14 +4,18 @@ shared-media-api v0.9
 ``shared-media-api`` is a MediaWiki API wrapper that easily gets Category and File
 information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
 
+Example: search categories:
+
 .. code-block:: php
 
-    // Example: Search categories
     $category = new Category();
+	$category->setLimit(2);
     $results = $category->search('Albert Einstein');
     foreach ($results as $result) {
         print_r($result);
     }
+
+Result:
 
 .. code-block:: none
 
@@ -39,7 +43,6 @@ information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
         [categoryinfo.subcats] => 0
         [categoryinfo.hidden] =>
     )
-    ... etc
 
 .. image:: https://travis-ci.org/attogram/shared-media-api.svg?branch=master
     :target: https://travis-ci.org/attogram/shared-media-api
@@ -51,20 +54,8 @@ information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
     :target: http://shared-media-api.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-Project links
-
-* ``shared-media-api`` project home: https://github.com/attogram/shared-media-api
-* ``shared-media-api`` documentation: https://shared-media-api.readthedocs.io/en/latest/
-* ``shared-media-api`` packagist: https://packagist.org/packages/attogram/shared-media-api
-* ``shared-media-api`` travis-ci: https://travis-ci.org/attogram/shared-media-api
-* ``shared-media-api`` codeclimate: https://codeclimate.com/github/attogram/shared-media-api
-
-License
-
-* ``shared-media-api`` is Dual Licensed under the MIT or GPL-3.0+, at your choosing.
 
 .. toctree::
-    :hidden:
 
     about
     category
