@@ -13,7 +13,7 @@ information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
         print_r($result);
     }
 
-.. code-block::
+.. code-block:: none
 
     Array
     (
