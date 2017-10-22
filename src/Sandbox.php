@@ -14,7 +14,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.34';
+    const VERSION = '0.9.35';
 
     const DEFAULT_LIMIT = 10;
 
@@ -51,7 +51,9 @@ class Sandbox
         $this->sandboxDefaults();
         print $this->getHeader().'<br />'.$this->menu().$this->form();
         if ($this->isSubmitted) {
-            print '<pre>'.$this->getResponse().'</pre>';
+            print '<pre>';
+			print $this->getResponse();
+			print '</pre>';
         }
         print $this->getFooter();
     }
