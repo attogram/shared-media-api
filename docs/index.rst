@@ -64,9 +64,8 @@ License
 * ``shared-media-api`` is Dual Licensed under the MIT or GPL-3.0+, at your choosing.
 
 .. toctree::
-    ::hidden
+    :hidden:
 
-    About shared-media-api <index>
     api
     base
     category
