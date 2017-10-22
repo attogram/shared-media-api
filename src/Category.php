@@ -102,7 +102,8 @@ class Category extends Base
      * @param string $cmtype 'file' or 'subcat'
      * @return array
      */
-    private function getCategorymemberResponse($cmtype) {
+    private function getCategorymemberResponse($cmtype)
+    {
         $this->logger->debug('Category::getCategorymemberResponse');
         if (!$this->setIdentifier('gcm', '')) {
             return [];
