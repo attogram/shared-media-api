@@ -14,9 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.14';
-
-    const DEFAULT_LIMIT = 50;
+    const VERSION = '0.9.15';
 
     public $logger;
 

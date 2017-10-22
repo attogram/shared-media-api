@@ -14,7 +14,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.35';
+    const VERSION = '0.9.36';
 
     const DEFAULT_LIMIT = 10;
 
@@ -203,14 +203,14 @@ class Sandbox
     public function logLevelSelect()
     {
         return '<select name="logLevel">'
-        .'<option value="debug"'.Tools::isSelected('DEBUG', $this->logLevel).'>debug</option>'
-        .'<option value="info"'.Tools::isSelected('INFO', $this->logLevel).'>info</option>'
-        .'<option value="notice"'.Tools::isSelected('NOTICE', $this->logLevel).'>notice</option>'
-        .'<option value="warning"'.Tools::isSelected('WARNING', $this->logLevel).'>warning</option>'
-        .'<option value="error"'.Tools::isSelected('ERROR', $this->logLevel).'>error</option>'
-        .'<option value="critical"'.Tools::isSelected('CRITICAL', $this->logLevel).'>critical</option>'
-        .'<option value="alert"'.Tools::isSelected('ALERT', $this->logLevel).'>alert</option>'
-        .'<option value="emergency'.Tools::isSelected('EMERGENCY', $this->logLevel).'">emergency</option>'
+        .'<option value="DEBUG"'.Tools::isSelected('DEBUG', $this->logLevel).'>debug</option>'
+        .'<option value="INFO"'.Tools::isSelected('INFO', $this->logLevel).'>info</option>'
+        .'<option value="NOTICE"'.Tools::isSelected('NOTICE', $this->logLevel).'>notice</option>'
+        .'<option value="WARNING"'.Tools::isSelected('WARNING', $this->logLevel).'>warning</option>'
+        .'<option value="ERROR"'.Tools::isSelected('ERROR', $this->logLevel).'>error</option>'
+        .'<option value="CRITICAL"'.Tools::isSelected('CRITICAL', $this->logLevel).'>critical</option>'
+        .'<option value="ALERT"'.Tools::isSelected('ALERT', $this->logLevel).'>alert</option>'
+        .'<option value="EMERGENCY'.Tools::isSelected('EMERGENCY', $this->logLevel).'">emergency</option>'
         .'</select>';
     }
 

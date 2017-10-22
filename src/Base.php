@@ -7,7 +7,9 @@ namespace Attogram\SharedMedia\Api;
  */
 class Base extends Api
 {
-    const VERSION = '0.9.5';
+    const VERSION = '0.9.6';
+
+    const DEFAULT_LIMIT = 50;
 
     const CATEGORY_NAMESPACE = 14;
     const FILE_NAMESPACE = 6;
