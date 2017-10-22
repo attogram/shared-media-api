@@ -1,7 +1,7 @@
 shared-media-api v0.9
 =====================
 
-``shared-media-api`` is a MediaWiki API wrapper to easily gets Category and File 
+``shared-media-api`` is a MediaWiki API wrapper that easily gets Category and File 
 information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
 
 .. image:: https://travis-ci.org/attogram/``shared-media-api``.svg?branch=master
@@ -28,11 +28,8 @@ License
 
 * ``shared-media-api`` is Dual Licensed under the MIT or GPL-3.0+, at your choosing.
 
-Contents
---------
-
 .. toctree::
    :maxdepth: 2
 
-   introduction <index>
-   other open source projects <other>
+   About shared-media-api <index>
+   Other projects <other>

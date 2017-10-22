@@ -1,8 +1,8 @@
 Other stuff
 ===========
 
-Similar open source projects:
------------------------------
+Similar open source projects
+----------------------------
 
 * https://github.com/addwiki/mediawiki-api
 * https://github.com/gbirke/mediawiki-api-client
