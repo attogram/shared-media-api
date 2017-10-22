@@ -52,7 +52,6 @@ information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
     :alt: Documentation Status
 
 Project links
--------------
 
 * ``shared-media-api`` project home: https://github.com/attogram/shared-media-api
 * ``shared-media-api`` documentation: https://shared-media-api.readthedocs.io/en/latest/
@@ -61,20 +60,19 @@ Project links
 * ``shared-media-api`` codeclimate: https://codeclimate.com/github/attogram/shared-media-api
 
 License
--------
 
 * ``shared-media-api`` is Dual Licensed under the MIT or GPL-3.0+, at your choosing.
 
-
 .. toctree::
+    ::hidden
 
-   About shared-media-api <index>
-   api
-   base
-   category
-   file
-   page
-   sandbox
-   tools
-   sources
-   others
+    About shared-media-api <index>
+    api
+    base
+    category
+    file
+    page
+    sandbox
+    tools
+    sources
+    other
