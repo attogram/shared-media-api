@@ -52,8 +52,8 @@ class Sandbox
         print $this->getHeader().'<br />'.$this->menu().$this->form();
         if ($this->isSubmitted) {
             print '<pre>';
-			print $this->getResponse();
-			print '</pre>';
+            print $this->getResponse();
+            print '</pre>';
         }
         print $this->getFooter();
     }
