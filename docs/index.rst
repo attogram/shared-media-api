@@ -1,8 +1,17 @@
 shared-media-api v0.9
 =====================
 
-``shared-media-api`` is a MediaWiki API wrapper that easily gets Category and File 
+``shared-media-api`` is a MediaWiki API wrapper that easily gets Category and File
 information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
+
+.. code-block:: php
+
+    // Example: Search categories
+    $category = new Category();
+    $results = $category->search('Albert Einstein');
+    foreach ($results as $result) {
+        print_r($result);
+    }
 
 .. image:: https://travis-ci.org/attogram/shared-media-api.svg?branch=master
     :target: https://travis-ci.org/attogram/shared-media-api
@@ -32,7 +41,7 @@ Contents
 --------
 
 .. toctree::
-   :maxdepth: 2
+   :hidden:
 
    About shared-media-api <index>
    Other projects <other>
