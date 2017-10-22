@@ -1,45 +1,8 @@
-shared-media-api v0.9
-=====================
+About shared-media-api v0.9
+===========================
 
 ``shared-media-api`` is a MediaWiki API wrapper that easily gets Category and File
 information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
-
-.. code-block:: php
-
-    // Example: Search categories
-    $category = new Category();
-    $results = $category->search('Albert Einstein');
-    foreach ($results as $result) {
-        print_r($result);
-    }
-
-.. code-block:: none
-
-    Array
-    (
-        [pageid] => 970886
-        [ns] => 14
-        [title] => Category:Albert Einstein
-        [index] => 1
-        [categoryinfo.size] => 198
-        [categoryinfo.pages] => 3
-        [categoryinfo.files] => 177
-        [categoryinfo.subcats] => 18
-        [categoryinfo.hidden] =>
-    )
-    Array
-    (
-        [pageid] => 4975712
-        [ns] => 14
-        [title] => Category:Einstein-Szilárd letter
-        [index] => 7
-        [categoryinfo.size] => 3
-        [categoryinfo.pages] => 0
-        [categoryinfo.files] => 3
-        [categoryinfo.subcats] => 0
-        [categoryinfo.hidden] =>
-    )
-    ... etc
 
 .. image:: https://travis-ci.org/attogram/shared-media-api.svg?branch=master
     :target: https://travis-ci.org/attogram/shared-media-api
@@ -62,17 +25,3 @@ Project links
 License
 
 * ``shared-media-api`` is Dual Licensed under the MIT or GPL-3.0+, at your choosing.
-
-.. toctree::
-    :hidden:
-
-    about
-	api
-    base
-    category
-    file
-    page
-    sandbox
-    tools
-    sources
-    other
