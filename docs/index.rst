@@ -41,4 +41,12 @@ License
    :hidden:
 
    About shared-media-api <index>
+   api
+   base
+   category
+   file
+   page
+   sandbox
+   tools
+   sources
    Other projects <other>
