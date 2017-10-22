@@ -67,11 +67,11 @@ License
     :hidden:
 
     about
-	api
-    base
     category
     file
     page
+    base
+	api
     sandbox
     tools
     sources
