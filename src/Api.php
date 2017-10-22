@@ -14,7 +14,7 @@ use Monolog\Handler\StreamHandler;
  */
 class Api
 {
-    const VERSION = '0.9.15';
+    const VERSION = '0.9.16';
 
     public $logger;
 
@@ -153,7 +153,7 @@ class Api
         return $response;
     }
 
-    public function getResponseFromKeys($keys)
+    private function getResponseFromKeys($keys)
     {
         if (!$keys) {
             $this->logger->debug('Api::getResponseFromKeys: Keys Not Found.');
@@ -185,7 +185,7 @@ class Api
     /**
      * @return object \GuzzleHttp\Client
      */
-    public function getClient()
+    private function getClient()
     {
         return $this->client ?: new Client();
     }

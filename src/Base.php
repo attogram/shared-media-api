@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Base extends Api
 {
-    const VERSION = '0.9.6';
+    const VERSION = '0.9.7';
 
     const DEFAULT_LIMIT = 50;
 
@@ -43,7 +43,7 @@ class Base extends Api
      * @param string|null $postfix
      * @return bool
      */
-    public function setIdentifierValue($type, $prefix = '', $postfix = '')
+    private function setIdentifierValue($type, $prefix = '', $postfix = '')
     {
         $this->logger->debug('Base::setIdentifierValue');
         if (!in_array($type, ['pageid', 'title'])) {
