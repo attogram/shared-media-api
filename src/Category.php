@@ -2,6 +2,7 @@
 
 namespace Attogram\SharedMedia\Api;
 
+use Attogram\SharedMedia\Api\File;
 use Attogram\SharedMedia\Api\Tools;
 
 /**
@@ -9,7 +10,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Base
 {
-    const VERSION = '0.9.13';
+    const VERSION = '0.9.14';
 
     /**
      * search for categories
@@ -86,41 +87,5 @@ class Category extends Base
     {
         $this->logger->debug('Category::members');
         return $this->getCategorymemberResponse('file');
-    }
-
-    /**
-     * @return void
-     */
-    private function setGeneratorCategorymembers()
-    {
-        $this->setParam('generator', 'categorymembers');
-        $this->setParam('gcmprop', 'ids|title');
-        $this->setParam('gcmlimit', $this->getLimit());
-    }
-
-    /**
-     * @param string $cmtype 'file' or 'subcat'
-     * @return array
-     */
-    private function getCategorymemberResponse($cmtype)
-    {
-        $this->logger->debug('Category::getCategorymemberResponse');
-        if (!$this->setIdentifier('gcm', '')) {
-            return [];
-        }
-        $this->setGeneratorCategorymembers();
-        $this->setParam('gcmtype', $cmtype);
-        return $this->getCategoryinfoResponse();
-    }
-
-    /**
-     * @return array
-     */
-    private function getCategoryinfoResponse()
-    {
-        $this->logger->debug('Category::getCategoryinfoResponse');
-        $this->setParam('prop', 'categoryinfo');
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'pages']));
     }
 }

@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Base extends Api
 {
-    const VERSION = '0.9.7';
+    const VERSION = '0.9.8';
 
     const DEFAULT_LIMIT = 50;
 
@@ -72,6 +72,74 @@ class Base extends Api
             $this->setLimit(self::DEFAULT_LIMIT);
         }
         return $this->limit;
+    }
+
+    /**
+     * Get API response from a files-info request
+     *
+     * @return array
+     */
+    public function getInfoResponse()
+    {
+        $this->setImageinfoParams();
+        $this->send();
+        return Tools::flatten($this->getResponse(['query', 'pages']));
+    }
+
+    /**
+     * Set API parameters for an imageinfo query
+     *
+     * @see https://www.mediawiki.org/wiki/API:Imageinfo
+     * @return void
+     */
+    public function setImageinfoParams()
+    {
+        $this->setParam('prop', 'imageinfo');
+        $this->setParam('iiprop', 'url|size|mime|thumbmime|user|userid|sha1|timestamp|extmetadata');
+        $this->setParam('iiextmetadatafilter', 'LicenseShortName|UsageTerms|AttributionRequired|'
+                        .'Restrictions|Artist|ImageDescription|DateTimeOriginal');
+        $this->setParam('iiurlwidth', $this->width);
+    }
+
+    /**
+     * @return void
+     */
+    public function setGeneratorCategorymembers()
+    {
+        $this->setParam('generator', 'categorymembers');
+        $this->setParam('gcmprop', 'ids|title');
+        $this->setParam('gcmlimit', $this->getLimit());
+    }
+
+    /**
+     * @param string $cmtype 'file' or 'subcat'
+     * @return array
+     */
+    public function getCategorymemberResponse($cmtype)
+    {
+        $this->logger->debug('Category::getCategorymemberResponse');
+        if (!$this->setIdentifier('gcm', '')) {
+            return [];
+        }
+        $this->setGeneratorCategorymembers();
+		$this->setParam('gcmtype', $cmtype);
+		switch ($cmtype) {
+			case 'subcat':
+				return $this->getCategoryinfoResponse();
+			case 'file':
+				return $this->getCategoryinfoResponse(); // @todo
+		}
+    }
+
+    /**
+     * @return array
+     */
+    public function getCategoryinfoResponse()
+    {
+        $this->logger->debug('Category::getCategoryinfoResponse');
+        $this->setParam('prop', 'categoryinfo');
+        $this->send();
+        return Tools::flatten($this->getResponse(['query', 'pages']));
     }
 
     /**

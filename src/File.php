@@ -10,7 +10,7 @@ use Attogram\SharedMedia\Api\Category;
  */
 class File extends Base
 {
-    const VERSION = '0.9.10';
+    const VERSION = '0.9.11';
 
     public $width = 100;
 
@@ -70,33 +70,6 @@ class File extends Base
         $category = new Category($this->logger);
         $category->pageid = $this->pageid;
         $category->title = $this->title;
-        return $category->members();
-    }
-
-    /**
-     * Get API response from a files-info request
-     *
-     * @return array
-     */
-    private function getInfoResponse()
-    {
-        $this->setImageinfoParams();
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'pages']));
-    }
-
-    /**
-     * Set API parameters for an imageinfo query
-     *
-     * @see https://www.mediawiki.org/wiki/API:Imageinfo
-     * @return void
-     */
-    private function setImageinfoParams()
-    {
-        $this->setParam('prop', 'imageinfo');
-        $this->setParam('iiprop', 'url|size|mime|thumbmime|user|userid|sha1|timestamp|extmetadata');
-        $this->setParam('iiextmetadatafilter', 'LicenseShortName|UsageTerms|AttributionRequired|'
-                        .'Restrictions|Artist|ImageDescription|DateTimeOriginal');
-        $this->setParam('iiurlwidth', $this->width);
+        return $category->members('file');
     }
 }
