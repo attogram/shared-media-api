@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Base extends Transport
 {
-    const VERSION = '0.9.11';
+    const VERSION = '0.9.12';
 
     const DEFAULT_LIMIT = 50;
 
@@ -78,18 +78,6 @@ class Base extends Transport
     }
 
     /**
-     * Get API response from a files-info request
-     *
-     * @return array
-     */
-    public function getInfoResponse()
-    {
-        $this->setImageinfoParams();
-        $this->send();
-        return Tools::flatten($this->getResponse(['query', 'pages']));
-    }
-
-    /**
      * Set API parameters for an imageinfo query
      *
      * @see https://www.mediawiki.org/wiki/API:Imageinfo
@@ -115,6 +103,18 @@ class Base extends Transport
     }
 
     /**
+     * Get API response from a files-info request
+     *
+     * @return array
+     */
+    public function getImageinfoResponse()
+    {
+        $this->setImageinfoParams();
+        $this->send();
+        return Tools::flatten($this->getResponse(['query', 'pages']));
+    }
+
+    /**
      * @param string $cmtype 'file' or 'subcat'
      * @return array
      */
@@ -130,7 +130,7 @@ class Base extends Transport
             case 'subcat':
                 return $this->getCategoryinfoResponse();
             case 'file':
-                return $this->getCategoryinfoResponse(); // @todo
+                return $this->getImageinfoResponse();
         }
     }
 

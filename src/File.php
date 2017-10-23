@@ -29,7 +29,7 @@ class File extends Base
         $this->setParam('gsrnamespace', self::FILE_NAMESPACE);
         $this->setParam('gsrlimit', $this->getLimit());
         $this->setParam('gsrsearch', $query);
-        return $this->getInfoResponse();
+        return $this->getImageinfoResponse();
     }
 
     /**
@@ -42,7 +42,7 @@ class File extends Base
         if (!$this->setIdentifier('', 's')) {
             return [];
         }
-        return $this->getInfoResponse();
+        return $this->getImageinfoResponse();
     }
 
     /**
@@ -59,7 +59,7 @@ class File extends Base
         }
         $this->setParam('generator', 'images');
         $this->setParam('gimlimit', $this->getLimit());
-        return $this->getInfoResponse();
+        return $this->getImageinfoResponse();
     }
 
     public function inCategory()
