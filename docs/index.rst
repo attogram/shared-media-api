@@ -19,7 +19,7 @@ Example: search categories
     :target: http://shared-media-api.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
-See more :examples:
+See more :doc:`examples`
 
 .. toctree::
 
