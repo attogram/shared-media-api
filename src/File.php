@@ -10,7 +10,7 @@ use Attogram\SharedMedia\Api\Category;
  */
 class File extends Base
 {
-    const VERSION = '0.9.12';
+    const VERSION = '0.9.13';
 
     /**
      * search for Files
@@ -68,6 +68,6 @@ class File extends Base
         $category = new Category($this->logger);
         $category->pageid = $this->pageid;
         $category->title = $this->title;
-        return $category->members('file');
+        return $category->members();
     }
 }
