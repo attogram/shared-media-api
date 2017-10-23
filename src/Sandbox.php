@@ -232,7 +232,7 @@ class Sandbox
         $class->setEndpoint($this->endpoint);
         $class->setLimit($this->limit);
         $results = $class->{$this->method}($this->arg);
-        return htmlentities(print_r($results, true));
+        return htmlentities(var_dump($results, true));
     }
 
     public function getClass()
