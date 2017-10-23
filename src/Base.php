@@ -122,13 +122,13 @@ class Base extends Api
             return [];
         }
         $this->setGeneratorCategorymembers();
-		$this->setParam('gcmtype', $cmtype);
-		switch ($cmtype) {
-			case 'subcat':
-				return $this->getCategoryinfoResponse();
-			case 'file':
-				return $this->getCategoryinfoResponse(); // @todo
-		}
+        $this->setParam('gcmtype', $cmtype);
+        switch ($cmtype) {
+            case 'subcat':
+                return $this->getCategoryinfoResponse();
+            case 'file':
+                return $this->getCategoryinfoResponse(); // @todo
+        }
     }
 
     /**
