@@ -3,7 +3,6 @@
 namespace Attogram\SharedMedia\Api;
 
 use PHPUnit\Framework\TestCase;
-use Psr\Log\NullLogger;
 
 /**
  */
