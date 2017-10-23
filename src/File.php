@@ -10,9 +10,7 @@ use Attogram\SharedMedia\Api\Category;
  */
 class File extends Base
 {
-    const VERSION = '0.9.11';
-
-    public $width = 100;
+    const VERSION = '0.9.12';
 
     /**
      * search for Files

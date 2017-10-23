@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Base extends Api
 {
-    const VERSION = '0.9.8';
+    const VERSION = '0.9.9';
 
     const DEFAULT_LIMIT = 50;
 
@@ -17,6 +17,9 @@ class Base extends Api
 
     public $pageid;
     public $title;
+
+    public $thumbnail_width = 100;
+
     private $limit;
 
     /**
@@ -98,7 +101,7 @@ class Base extends Api
         $this->setParam('iiprop', 'url|size|mime|thumbmime|user|userid|sha1|timestamp|extmetadata');
         $this->setParam('iiextmetadatafilter', 'LicenseShortName|UsageTerms|AttributionRequired|'
                         .'Restrictions|Artist|ImageDescription|DateTimeOriginal');
-        $this->setParam('iiurlwidth', $this->width);
+        $this->setParam('iiurlwidth', $this->thumbnail_width);
     }
 
     /**
