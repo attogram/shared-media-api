@@ -14,7 +14,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.36';
+    const VERSION = '0.9.37';
 
     const DEFAULT_LIMIT = 10;
 
@@ -161,13 +161,13 @@ class Sandbox
             .'<input type="hidden" name="method" value="'.$this->method.'" />'
             .$this->apiForm().'<br />';
         if ($action[3]) {
-            $form .= $this->identifierForm().'<br />';
+            $form .= $this->identifierForm();
         }
-        $form .= '<b>'.$this->class.'::'.$this->method.'</b>:';
         if ($action[2]) {
-            $form .= '<input name="arg" type="text" size="42" value="'.$this->arg.'" />';
+            $form .= $action[2] .': <input name="arg" type="text" size="42" value="'.$this->arg.'" />';
         }
-        $form .= '<br /><input type="submit" value="                  GO                  "/></form>';
+        $form .= '<br /><input type="submit" value="         '
+            .$this->class.'::'.$this->method.'         "/></form>';
         return $form;
     }
 
