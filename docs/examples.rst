@@ -43,3 +43,4 @@ Result:
         [categoryinfo.subcats] => 0
         [categoryinfo.hidden] =>
     )
+
