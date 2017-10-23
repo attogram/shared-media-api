@@ -6,8 +6,10 @@ information into a flat PHP array.  Fine-tuned for WikiMedia Commmons.
 
 Example: search categories
 
-.. literalinclude:: examples/example.search.categories.php
+.. literalinclude:: examples/search.categories.php
    :language: php
+.. literalinclude:: examples/search.categories.txt
+   :language: none
 
 .. image:: https://travis-ci.org/attogram/shared-media-api.svg?branch=master
     :target: https://travis-ci.org/attogram/shared-media-api
