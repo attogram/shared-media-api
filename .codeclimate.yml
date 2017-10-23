@@ -1,4 +1,4 @@
-# attogram/shared-media-api - codeclimate.yml - v0.9.3
+# attogram/shared-media-api - codeclimate.yml - v0.9.4
 version: "2"
 exclude_patterns:
 - "vendor/"
@@ -41,7 +41,7 @@ plugins:
     config:
       languages:
         php:
-          mass_threshold: 40
+          mass_threshold: 38
   csslint:
     enabled: true
   stylelint:
