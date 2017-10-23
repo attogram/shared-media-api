@@ -10,7 +10,7 @@ use Attogram\SharedMedia\Api\Category;
  */
 class File extends Base
 {
-    const VERSION = '0.9.9';
+    const VERSION = '0.9.10';
 
     public $width = 100;
 
@@ -41,7 +41,7 @@ class File extends Base
      */
     public function info()
     {
-        if (!$this->setIdentifier()) {
+        if (!$this->setIdentifier('', 's')) {
             return [];
         }
         return $this->getInfoResponse();
@@ -56,7 +56,7 @@ class File extends Base
     public function onPage()
     {
         $this->logger->debug('File::onPage');
-        if (!$this->setIdentifier('gm')) {
+        if (!$this->setIdentifier('', 's')) {
             return [];
         }
         $this->setParam('generator', 'images');
