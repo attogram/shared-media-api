@@ -6,9 +6,9 @@ use PHPUnit\Framework\TestCase;
 
 /**
  */
-class ApiTest extends TestCase
+class TransportTest extends TestCase
 {
-    const VERSION = '0.9.7';
+    const VERSION = '0.10.0';
 
     public $defaultEndpoint;
     public $testingUrl;
@@ -24,23 +24,23 @@ class ApiTest extends TestCase
     public function testConstruct()
     {
         $this->assertTrue(
-            class_exists('\Attogram\SharedMedia\Api\Api'),
-            'class \Attogram\SharedMedia\Api\Api not found'
+            class_exists('\Attogram\SharedMedia\Api\Transport'),
+            'class \Attogram\SharedMedia\Api\Transport not found'
         );
         $this->assertTrue(
-            defined('\Attogram\SharedMedia\Api\Api::VERSION'),
-            'constant \Attogram\SharedMedia\Api\Api::VERSION not found'
+            defined('\Attogram\SharedMedia\Api\Transport::VERSION'),
+            'constant \Attogram\SharedMedia\Api\Transport::VERSION not found'
         );
-        $this->assertClassHasAttribute('endpoint', \Attogram\SharedMedia\Api\Api::class);
-        $api = new \Attogram\SharedMedia\Api\Api();
-        $this->assertObjectHasAttribute('endpoint', $api);
+        $this->assertClassHasAttribute('endpoint', \Attogram\SharedMedia\Api\Transport::class);
+        $transport = new \Attogram\SharedMedia\Api\Transport();
+        $this->assertObjectHasAttribute('endpoint', $transport);
     }
 
     /**
      */
     public function testSetEndpoint()
     {
-        $call = new \Attogram\SharedMedia\Api\Api();
+        $call = new \Attogram\SharedMedia\Api\Transport();
         $call->setEndpoint($this->testingUrl);
         $this->assertEquals(
             $call->getEndpoint(),

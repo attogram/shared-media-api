@@ -9,11 +9,11 @@ use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
 /**
- * Attogram SharedMedia API
+ * Attogram SharedMedia Api Transport
  */
-class Api
+class Transport
 {
-    const VERSION = '0.9.17';
+    const VERSION = '0.10.0';
 
     public $logger;
 

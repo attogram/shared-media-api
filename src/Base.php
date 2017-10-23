@@ -5,9 +5,9 @@ namespace Attogram\SharedMedia\Api;
 /**
  * Base Object
  */
-class Base extends Api
+class Base extends Transport
 {
-    const VERSION = '0.9.10';
+    const VERSION = '0.9.11';
 
     const DEFAULT_LIMIT = 50;
 
