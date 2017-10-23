@@ -8,7 +8,7 @@ Example: search categories:
 
 .. code-block:: php
 
-	use Attogram\SharedMedia\Api\Category;
+    use Attogram\SharedMedia\Api\Category;
 
     $category = new Category();
     $category->setLimit(2);
