@@ -8,6 +8,8 @@ Example: search categories:
 
 .. code-block:: php
 
+	use Attogram\SharedMedia\Api\Category;
+
     $category = new Category();
     $category->setLimit(2);
     $results = $category->search('Albert Einstein');
@@ -58,6 +60,7 @@ Result:
 .. toctree::
 
     about
+	examples
     category
     file
     page
