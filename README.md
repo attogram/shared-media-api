@@ -1,7 +1,7 @@
 # shared-media-api v0.9
 
-MediaWiki API wrapper, fine-tuned for WikiMedia Commons. 
-Gets Category and File information into a flat PHP array.
+MediaWiki API wrapper that easily gets Category and File information into simple PHP arrays. 
+Fine-tuned for WikiMedia Commmons. 
 
 [![Build Status](https://travis-ci.org/attogram/shared-media-api.svg?branch=master)](https://travis-ci.org/attogram/shared-media-api)
 [![Maintainability](https://api.codeclimate.com/v1/badges/495c792e36f498fed6ef/maintainability)](https://codeclimate.com/github/attogram/shared-media-api/maintainability)
