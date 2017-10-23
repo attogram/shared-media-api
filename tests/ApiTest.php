@@ -9,7 +9,7 @@ use Psr\Log\NullLogger;
  */
 class ApiTest extends TestCase
 {
-    const VERSION = '0.9.5';
+    const VERSION = '0.9.6';
 
     public $defaultEndpoint;
     public $testingUrl;
@@ -61,23 +61,6 @@ class ApiTest extends TestCase
         $this->assertTrue(
             class_exists('\GuzzleHttp\Exception\ConnectException'),
             'class \GuzzleHttp\Exception\ConnectException not found'
-        );
-        $call = new \Attogram\SharedMedia\Api\Api(new NullLogger);
-        $client = $call->getClient();
-        $this->assertInstanceof(
-            '\GuzzleHttp\Client',
-            $client,
-            'guzzle client is not instance of \GuzzleHttp\Client'
-        );
-        $this->assertTrue(
-            method_exists($client, 'request'),
-            'guzzle client has no request() method'
-        );
-        $client2 = $call->getClient();
-        $this->assertInstanceof(
-            '\GuzzleHttp\Client',
-            $client2,
-            'second client is not instance of \GuzzleHttp\Client'
         );
     }
 }
