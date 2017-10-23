@@ -60,7 +60,7 @@ Result:
 .. toctree::
 
     about
-	examples
+    examples
     category
     file
     page
