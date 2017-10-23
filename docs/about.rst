@@ -1,7 +1,7 @@
 About shared-media-api v0.9
 ===========================
 
-``shared-media-api`` is a MediaWiki API wrapper that easily gets Category and File
+``shared-media-api`` is a MediaWiki Query API wrapper that easily gets Category and File
 information into simple PHP arrays.  Fine-tuned for WikiMedia Commmons.
 
 .. image:: https://travis-ci.org/attogram/shared-media-api.svg?branch=master

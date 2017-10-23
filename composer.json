@@ -1,6 +1,6 @@
 {
     "name": "attogram/shared-media-api",
-    "description": "MediaWiki API wrapper, fine-tuned for WikiMedia Commons.  Gets Category and File information into a flat PHP array.",
+    "description": "MediaWiki Query API wrapper that easily gets Category and File information into simple PHP arrays. Fine-tuned for WikiMedia Commmons.",
     "type": "library",
     "license": "(MIT or GPL-3.0+)",
     "homepage": "https://github.com/attogram/shared-media-api",
