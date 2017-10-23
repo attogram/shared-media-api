@@ -24,7 +24,7 @@ class Api
     private $response;
 
     /**
-	 * @param LoggerInterface $logger PSR3 logger
+     * @param LoggerInterface $logger PSR3 logger
      * @return void
      */
     public function __construct(LoggerInterface $logger = null)
