@@ -6,15 +6,14 @@ use Attogram\SharedMedia\Api\Sources;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
 use Psr\Log\LoggerInterface;
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
+use Psr\Log\NullLogger;
 
 /**
  * Attogram SharedMedia API
  */
 class Api
 {
-    const VERSION = '0.9.16';
+    const VERSION = '0.9.17';
 
     public $logger;
 
@@ -25,6 +24,7 @@ class Api
     private $response;
 
     /**
+	 * @param LoggerInterface $logger PSR3 logger
      * @return void
      */
     public function __construct(LoggerInterface $logger = null)
@@ -33,7 +33,7 @@ class Api
     }
 
     /**
-     * Set a PSR3 logger
+     * Set a PSR3 logger, or the NullLogger by default
      *
      * @param mixed $log
      * @return void
@@ -44,8 +44,7 @@ class Api
             $this->logger = $logger;
             return;
         }
-        $this->logger = new Logger('Log');
-        $this->logger->pushHandler(new StreamHandler('php://output'));
+        $this->logger = new NullLogger;
     }
 
     /**

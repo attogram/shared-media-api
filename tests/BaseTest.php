@@ -9,7 +9,7 @@ use Psr\Log\NullLogger;
  */
 class BaseTest extends TestCase
 {
-    const VERSION = '0.9.5';
+    const VERSION = '0.9.6';
 
     /**
      */
@@ -23,7 +23,7 @@ class BaseTest extends TestCase
             defined('\Attogram\SharedMedia\Api\Base::VERSION'),
             'constant \Attogram\SharedMedia\Api\Base::VERSION not found'
         );
-        $base = new \Attogram\SharedMedia\Api\Base(new NullLogger);
+        $base = new \Attogram\SharedMedia\Api\Base();
         $this->assertTrue(is_object($base), 'instantiation of Base failed');
     }
 
@@ -31,7 +31,7 @@ class BaseTest extends TestCase
      */
     public function testCallPreGets()
     {
-        $call = new \Attogram\SharedMedia\Api\Base(new NullLogger);
+        $call = new \Attogram\SharedMedia\Api\Base();
         $this->assertFalse(
             $call->getWarnings(),
             'getWarnings without valid call, not returning false'

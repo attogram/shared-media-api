@@ -9,7 +9,7 @@ use Psr\Log\NullLogger;
  */
 class PageTest extends TestCase
 {
-    const VERSION = '0.9.4';
+    const VERSION = '0.9.5';
 
     /**
      */
@@ -23,7 +23,7 @@ class PageTest extends TestCase
             defined('\Attogram\SharedMedia\Api\Page::VERSION'),
             'constant \Attogram\SharedMedia\Api\Page::VERSION not found'
         );
-        $page = new \Attogram\SharedMedia\Api\Page(new NullLogger);
+        $page = new \Attogram\SharedMedia\Api\Page();
         $this->assertTrue(is_object($page), 'instantiation of Page failed');
     }
 }

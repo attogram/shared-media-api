@@ -9,7 +9,7 @@ use Psr\Log\NullLogger;
  */
 class CategoryTest extends TestCase
 {
-    const VERSION = '0.9.4';
+    const VERSION = '0.9.5';
 
     /**
      */
@@ -23,7 +23,7 @@ class CategoryTest extends TestCase
             defined('\Attogram\SharedMedia\Api\Category::VERSION'),
             'constant \Attogram\SharedMedia\Api\Category::VERSION not found'
         );
-        $category = new \Attogram\SharedMedia\Api\Category(new NullLogger);
+        $category = new \Attogram\SharedMedia\Api\Category();
         $this->assertTrue(is_object($category), 'instantiation of Category failed');
     }
 }

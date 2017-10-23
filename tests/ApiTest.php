@@ -9,7 +9,7 @@ use Psr\Log\NullLogger;
  */
 class ApiTest extends TestCase
 {
-    const VERSION = '0.9.6';
+    const VERSION = '0.9.7';
 
     public $defaultEndpoint;
     public $testingUrl;
@@ -33,7 +33,7 @@ class ApiTest extends TestCase
             'constant \Attogram\SharedMedia\Api\Api::VERSION not found'
         );
         $this->assertClassHasAttribute('endpoint', \Attogram\SharedMedia\Api\Api::class);
-        $api = new \Attogram\SharedMedia\Api\Api(new NullLogger);
+        $api = new \Attogram\SharedMedia\Api\Api();
         $this->assertObjectHasAttribute('endpoint', $api);
     }
 
@@ -41,7 +41,7 @@ class ApiTest extends TestCase
      */
     public function testSetEndpoint()
     {
-        $call = new \Attogram\SharedMedia\Api\Api(new NullLogger);
+        $call = new \Attogram\SharedMedia\Api\Api();
         $call->setEndpoint($this->testingUrl);
         $this->assertEquals(
             $call->getEndpoint(),

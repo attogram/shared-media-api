@@ -9,7 +9,7 @@ use Psr\Log\NullLogger;
  */
 class FileTest extends TestCase
 {
-    const VERSION = '0.9.4';
+    const VERSION = '0.9.5';
 
     /**
      */
@@ -23,7 +23,7 @@ class FileTest extends TestCase
             defined('\Attogram\SharedMedia\Api\File::VERSION'),
             'constant \Attogram\SharedMedia\Api\File::VERSION not found'
         );
-        $file = new \Attogram\SharedMedia\Api\File(new NullLogger);
+        $file = new \Attogram\SharedMedia\Api\File();
         $this->assertTrue(is_object($file), 'instantiation of File failed');
     }
 }
