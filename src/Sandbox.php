@@ -2,7 +2,7 @@
 
 namespace Attogram\SharedMedia\Api;
 
-use Attogram\SharedMedia\Api\Api;
+use Attogram\SharedMedia\Api\Transport;
 use Attogram\SharedMedia\Api\Base;
 use Attogram\SharedMedia\Api\Category;
 use Attogram\SharedMedia\Api\File;
@@ -14,7 +14,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.37';
+    const VERSION = '0.9.38';
 
     const DEFAULT_LIMIT = 10;
 
@@ -100,14 +100,14 @@ class Sandbox
         return '<footer><hr />'
         .'<a href="./">shared-media-api</a> : <a href="'.$this->self.'">sandbox</a>'
         .'<pre>Attogram\SharedMedia\Api'
-        .'<br />Api      v'.Api::VERSION
-        .'<br />Base     v'.Base::VERSION
-        .'<br />Category v'.Category::VERSION
-        .'<br />File     v'.File::VERSION
-        .'<br />Page     v'.Page::VERSION
-        .'<br />Tools    v'.Tools::VERSION
-        .'<br />Sources  v'.Sources::VERSION
-        .'<br />Sandbox  v'. self::VERSION
+        .'<br />Transport v'.Transport::VERSION
+        .'<br />Base      v'.Base::VERSION
+        .'<br />Category  v'.Category::VERSION
+        .'<br />File      v'.File::VERSION
+        .'<br />Page      v'.Page::VERSION
+        .'<br />Tools     v'.Tools::VERSION
+        .'<br />Sources   v'.Sources::VERSION
+        .'<br />Sandbox   v'. self::VERSION
         .'</pre>'
         .'</footer></body></html>';
     }
