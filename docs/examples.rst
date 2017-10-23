@@ -48,14 +48,8 @@ Result:
 Example: Search for 1 file
 --------------------------
 
-.. code-block:: php
-
-    use Attogram\SharedMedia\Api\File;
-
-    $file = new File();
-    $file->setLimit(1);
-    $result = $file->search('Albert Einstein');
-    print_r($result);
+.. literalinclude:: examples/example.search.for.1.file.php
+   :language: php
 
 Result:
 
