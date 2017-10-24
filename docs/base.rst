@@ -1,5 +1,5 @@
-Base
-====
+Base object
+===========
 
 public $pageid;
 

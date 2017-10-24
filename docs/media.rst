@@ -1,5 +1,5 @@
-Media
-=====
+Media object
+============
 
 public $width = 100;
 

@@ -1,5 +1,5 @@
-Category
-========
+Category object
+===============
 
 public function search($query)
 
