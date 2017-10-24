@@ -1,4 +1,4 @@
-# attogram/shared-media-api - .travis.yml - v0.9.9
+# attogram/shared-media-api - .travis.yml - v0.9.10
 
 language: php
 
@@ -21,5 +21,4 @@ script:
   - if find public/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find src/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find tests/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
-  - if find vendor/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - vendor/bin/phpunit
