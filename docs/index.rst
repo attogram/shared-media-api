@@ -28,7 +28,7 @@ See more :doc:`examples`
     about
     examples
     category
-    file
+    media
     page
     base
     transport

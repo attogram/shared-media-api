@@ -2,17 +2,19 @@
 
 namespace Attogram\SharedMedia\Api;
 
+use Attogram\SharedMedia\Api\Tools;
+
 /**
  * Base Object
  */
 class Base extends Transport
 {
-    const VERSION = '0.9.12';
+    const VERSION = '0.9.13';
 
     const DEFAULT_LIMIT = 50;
 
     const CATEGORY_NAMESPACE = 14;
-    const FILE_NAMESPACE = 6;
+    const MEDIA_NAMESPACE = 6;
     const PAGE_NAMESPACE = 0;
 
     public $pageid;

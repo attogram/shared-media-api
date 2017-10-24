@@ -1,5 +1,5 @@
-File
-====
+Media
+=====
 
 public $width = 100;
 

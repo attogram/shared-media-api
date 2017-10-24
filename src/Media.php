@@ -6,14 +6,14 @@ use Attogram\SharedMedia\Api\Tools;
 use Attogram\SharedMedia\Api\Category;
 
 /**
- * File object
+ * Media file object
  */
-class File extends Base
+class Media extends Base
 {
-    const VERSION = '0.9.13';
+    const VERSION = '0.10.0';
 
     /**
-     * search for Files
+     * search for Media files
      *
      * @see https://www.mediawiki.org/wiki/API:Search
      * @param string $query
@@ -22,18 +22,18 @@ class File extends Base
     public function search($query)
     {
         if (!Tools::isGoodString($query)) {
-            $this->logger->error('File::search: invalid query');
+            $this->logger->error('Media::search: invalid query');
             return [];
         }
         $this->setParam('generator', 'search');
-        $this->setParam('gsrnamespace', self::FILE_NAMESPACE);
+        $this->setParam('gsrnamespace', self::MEDIA_NAMESPACE);
         $this->setParam('gsrlimit', $this->getLimit());
         $this->setParam('gsrsearch', $query);
         return $this->getImageinfoResponse();
     }
 
     /**
-     * get File information
+     * get Media file information
      *
      * @return array
      */
@@ -46,14 +46,14 @@ class File extends Base
     }
 
     /**
-     * get Files embedded on a Page
+     * get Media files embedded on a Page
      *
      * @see https://www.mediawiki.org/wiki/API:Images
      * @return array
      */
     public function onPage()
     {
-        $this->logger->debug('File::onPage');
+        $this->logger->debug('Media::onPage');
         if (!$this->setIdentifier('', 's')) {
             return [];
         }
@@ -64,7 +64,7 @@ class File extends Base
 
     public function inCategory()
     {
-        $this->logger->debug('File::inCategory');
+        $this->logger->debug('Media::inCategory');
         $category = new Category($this->logger);
         $category->pageid = $this->pageid;
         $category->title = $this->title;

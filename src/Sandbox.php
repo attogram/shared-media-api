@@ -5,7 +5,7 @@ namespace Attogram\SharedMedia\Api;
 use Attogram\SharedMedia\Api\Transport;
 use Attogram\SharedMedia\Api\Base;
 use Attogram\SharedMedia\Api\Category;
-use Attogram\SharedMedia\Api\File;
+use Attogram\SharedMedia\Api\Media;
 use Attogram\SharedMedia\Api\Page;
 use Attogram\SharedMedia\Api\Sources;
 use Attogram\SharedMedia\Api\Tools;
@@ -14,7 +14,7 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.38';
+    const VERSION = '0.9.39';
 
     const DEFAULT_LIMIT = 10;
 
@@ -26,10 +26,10 @@ class Sandbox
         ['Category', 'members',    false,    true],
         ['Category', 'fromPage',   false,    true],
 
-        ['File',     'search',     'query',  false],
-        ['File',     'info',       false,    true],
-        ['File',     'inCategory', false,    true],
-        ['File',     'onPage',     false,    true],
+        ['Media',    'search',     'query',  false],
+        ['Media',    'info',       false,    true],
+        ['Media',    'inCategory', false,    true],
+        ['Media',    'onPage',     false,    true],
 
         ['Page',     'search',     'query',  false],
     ];
@@ -103,11 +103,11 @@ class Sandbox
         .'<br />Transport v'.Transport::VERSION
         .'<br />Base      v'.Base::VERSION
         .'<br />Category  v'.Category::VERSION
-        .'<br />File      v'.File::VERSION
+        .'<br />Media     v'.Media::VERSION
         .'<br />Page      v'.Page::VERSION
         .'<br />Tools     v'.Tools::VERSION
         .'<br />Sources   v'.Sources::VERSION
-        .'<br />Sandbox   v'. self::VERSION
+        .'<br />Sandbox   v'.self::VERSION
         .'</pre>'
         .'</footer></body></html>';
     }
@@ -240,8 +240,8 @@ class Sandbox
         switch ($this->class) {
             case 'Category':
                 return new Category($this->logger);
-            case 'File':
-                return new File($this->logger);
+            case 'Media':
+                return new Media($this->logger);
             case 'Page':
                 return new Page($this->logger);
             default:

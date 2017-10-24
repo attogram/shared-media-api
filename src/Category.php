@@ -2,7 +2,6 @@
 
 namespace Attogram\SharedMedia\Api;
 
-use Attogram\SharedMedia\Api\File;
 use Attogram\SharedMedia\Api\Tools;
 
 /**
@@ -10,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Base
 {
-    const VERSION = '0.9.14';
+    const VERSION = '0.9.15';
 
     /**
      * search for categories
