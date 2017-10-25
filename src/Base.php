@@ -77,6 +77,8 @@ class Base extends Transport
     }
 
     /**
+     * @see https://www.mediawiki.org/wiki/API:Search
+     *
      * @param string $query
      * @param int|null $namespace
      * @return void
@@ -92,16 +94,20 @@ class Base extends Transport
     }
 
     /**
+     * @see https://www.mediawiki.org/wiki/API:Categorymembers
+     *
      * @return void
      */
     public function setGeneratorCategorymembers()
     {
         $this->setParam('generator', 'categorymembers');
-        $this->setParam('gcmprop', 'ids|title');
+        $this->setParam('gcmprop', 'ids|title|type|timestamp');
         $this->setParam('gcmlimit', $this->getLimit());
     }
 
     /**
+     * @see https://www.mediawiki.org/wiki/API:Categories
+     *
      * @return void
      */
     public function setGeneratorCategories()
@@ -112,6 +118,8 @@ class Base extends Transport
     }
 
     /**
+     * @see https://www.mediawiki.org/wiki/API:Images
+     *
      * @return void
      */
     public function setGeneratorImages()
@@ -167,6 +175,8 @@ class Base extends Transport
     }
 
     /**
+     * @see https://www.mediawiki.org/wiki/API:Categoryinfo
+     *
      * @return array
      */
     public function getCategoryinfoResponse()
