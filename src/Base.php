@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Base extends Transport
 {
-    const VERSION = '0.9.13';
+    const VERSION = '0.10.0';
 
     const DEFAULT_LIMIT = 50;
 
@@ -31,7 +31,6 @@ class Base extends Transport
      */
     public function setIdentifier($prefix = '', $postfix = '')
     {
-        $this->logger->debug('Base::setIdentifier');
         if (!$this->pageid && !$this->title) {
             $this->logger->error('Base::setIdentifier: Identifier Not Found');
             return false;
@@ -50,7 +49,6 @@ class Base extends Transport
      */
     private function setIdentifierValue($type, $prefix = '', $postfix = '')
     {
-        $this->logger->debug('Base::setIdentifierValue');
         if (!in_array($type, ['pageid', 'title'])) {
             $this->logger->error('Base::setIdentifierValue: invalid type');
             return false;
@@ -65,7 +63,6 @@ class Base extends Transport
     public function setLimit($limit)
     {
         $this->limit = $limit;
-        $this->logger->debug('Base::setLimit:', [$limit]);
     }
 
     /**
@@ -77,6 +74,50 @@ class Base extends Transport
             $this->setLimit(self::DEFAULT_LIMIT);
         }
         return $this->limit;
+    }
+
+    /**
+     * @param string $query
+     * @param int|null $namespace
+     * @return void
+     */
+    public function setGeneratorSearch($query, $namespace = null)
+    {
+        $this->setParam('generator', 'search');
+        $this->setParam('gsrlimit', $this->getLimit());
+        $this->setParam('gsrsearch', $query);
+        if ($namespace) {
+            $this->setParam('gsrnamespace', $namespace);
+        }
+    }
+
+    /**
+     * @return void
+     */
+    public function setGeneratorCategorymembers()
+    {
+        $this->setParam('generator', 'categorymembers');
+        $this->setParam('gcmprop', 'ids|title');
+        $this->setParam('gcmlimit', $this->getLimit());
+    }
+
+    /**
+     * @return void
+     */
+    public function setGeneratorCategories()
+    {
+        $this->setParam('generator', 'categories');
+        $this->setParam('gclprop', 'hidden|timestamp');
+        $this->setParam('gcllimit', $this->getLimit());
+    }
+
+    /**
+     * @return void
+     */
+    public function setGeneratorImages()
+    {
+        $this->setParam('generator', 'images');
+        $this->setParam('gimlimit', $this->getLimit());
     }
 
     /**
@@ -92,16 +133,6 @@ class Base extends Transport
         $this->setParam('iiextmetadatafilter', 'LicenseShortName|UsageTerms|AttributionRequired|'
                         .'Restrictions|Artist|ImageDescription|DateTimeOriginal');
         $this->setParam('iiurlwidth', $this->thumbnailWidth);
-    }
-
-    /**
-     * @return void
-     */
-    public function setGeneratorCategorymembers()
-    {
-        $this->setParam('generator', 'categorymembers');
-        $this->setParam('gcmprop', 'ids|title');
-        $this->setParam('gcmlimit', $this->getLimit());
     }
 
     /**
@@ -122,7 +153,6 @@ class Base extends Transport
      */
     public function getCategorymemberResponse($cmtype)
     {
-        $this->logger->debug('Category::getCategorymemberResponse');
         if (!$this->setIdentifier('gcm', '')) {
             return [];
         }
@@ -141,7 +171,6 @@ class Base extends Transport
      */
     public function getCategoryinfoResponse()
     {
-        $this->logger->debug('Category::getCategoryinfoResponse');
         $this->setParam('prop', 'categoryinfo');
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));

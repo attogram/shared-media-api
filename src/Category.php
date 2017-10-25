@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Base
 {
-    const VERSION = '0.9.15';
+    const VERSION = '0.10.0';
 
     /**
      * search for categories
@@ -20,15 +20,11 @@ class Category extends Base
      */
     public function search($query)
     {
-        $this->logger->debug('Category::search');
         if (!Tools::isGoodString($query)) {
             $this->logger->error('Category::search: invalid query');
             return [];
         }
-        $this->setParam('generator', 'search');
-        $this->setParam('gsrnamespace', self::CATEGORY_NAMESPACE);
-        $this->setParam('gsrlimit', $this->getLimit());
-        $this->setParam('gsrsearch', $query);
+        $this->setGeneratorSearch($query, self::CATEGORY_NAMESPACE);
         return $this->getCategoryinfoResponse();
     }
 
@@ -39,7 +35,6 @@ class Category extends Base
      */
     public function info()
     {
-        $this->logger->debug('Category::info');
         if (!$this->setIdentifier('', 's')) {
             return [];
         }
@@ -54,13 +49,10 @@ class Category extends Base
      */
     public function fromPage()
     {
-        $this->logger->debug('Category::fromPage');
         if (!$this->setIdentifier('', 's')) {
             return [];
         }
-        $this->setParam('generator', 'categories');
-        $this->setParam('gclprop', 'hidden|timestamp');
-        $this->setParam('gcllimit', $this->getLimit());
+        $this->setGeneratorCategories();
         return $this->getCategoryinfoResponse();
     }
 
@@ -72,7 +64,6 @@ class Category extends Base
      */
     public function subcats()
     {
-        $this->logger->debug('Category::subcats');
         return $this->getCategorymemberResponse('subcat');
     }
 
@@ -84,7 +75,6 @@ class Category extends Base
      */
     public function members()
     {
-        $this->logger->debug('Category::members');
         return $this->getCategorymemberResponse('file');
     }
 }

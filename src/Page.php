@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Page extends Base
 {
-    const VERSION = '0.9.5';
+    const VERSION = '0.10.0';
 
     /**
      * search for Pages
@@ -24,11 +24,7 @@ class Page extends Base
             $this->logger->error('Page::search: invalid query');
             return [];
         }
-        $this->logger->debug('Page::search: query: '.$query);
-        $this->setParam('generator', 'search');
-        $this->setParam('gsrnamespace', self::PAGE_NAMESPACE);
-        $this->setParam('gsrlimit', $this->getLimit());
-        $this->setParam('gsrsearch', $query);
+        $this->setGeneratorSearch($query, self::PAGE_NAMESPACE);
         $this->setParam('prop', 'pageprops');
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));

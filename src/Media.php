@@ -10,7 +10,7 @@ use Attogram\SharedMedia\Api\Category;
  */
 class Media extends Base
 {
-    const VERSION = '0.10.0';
+    const VERSION = '0.10.1';
 
     /**
      * search for Media files
@@ -25,10 +25,7 @@ class Media extends Base
             $this->logger->error('Media::search: invalid query');
             return [];
         }
-        $this->setParam('generator', 'search');
-        $this->setParam('gsrnamespace', self::MEDIA_NAMESPACE);
-        $this->setParam('gsrlimit', $this->getLimit());
-        $this->setParam('gsrsearch', $query);
+        $this->setGeneratorSearch($query, self::MEDIA_NAMESPACE);
         return $this->getImageinfoResponse();
     }
 
@@ -53,21 +50,19 @@ class Media extends Base
      */
     public function onPage()
     {
-        $this->logger->debug('Media::onPage');
         if (!$this->setIdentifier('', 's')) {
             return [];
         }
-        $this->setParam('generator', 'images');
-        $this->setParam('gimlimit', $this->getLimit());
+        $this->setGeneratorImages();
         return $this->getImageinfoResponse();
     }
 
+    /**
+     * @return array
+     */
     public function inCategory()
     {
-        $this->logger->debug('Media::inCategory');
-        $category = new Category($this->logger);
-        $category->pageid = $this->pageid;
-        $category->title = $this->title;
-        return $category->members();
+        $this->logger->error('Media::inCategory IN DEV');
+        return [];
     }
 }
