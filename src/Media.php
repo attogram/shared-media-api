@@ -3,14 +3,13 @@
 namespace Attogram\SharedMedia\Api;
 
 use Attogram\SharedMedia\Api\Tools;
-use Attogram\SharedMedia\Api\Category;
 
 /**
  * Media file object
  */
 class Media extends Base
 {
-    const VERSION = '0.10.1';
+    const VERSION = '0.10.2';
 
     /**
      * search for Media files
@@ -48,7 +47,7 @@ class Media extends Base
      * @see https://www.mediawiki.org/wiki/API:Images
      * @return array
      */
-    public function onPage()
+    public function getMediaOnPage()
     {
         if (!$this->setIdentifier('', 's')) {
             return [];
@@ -58,11 +57,13 @@ class Media extends Base
     }
 
     /**
+     * get a list of Media files in a category
+     *
+     * @see https://www.mediawiki.org/wiki/API:Categorymembers
      * @return array
      */
-    public function inCategory()
+    public function getMediaInCategory()
     {
-        $this->logger->error('Media::inCategory IN DEV');
-        return [];
+        return $this->getCategorymemberResponse('file');
     }
 }

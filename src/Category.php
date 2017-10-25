@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Base
 {
-    const VERSION = '0.10.0';
+    const VERSION = '0.10.1';
 
     /**
      * search for categories
@@ -47,7 +47,7 @@ class Category extends Base
      * @see https://www.mediawiki.org/wiki/API:Categories
      * @return array
      */
-    public function fromPage()
+    public function getCategoryfromPage()
     {
         if (!$this->setIdentifier('', 's')) {
             return [];
@@ -65,16 +65,5 @@ class Category extends Base
     public function subcats()
     {
         return $this->getCategorymemberResponse('subcat');
-    }
-
-    /**
-     * get a list of files in a category
-     *
-     * @see https://www.mediawiki.org/wiki/API:Categorymembers
-     * @return array
-     */
-    public function members()
-    {
-        return $this->getCategorymemberResponse('file');
     }
 }

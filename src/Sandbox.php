@@ -14,24 +14,23 @@ use Monolog\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.39';
+    const VERSION = '0.9.40';
 
     const DEFAULT_LIMIT = 10;
 
     public $methods = [ // Class, Method, Has Arg, Use Identifiers
 
-        ['Category', 'search',     'query',  false],
-        ['Category', 'info',       false,    true],
-        ['Category', 'subcats',    false,    true],
-        ['Category', 'members',    false,    true],
-        ['Category', 'fromPage',   false,    true],
+        ['Category', 'search',              'query',  false],
+        ['Category', 'info',                false,    true],
+        ['Category', 'subcats',             false,    true],
+        ['Category', 'getCategoryfromPage', false,    true],
 
-        ['Media',    'search',     'query',  false],
-        ['Media',    'info',       false,    true],
-        ['Media',    'inCategory', false,    true],
-        ['Media',    'onPage',     false,    true],
+        ['Media',    'search',              'query',  false],
+        ['Media',    'info',                false,    true],
+        ['Media',    'getMediaInCategory',  false,    true],
+        ['Media',    'getMediaOnPage',      false,    true],
 
-        ['Page',     'search',     'query',  false],
+        ['Page',     'search',              'query',  false],
     ];
     public $self;
     public $class;
