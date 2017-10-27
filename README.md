@@ -1,4 +1,4 @@
-# shared-media-api v0.9
+# shared-media-api v0.10
 
 MediaWiki Query API wrapper that easily gets Category and File information into simple PHP arrays. 
 Fine-tuned for WikiMedia Commmons. 

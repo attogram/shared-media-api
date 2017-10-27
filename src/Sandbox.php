@@ -9,12 +9,11 @@ use Attogram\SharedMedia\Api\Media;
 use Attogram\SharedMedia\Api\Page;
 use Attogram\SharedMedia\Api\Sources;
 use Attogram\SharedMedia\Api\Tools;
-use Monolog\Handler\StreamHandler;
-use Monolog\Logger;
+use Attogram\SharedMedia\Api\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.9.40';
+    const VERSION = '0.10.0';
 
     const DEFAULT_LIMIT = 10;
 
@@ -79,8 +78,7 @@ class Sandbox
         if (!$this->logLevel) {
             $this->logLevel = 'NOTICE';
         }
-        $this->logger = new Logger('Log');
-        $this->logger->pushHandler(new StreamHandler('php://output', $this->logLevel));
+        $this->logger = new Logger($this->logLevel);
     }
 
     public function getHeader()
@@ -106,6 +104,7 @@ class Sandbox
         .'<br />Page      v'.Page::VERSION
         .'<br />Tools     v'.Tools::VERSION
         .'<br />Sources   v'.Sources::VERSION
+        .'<br />Logger    v'.Logger::VERSION
         .'<br />Sandbox   v'.self::VERSION
         .'</pre>'
         .'</footer></body></html>';

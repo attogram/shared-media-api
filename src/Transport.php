@@ -5,15 +5,16 @@ namespace Attogram\SharedMedia\Api;
 use Attogram\SharedMedia\Api\Sources;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ConnectException;
+use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 
 /**
  * Attogram SharedMedia Api Transport
  */
-class Transport
+class Transport implements LoggerAwareInterface
 {
-    const VERSION = '0.10.0';
+    const VERSION = '0.10.1';
 
     public $logger;
 
@@ -38,7 +39,7 @@ class Transport
      * @param mixed $log
      * @return void
      */
-    private function setLogger(LoggerInterface $logger = null)
+    public function setLogger(LoggerInterface $logger = null)
     {
         if ($logger instanceof LoggerInterface) {
             $this->logger = $logger;

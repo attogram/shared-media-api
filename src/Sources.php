@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Sources
 {
-    const VERSION = '0.9.0';
+    const VERSION = '0.10.0';
 
     public static $sources = [
         'commons'        => 'https://commons.wikimedia.org/w/api.php',

@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '0.9.6';
+    const VERSION = '0.10.0';
 
     /**
      * @param array $arrays

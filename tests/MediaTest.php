@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
  */
 class MediaTest extends TestCase
 {
-    const VERSION = '0.9.6';
+    const VERSION = '0.10.0';
 
     /**
      */

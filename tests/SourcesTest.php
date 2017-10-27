@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
  */
 class SourcesTest extends TestCase
 {
-    const VERSION = '0.9.5';
+    const VERSION = '0.10.0';
 
     /**
      */
