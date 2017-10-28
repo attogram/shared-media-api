@@ -9,10 +9,10 @@ Example: search categories
 .. literalinclude:: examples/search.categories.txt
    :language: none
    
-Example: Search for 1 file
---------------------------
+Example: Search for 1 media file
+--------------------------------
 
-.. literalinclude:: examples/search.for.1.file.php
+.. literalinclude:: examples/search.for.1.media.file.php
    :language: php
-.. literalinclude:: examples/search.for.1.file.txt
+.. literalinclude:: examples/search.for.1.media.file.txt
    :language: none
