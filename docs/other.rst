@@ -21,7 +21,7 @@ Open source projects using MediaWiki API
 
 Other related open source projects
 ----------------------------------
-
+* https://github.com/wikisource/api
 * https://github.com/joomla-framework/mediawiki-api
 * https://github.com/gtonye/library-mediawiki-api
 * https://github.com/DFelten/mediawiki-api-helper
