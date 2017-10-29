@@ -1,4 +1,4 @@
-# attogram/shared-media-api - .travis.yml - v0.10.7
+# attogram/shared-media-api - .travis.yml - v0.10.8
 
 language: php
 
@@ -19,7 +19,7 @@ matrix:
 
 before_script:
   - composer install --no-dev
-  - if [ $TRAVIS_PHP_VERSION != "5.5" ]; then composer install --no-dev --ignore-platform-reqs; fi
+  #- if [ $TRAVIS_PHP_VERSION == "5.5" ]; then composer install --no-dev --ignore-platform-reqs; fi
   - phpunit --version
   
 script:
@@ -28,4 +28,4 @@ script:
   - if find src/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find tests/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if [ $TRAVIS_PHP_VERSION != "5.5" ]; then phpunit; fi
-  - if [ $TRAVIS_PHP_VERSION = "5.5" ]; then composer require phpunit/phpunit 4.*; vendor/bin/phpunit; fi
+  - if [ $TRAVIS_PHP_VERSION = "5.5" ]; then composer require phpunit/phpunit >= 4.8.36; vendor/bin/phpunit; fi
