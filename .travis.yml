@@ -1,4 +1,4 @@
-# attogram/shared-media-api - .travis.yml - v0.10.1
+# attogram/shared-media-api - .travis.yml - v0.10.2
 
 language: php
 
@@ -20,11 +20,12 @@ matrix:
 before_script:
   - composer install
   - phpunit --version
-  - vendor/bin/phpunit --version
+  #- vendor/bin/phpunit --version
   
 script:
   - if find docs/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find public/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find src/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find tests/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
-  - vendor/bin/phpunit
+  #- vendor/bin/phpunit
+  - phpunit
