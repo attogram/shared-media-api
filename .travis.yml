@@ -1,4 +1,4 @@
-# attogram/shared-media-api - .travis.yml - v0.10.4
+# attogram/shared-media-api - .travis.yml - v0.10.5
 
 language: php
 
@@ -27,5 +27,4 @@ script:
   - if find src/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if find tests/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
   - if [ $TRAVIS_PHP_VERSION != "5.5" ]; then phpunit; fi
-  - if [ $TRAVIS_PHP_VERSION = "5.5" ]; then wget https://phar.phpunit.de/phpunit-5.7.phar; phpunit-5.7.phar; fi
-  
+  - if [ $TRAVIS_PHP_VERSION = "5.5" ]; then wget https://phar.phpunit.de/phpunit-5.7.phar; chmod 755 ./phpunit-5.7.phar; ./phpunit-5.7.phar; fi
