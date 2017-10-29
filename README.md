@@ -9,14 +9,9 @@ Fine-tuned for WikiMedia Commmons.
 [![Latest Stable Version](https://poser.pugx.org/attogram/shared-media-api/v/stable)](https://packagist.org/packages/attogram/shared-media-api)
 [![Latest Unstable Version](https://poser.pugx.org/attogram/shared-media-api/v/unstable)](https://packagist.org/packages/attogram/shared-media-api)
 
-# Links
-
-* shared-media-api project home: https://github.com/attogram/shared-media-api
-* shared-media-api documentation: https://shared-media-api.readthedocs.io/
-* shared-media-api packagist: https://packagist.org/packages/attogram/shared-media-api
-* shared-media-api travis-ci: https://travis-ci.org/attogram/shared-media-api
-* shared-media-api codeclimate: https://codeclimate.com/github/attogram/shared-media-api
-
-# License
-
+* project home: https://github.com/attogram/shared-media-api
+* documentation: https://shared-media-api.readthedocs.io/
+* packagist: https://packagist.org/packages/attogram/shared-media-api
+* travis-ci: https://travis-ci.org/attogram/shared-media-api
+* codeclimate: https://codeclimate.com/github/attogram/shared-media-api
 * shared-media-api is Dual Licensed under the MIT or GPL-3.0+, at your choosing.
