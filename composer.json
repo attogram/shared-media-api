@@ -6,7 +6,7 @@
     "homepage": "https://github.com/attogram/shared-media-api",
     "minimum-stability": "dev",
     "require": {
-        "php": ">=7.0",
+        "php": ">=5.5",
         "guzzlehttp/guzzle": "^6.2@dev",
         "psr/log": "~1.0"
 	},
