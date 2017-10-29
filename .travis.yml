@@ -1,4 +1,4 @@
-# attogram/shared-media-api - .travis.yml - v0.10.10
+# attogram/shared-media-api - .travis.yml - v0.10.11
 
 language: php
 
@@ -24,8 +24,8 @@ before_script:
   - phpunit --version
 
 script:
-  - if find docs/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error"; then exit 1; fi;
-  - if find public/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error"; then exit 1; fi;
-  - if find src/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error"; then exit 1; fi;
-  - if find tests/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error"; then exit 1; fi;
+  - if find docs/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error,"; then exit 1; fi;
+  - if find public/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error,"; then exit 1; fi;
+  - if find src/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error,"; then exit 1; fi;
+  - if find tests/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error,"; then exit 1; fi;
   - if [ $TRAVIS_PHP_VERSION <= "5.5" ]; then composer require phpunit/phpunit ~4.8.36; vendor/bin/phpunit; else phpunit; fi
