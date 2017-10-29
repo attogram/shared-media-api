@@ -1,8 +1,10 @@
-# attogram/shared-media-api - .travis.yml - v0.10.8
+# attogram/shared-media-api - .travis.yml - v0.10.10
 
 language: php
 
 php:
+  - 5.3
+  - 5.4
   - 5.5
   - 5.6
   - 7.0
@@ -10,22 +12,20 @@ php:
   - 7.2
   - nightly
 
-  
 matrix:
   fast_finish: true
   allow_failures:
+    - php: 5.3
+    - php: 5.4
     - php: nightly
-    - php: 5.5
 
 before_script:
-  - composer install --no-dev
-  #- if [ $TRAVIS_PHP_VERSION == "5.5" ]; then composer install --no-dev --ignore-platform-reqs; fi
+  - if [ $TRAVIS_PHP_VERSION <= "5.5" ]; then composer install --no-dev --ignore-platform-reqs; else composer install --no-dev; fi
   - phpunit --version
-  
+
 script:
-  - if find docs/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
-  - if find public/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
-  - if find src/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
-  - if find tests/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
-  - if [ $TRAVIS_PHP_VERSION != "5.5" ]; then phpunit; fi
-  - if [ $TRAVIS_PHP_VERSION = "5.5" ]; then composer require phpunit/phpunit ~4.8.36; vendor/bin/phpunit; fi
+  - if find docs/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error"; then exit 1; fi;
+  - if find public/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error"; then exit 1; fi;
+  - if find src/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error"; then exit 1; fi;
+  - if find tests/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error"; then exit 1; fi;
+  - if [ $TRAVIS_PHP_VERSION <= "5.5" ]; then composer require phpunit/phpunit ~4.8.36; vendor/bin/phpunit; else phpunit; fi
