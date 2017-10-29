@@ -1,4 +1,4 @@
-/* attogram/shared-media-api - sandbox.css - v0.10.0 */
+/* attogram/shared-media-api - sandbox.css - v0.10.1 */
 body {
     background-color:#ddd;
     color:#000;
@@ -21,8 +21,8 @@ h1, h2, h3, h4, h5, h6 {
     background-color:lightyellow;
     border:1px solid black;
     display:inline-block;
-    margin:1px;
-    padding:5px;
+    margin:4px;
+    padding:8px;
 }
 form {
     background-color:#eee;

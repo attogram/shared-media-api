@@ -1,4 +1,4 @@
-# attogram/shared-media-api - .travis.yml - v0.10.0
+# attogram/shared-media-api - .travis.yml - v0.10.1
 
 language: php
 
@@ -7,14 +7,20 @@ php:
   - 7.1
   - 7.2
   - nightly
+  - 5.6
+  - 5.5
   
 matrix:
   fast_finish: true
   allow_failures:
     - php: nightly
+    - php: 5.6
+    - php: 5.5
 
 before_script:
   - composer install
+  - phpunit --version
+  - vendor/bin/phpunit --version
   
 script:
   - if find docs/ -name "*.php" -exec php -l {} 2>&1 \; | grep "syntax error, unexpected"; then exit 1; fi;
