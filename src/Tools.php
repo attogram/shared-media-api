@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '0.10.2';
+    const VERSION = '0.10.3';
 
     /**
      * @param array $arrays
@@ -35,7 +35,7 @@ class Tools
      * @param string $prefix Optional
      * @return array
      */
-    public static function flattenArray(Array $array, $prefix = '')
+    public static function flattenArray(array $array, $prefix = '')
     {
         if (self::isDiscardable($prefix)) {
             $prefix = null;
