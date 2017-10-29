@@ -4,11 +4,11 @@ Array
     [ns] => 14
     [title] => Category:Albert Einstein
     [index] => 1
-    [categoryinfo.size] => 198
-    [categoryinfo.pages] => 3
-    [categoryinfo.files] => 177
-    [categoryinfo.subcats] => 18
-    [categoryinfo.hidden] => 
+    [size] => 198
+    [pages] => 3
+    [files] => 177
+    [subcats] => 18
+    [hidden] => 
 )
 Array
 (
@@ -16,11 +16,11 @@ Array
     [ns] => 14
     [title] => Category:Albert Einstein College of Medicine
     [index] => 3
-    [categoryinfo.size] => 3
-    [categoryinfo.pages] => 0
-    [categoryinfo.files] => 1
-    [categoryinfo.subcats] => 2
-    [categoryinfo.hidden] => 
+    [size] => 3
+    [pages] => 0
+    [files] => 1
+    [subcats] => 2
+    [hidden] => 
 )
 Array
 (
@@ -28,11 +28,11 @@ Array
     [ns] => 14
     [title] => Category:Einstein birthplace
     [index] => 4
-    [categoryinfo.size] => 5
-    [categoryinfo.pages] => 0
-    [categoryinfo.files] => 5
-    [categoryinfo.subcats] => 0
-    [categoryinfo.hidden] => 
+    [size] => 5
+    [pages] => 0
+    [files] => 5
+    [subcats] => 0
+    [hidden] => 
 )
 Array
 (
@@ -40,11 +40,11 @@ Array
     [ns] => 14
     [title] => Category:Einsteinhaus Caputh
     [index] => 5
-    [categoryinfo.size] => 25
-    [categoryinfo.pages] => 0
-    [categoryinfo.files] => 25
-    [categoryinfo.subcats] => 0
-    [categoryinfo.hidden] => 
+    [size] => 25
+    [pages] => 0
+    [files] => 25
+    [subcats] => 0
+    [hidden] => 
 )
 Array
 (
@@ -52,9 +52,9 @@ Array
     [ns] => 14
     [title] => Category:Albert-Einstein-Schule Laatzen
     [index] => 2
-    [categoryinfo.size] => 1
-    [categoryinfo.pages] => 0
-    [categoryinfo.files] => 1
-    [categoryinfo.subcats] => 0
-    [categoryinfo.hidden] => 
+    [size] => 1
+    [pages] => 0
+    [files] => 1
+    [subcats] => 0
+    [hidden] => 
 )

@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '0.10.0';
+    const VERSION = '0.10.1';
 
     /**
      * @param array $arrays
@@ -36,6 +36,9 @@ class Tools
         if (!is_array($array)) {
             return $array;
         }
+        if (self::isDiscardable($prefix)) {
+            $prefix = null;
+        }
         $result = [];
         foreach ($array as $key => $val) {
             if (is_array($val)) {
@@ -45,6 +48,24 @@ class Tools
             $result[$prefix.$key] = $val;
         }
         return $result;
+    }
+
+    /**
+     * @param string $key
+     * @return bool
+     */
+    public static function isDiscardable($key)
+    {
+        $discards = [
+            'categoryinfo.',
+            'imageinfo.0.',
+            'extmetadata.',
+            'pageprops.',
+        ];
+        if (in_array($key, $discards)) {
+            return true;
+        }
+        return false;
     }
 
     /**
