@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '0.10.3';
+    const VERSION = '0.10.4';
 
     /**
      * @param array $arrays
@@ -37,36 +37,37 @@ class Tools
      */
     public static function flattenArray(array $array, $prefix = '')
     {
-        if (self::isDiscardable($prefix)) {
-            $prefix = null;
-        }
+        $prefix = self::keySanitize($prefix);
         $result = [];
         foreach ($array as $key => $val) {
             if (is_array($val)) {
                 $result += self::flattenArray($val, $prefix.$key.'.');
                 continue;
             }
-            $result[$prefix.$key] = $val;
+            $key = self::keySanitize($key);
+			$newKey = rtrim($prefix.$key, '.');
+            $result[$newKey] = $val;
         }
         return $result;
     }
 
     /**
      * @param string $key
-     * @return bool
+     * @return null|string
      */
-    public static function isDiscardable($key)
+    public static function keySanitize($key)
     {
         $discards = [
             'categoryinfo.',
             'imageinfo.0.',
             'extmetadata.',
             'pageprops.',
+            'value',
         ];
         if (in_array($key, $discards)) {
-            return true;
+            return null;
         }
-        return false;
+        return $key;
     }
 
     /**
