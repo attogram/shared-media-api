@@ -12,6 +12,42 @@ Array
 )
 Array
 (
+    [pageid] => 18215227
+    [ns] => 14
+    [title] => Category:Albert Einstein College of Medicine
+    [index] => 3
+    [categoryinfo.size] => 3
+    [categoryinfo.pages] => 0
+    [categoryinfo.files] => 1
+    [categoryinfo.subcats] => 2
+    [categoryinfo.hidden] => 
+)
+Array
+(
+    [pageid] => 22170186
+    [ns] => 14
+    [title] => Category:Einstein birthplace
+    [index] => 4
+    [categoryinfo.size] => 5
+    [categoryinfo.pages] => 0
+    [categoryinfo.files] => 5
+    [categoryinfo.subcats] => 0
+    [categoryinfo.hidden] => 
+)
+Array
+(
+    [pageid] => 29267631
+    [ns] => 14
+    [title] => Category:Einsteinhaus Caputh
+    [index] => 5
+    [categoryinfo.size] => 25
+    [categoryinfo.pages] => 0
+    [categoryinfo.files] => 25
+    [categoryinfo.subcats] => 0
+    [categoryinfo.hidden] => 
+)
+Array
+(
     [pageid] => 41480939
     [ns] => 14
     [title] => Category:Albert-Einstein-Schule Laatzen
