@@ -1,0 +1,99 @@
+Array
+(
+    [0] => Array
+        (
+            [pageid] => 970886
+            [ns] => 14
+            [title] => Category:Albert Einstein
+            [index] => 1
+            [categoryinfo.size] => 198
+            [categoryinfo.pages] => 3
+            [categoryinfo.files] => 177
+            [categoryinfo.subcats] => 18
+            [categoryinfo.hidden] => 
+        )
+
+)
+Array
+(
+    [pageid] => 42335632
+    [ns] => 6
+    [title] => File:Einstein Lehrerdiplom Bauzeitung.jpg
+    [imagerepository] => local
+    [imageinfo.0.timestamp] => 2015-08-14T08:18:42Z
+    [imageinfo.0.user] => Glunggenbauer
+    [imageinfo.0.userid] => 5122073
+    [imageinfo.0.size] => 497393
+    [imageinfo.0.width] => 1078
+    [imageinfo.0.height] => 749
+    [imageinfo.0.thumburl] => https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Einstein_Lehrerdiplom_Bauzeitung.jpg/100px-Einstein_Lehrerdiplom_Bauzeitung.jpg
+    [imageinfo.0.thumbwidth] => 100
+    [imageinfo.0.thumbheight] => 69
+    [imageinfo.0.thumbmime] => image/jpeg
+    [imageinfo.0.url] => https://upload.wikimedia.org/wikipedia/commons/7/7a/Einstein_Lehrerdiplom_Bauzeitung.jpg
+    [imageinfo.0.descriptionurl] => https://commons.wikimedia.org/wiki/File:Einstein_Lehrerdiplom_Bauzeitung.jpg
+    [imageinfo.0.descriptionshorturl] => https://commons.wikimedia.org/w/index.php?curid=42335632
+    [imageinfo.0.sha1] => 7550c9d6ba4f81a5f7494c1548786691cb6670d4
+    [imageinfo.0.extmetadata.ImageDescription.value] => Lehrerdiplome von Albert Einstein und Sinai Tschulok in der Schweizerischen Bauzeitung vom 4. August 1900
+    [imageinfo.0.extmetadata.ImageDescription.source] => commons-desc-page
+    [imageinfo.0.extmetadata.DateTimeOriginal.value] => 1900-08-04
+    [imageinfo.0.extmetadata.DateTimeOriginal.source] => commons-desc-page
+    [imageinfo.0.extmetadata.Artist.value] => <span lang="en">Unknown</span><a href="https://www.wikidata.org/wiki/Q4233718" title="wikidata:Q4233718"><img alt="wikidata:Q4233718" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/20px-Wikidata-logo.svg.png" width="20" height="11" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/30px-Wikidata-logo.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/40px-Wikidata-logo.svg.png 2x" data-file-width="1050" data-file-height="590"></a>
+    [imageinfo.0.extmetadata.Artist.source] => commons-desc-page
+    [imageinfo.0.extmetadata.LicenseShortName.value] => Public domain
+    [imageinfo.0.extmetadata.LicenseShortName.source] => commons-desc-page
+    [imageinfo.0.extmetadata.LicenseShortName.hidden] => 
+    [imageinfo.0.extmetadata.UsageTerms.value] => Public domain
+    [imageinfo.0.extmetadata.UsageTerms.source] => commons-desc-page
+    [imageinfo.0.extmetadata.UsageTerms.hidden] => 
+    [imageinfo.0.extmetadata.AttributionRequired.value] => false
+    [imageinfo.0.extmetadata.AttributionRequired.source] => commons-desc-page
+    [imageinfo.0.extmetadata.AttributionRequired.hidden] => 
+    [imageinfo.0.extmetadata.Restrictions.value] => 
+    [imageinfo.0.extmetadata.Restrictions.source] => commons-desc-page
+    [imageinfo.0.extmetadata.Restrictions.hidden] => 
+    [imageinfo.0.mime] => image/jpeg
+)
+Array
+(
+    [pageid] => 45542076
+    [ns] => 6
+    [title] => File:Einstein Dissertation eth-30378-01.pdf
+    [imagerepository] => local
+    [imageinfo.0.timestamp] => 2015-12-10T04:59:46Z
+    [imageinfo.0.user] => Drdoht
+    [imageinfo.0.userid] => 734439
+    [imageinfo.0.size] => 593056
+    [imageinfo.0.width] => 827
+    [imageinfo.0.height] => 1320
+    [imageinfo.0.pagecount] => 20
+    [imageinfo.0.thumburl] => https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Einstein_Dissertation_eth-30378-01.pdf/page1-100px-Einstein_Dissertation_eth-30378-01.pdf.jpg
+    [imageinfo.0.thumbwidth] => 100
+    [imageinfo.0.thumbheight] => 160
+    [imageinfo.0.thumbmime] => image/jpeg
+    [imageinfo.0.url] => https://upload.wikimedia.org/wikipedia/commons/f/fc/Einstein_Dissertation_eth-30378-01.pdf
+    [imageinfo.0.descriptionurl] => https://commons.wikimedia.org/wiki/File:Einstein_Dissertation_eth-30378-01.pdf
+    [imageinfo.0.descriptionshorturl] => https://commons.wikimedia.org/w/index.php?curid=45542076
+    [imageinfo.0.sha1] => 176d25c8850c0b93bd598b37f4e06a0f97836f5b
+    [imageinfo.0.extmetadata.ImageDescription.value] => <p>Albert Einstein, Dissertation Zürich, 30. April 1905, abgedruckt in <a rel="nofollow" class="external text" href="http://zs.thulb.uni-jena.de/receive/jportal_jparticle_00125834">Annalen der Physik <b>324</b>, 289-305 (1906).</a>
+</p>
+    [imageinfo.0.extmetadata.ImageDescription.source] => commons-desc-page
+    [imageinfo.0.extmetadata.DateTimeOriginal.value] => 1905-04-30
+    [imageinfo.0.extmetadata.DateTimeOriginal.source] => commons-desc-page
+    [imageinfo.0.extmetadata.Artist.value] => <bdi><a href="https://en.wikipedia.org/wiki/en:Albert_Einstein" class="extiw" title="w:en:Albert Einstein">Albert Einstein</a>
+</bdi>
+    [imageinfo.0.extmetadata.Artist.source] => commons-desc-page
+    [imageinfo.0.extmetadata.LicenseShortName.value] => Public domain
+    [imageinfo.0.extmetadata.LicenseShortName.source] => commons-desc-page
+    [imageinfo.0.extmetadata.LicenseShortName.hidden] => 
+    [imageinfo.0.extmetadata.UsageTerms.value] => Public domain
+    [imageinfo.0.extmetadata.UsageTerms.source] => commons-desc-page
+    [imageinfo.0.extmetadata.UsageTerms.hidden] => 
+    [imageinfo.0.extmetadata.AttributionRequired.value] => false
+    [imageinfo.0.extmetadata.AttributionRequired.source] => commons-desc-page
+    [imageinfo.0.extmetadata.AttributionRequired.hidden] => 
+    [imageinfo.0.extmetadata.Restrictions.value] => 
+    [imageinfo.0.extmetadata.Restrictions.source] => commons-desc-page
+    [imageinfo.0.extmetadata.Restrictions.hidden] => 
+    [imageinfo.0.mime] => application/pdf
+)

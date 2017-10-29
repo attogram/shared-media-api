@@ -6,9 +6,9 @@ information into simple PHP arrays.  Fine-tuned for WikiMedia Commmons.
 
 Example: search categories
 
-.. literalinclude:: examples/search.categories.php
+.. literalinclude:: examples/get.media.in.category.php
    :language: php
-.. literalinclude:: examples/search.categories.txt
+.. literalinclude:: examples/get.media.in.category.txt
    :language: none
 
 .. image:: https://travis-ci.org/attogram/shared-media-api.svg?branch=master
