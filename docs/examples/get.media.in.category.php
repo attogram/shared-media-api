@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Media;
 $category = new Category();
 $category->setLimit(1);
 $myCategory = $category->search('Albert Einstein');
-if (!count($myCategory)) {
+if (empty($myCategory)) {
     print 'Category Not Found';
     return;
 }
@@ -20,7 +20,7 @@ $media = new Media();
 $media->setLimit(2);
 $media->pageid = $myCategory[0]['pageid'];
 $myMedias = $media->getMediaInCategory();
-if (!count($myMedias)) {
+if (empty($myMedias)) {
     print 'Media Not Found';
     return;
 }
