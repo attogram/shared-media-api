@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '0.10.1';
+    const VERSION = '0.10.2';
 
     /**
      * @param array $arrays
@@ -19,7 +19,11 @@ class Tools
         }
         $flat = [];
         foreach ($arrays as $key => $val) {
-            $flat[$key] = self::flattenArray($val);
+            if (is_array($val)) {
+                $flat[$key] = self::flattenArray($val);
+                continue;
+            }
+            $flat[$key] = $val;
         }
         return $flat;
     }
@@ -31,11 +35,8 @@ class Tools
      * @param string $prefix Optional
      * @return array
      */
-    public static function flattenArray($array, $prefix = '')
+    public static function flattenArray(Array $array, $prefix = '')
     {
-        if (!is_array($array)) {
-            return $array;
-        }
         if (self::isDiscardable($prefix)) {
             $prefix = null;
         }
