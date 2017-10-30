@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Base
 {
-    const VERSION = '0.10.2';
+    const VERSION = '0.10.3';
 
     /**
      * search for categories
@@ -35,7 +35,10 @@ class Category extends Base
      */
     public function info()
     {
-        return $this->getCategoryinfoResponse(/*setIdentifier=*/true);
+        if (!$this->setIdentifier('', 's')) {
+            return [];
+        }
+        return $this->getCategoryinfoResponse();
     }
 
     /**
@@ -46,8 +49,11 @@ class Category extends Base
      */
     public function getCategoryfromPage()
     {
+        if (!$this->setIdentifier('', 's')) {
+            return [];
+        }
         $this->setGeneratorCategories();
-        return $this->getCategoryinfoResponse(/*setIdentifier=*/true);
+        return $this->getCategoryinfoResponse();
     }
 
     /**

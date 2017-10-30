@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Base extends Transport
 {
-    const VERSION = '0.10.1';
+    const VERSION = '0.10.2';
 
     const DEFAULT_LIMIT = 50;
 
@@ -146,14 +146,10 @@ class Base extends Transport
     /**
      * Get API response from a files-info request
      *
-     * @param bool $setIdentifier
      * @return array
      */
-    public function getImageinfoResponse($setIdentifier = false)
+    public function getImageinfoResponse()
     {
-        if ($setIdentifier && !$this->setIdentifier('', 's')) {
-            return [];
-        }
         $this->setImageinfoParams();
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));
@@ -181,14 +177,10 @@ class Base extends Transport
     /**
      * @see https://www.mediawiki.org/wiki/API:Categoryinfo
      *
-     * @param bool $setIdentifier
      * @return array
      */
-    public function getCategoryinfoResponse($setIdentifier = false)
+    public function getCategoryinfoResponse()
     {
-        if ($setIdentifier && !$this->setIdentifier('', 's')) {
-            return [];
-        }
         $this->setParam('prop', 'categoryinfo');
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));
