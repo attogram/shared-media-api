@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
  */
 class BaseTest extends TestCase
 {
-    const VERSION = '0.10.0';
+    const VERSION = '0.10.1';
 
     /**
      */
@@ -24,32 +24,5 @@ class BaseTest extends TestCase
         );
         $base = new \Attogram\SharedMedia\Api\Base();
         $this->assertTrue(is_object($base), 'instantiation of Base failed');
-    }
-
-    /**
-     */
-    public function testCallPreGets()
-    {
-        $call = new \Attogram\SharedMedia\Api\Base();
-        $this->assertFalse(
-            $call->getWarnings(),
-            'getWarnings without valid call, not returning false'
-        );
-        $this->assertFalse(
-            $call->isBatchcomplete(),
-            'isBatchcomplete without valid call, not returning false'
-        );
-        $this->assertFalse(
-            $call->getContinue(),
-            'getContinue without valid call, not returning false'
-        );
-        $this->assertFalse(
-            $call->getSroffset(),
-            'getSroffset without valid call, not returning false'
-        );
-        $this->assertFalse(
-            $call->getTotalhits(),
-            'getTotalhits without valid call, not returning false'
-        );
     }
 }
