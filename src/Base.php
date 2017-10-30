@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Base extends Transport
 {
-    const VERSION = '0.10.0';
+    const VERSION = '0.10.1';
 
     const DEFAULT_LIMIT = 50;
 
@@ -146,10 +146,14 @@ class Base extends Transport
     /**
      * Get API response from a files-info request
      *
+     * @param bool $setIdentifier
      * @return array
      */
-    public function getImageinfoResponse()
+    public function getImageinfoResponse($setIdentifier = false)
     {
+        if ($setIdentifier && !$this->setIdentifier('', 's')) {
+            return [];
+        }
         $this->setImageinfoParams();
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));
@@ -177,56 +181,16 @@ class Base extends Transport
     /**
      * @see https://www.mediawiki.org/wiki/API:Categoryinfo
      *
+     * @param bool $setIdentifier
      * @return array
      */
-    public function getCategoryinfoResponse()
+    public function getCategoryinfoResponse($setIdentifier = false)
     {
+        if ($setIdentifier && !$this->setIdentifier('', 's')) {
+            return [];
+        }
         $this->setParam('prop', 'categoryinfo');
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));
-    }
-
-    /**
-     * @return bool
-     */
-    public function isBatchcomplete()
-    {
-        return isset($this->response['batchcomplete']) ? true : false;
-    }
-
-    /**
-     * @return string|false
-     */
-    public function getTotalhits()
-    {
-        return isset($this->response['query']['searchinfo']['totalhits'])
-            ? $this->response['query']['searchinfo']['totalhits'] : false;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getWarnings()
-    {
-        return isset($this->response['warnings'])
-            ? $this->response['warnings'] : false;
-    }
-
-    /**
-     * @return string|false
-     */
-    public function getContinue()
-    {
-        return isset($this->response['continue']['continue'])
-            ? $this->response['continue']['continue'] : false;
-    }
-
-    /**
-     * @return int|false
-     */
-    public function getSroffset()
-    {
-        return isset($this->response['continue']['sroffset'])
-            ? $this->response['continue']['sroffset'] : false;
     }
 }

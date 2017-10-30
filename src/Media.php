@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Media extends Base
 {
-    const VERSION = '0.10.2';
+    const VERSION = '0.10.3';
 
     /**
      * search for Media files
@@ -35,10 +35,7 @@ class Media extends Base
      */
     public function info()
     {
-        if (!$this->setIdentifier('', 's')) {
-            return [];
-        }
-        return $this->getImageinfoResponse();
+        return $this->getImageinfoResponse(/*setIdentifier=*/true);
     }
 
     /**
@@ -49,11 +46,8 @@ class Media extends Base
      */
     public function getMediaOnPage()
     {
-        if (!$this->setIdentifier('', 's')) {
-            return [];
-        }
         $this->setGeneratorImages();
-        return $this->getImageinfoResponse();
+        return $this->getImageinfoResponse(/*setIdentifier=*/true);
     }
 
     /**
