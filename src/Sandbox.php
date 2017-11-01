@@ -13,22 +13,19 @@ use Attogram\SharedMedia\Api\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.10.0';
+    const VERSION = '0.10.1';
 
     const DEFAULT_LIMIT = 10;
 
     public $methods = [ // Class, Method, Has Arg, Use Identifiers
-
         ['Category', 'search',              'query',  false],
         ['Category', 'info',                false,    true],
         ['Category', 'subcats',             false,    true],
         ['Category', 'getCategoryfromPage', false,    true],
-
         ['Media',    'search',              'query',  false],
         ['Media',    'info',                false,    true],
         ['Media',    'getMediaInCategory',  false,    true],
         ['Media',    'getMediaOnPage',      false,    true],
-
         ['Page',     'search',              'query',  false],
     ];
     public $self;
@@ -42,6 +39,20 @@ class Sandbox
     public $isSubmitted;
     public $pageids;
     public $titles;
+
+    public $sandboxTitle = 'shared-media-api';
+    public $sandboxVersions = [
+        'Attogram\SharedMedia\Api\Transport',
+        'Attogram\SharedMedia\Api\Base',
+        'Attogram\SharedMedia\Api\Category',
+        'Attogram\SharedMedia\Api\Media',
+        'Attogram\SharedMedia\Api\Page',
+        'Attogram\SharedMedia\Api\Tools',
+        'Attogram\SharedMedia\Api\Sources',
+        'Attogram\SharedMedia\Api\Logger',
+        'Attogram\SharedMedia\Api\Sandbox',
+    ];
+    public $sandboxVersionsIndent = 34;
 
     public function play()
     {
@@ -88,26 +99,23 @@ class Sandbox
         .'<meta name="viewport" content="initial-scale=1" />'
         .'<meta http-equiv="X-UA-Compatible" content="IE=edge" />'
         .'<link rel="stylesheet" type="text/css" href="sandbox.css" />'
-        .'<title>shared-media-api / sandbox</title>'
-        .'</head><body><h1><a href="./">shared-media-api</a></h1><h2><a href="'.$this->self.'">sandbox</a></h2>';
+        .'<title>'.$this->sandboxTitle.' / sandbox</title>'
+        .'</head><body><h1><a href="./">'.$this->sandboxTitle
+        .'</a></h1><h2><a href="'.$this->self.'">sandbox</a></h2>';
     }
 
     public function getFooter()
     {
-        return '<footer><hr />'
-        .'<a href="./">shared-media-api</a> : <a href="'.$this->self.'">sandbox</a>'
-        .'<pre>Attogram\SharedMedia\Api'
-        .'<br />Transport v'.Transport::VERSION
-        .'<br />Base      v'.Base::VERSION
-        .'<br />Category  v'.Category::VERSION
-        .'<br />Media     v'.Media::VERSION
-        .'<br />Page      v'.Page::VERSION
-        .'<br />Tools     v'.Tools::VERSION
-        .'<br />Sources   v'.Sources::VERSION
-        .'<br />Logger    v'.Logger::VERSION
-        .'<br />Sandbox   v'.self::VERSION
-        .'</pre>'
-        .'</footer></body></html>';
+        $foot = '<footer><hr />'
+        .'<a href="./">'.$this->sandboxTitle
+        .'</a> : <a href="'.$this->self.'">sandbox</a><pre>';
+        foreach ($this->sandboxVersions as $version) {
+            $foot .= str_pad($version, $this->sandboxVersionsIndent, ' ')
+                .' v'.$version::VERSION
+                .'<br />';
+        }
+        $foot .= '</pre></footer></body></html>';
+        return $foot;
     }
 
     public function menu()
