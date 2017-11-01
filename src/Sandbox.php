@@ -13,7 +13,7 @@ use Attogram\SharedMedia\Api\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.10.1';
+    const VERSION = '0.10.2';
 
     const DEFAULT_LIMIT = 10;
 
@@ -41,7 +41,7 @@ class Sandbox
     public $titles;
 
     public $sandboxTitle = 'shared-media-api';
-    public $sandboxVersions = [
+    public $versions = [
         'Attogram\SharedMedia\Api\Transport',
         'Attogram\SharedMedia\Api\Base',
         'Attogram\SharedMedia\Api\Category',
@@ -52,7 +52,7 @@ class Sandbox
         'Attogram\SharedMedia\Api\Logger',
         'Attogram\SharedMedia\Api\Sandbox',
     ];
-    public $sandboxVersionsIndent = 34;
+    public $versionsPad = 34;
 
     public function play()
     {
@@ -109,8 +109,8 @@ class Sandbox
         $foot = '<footer><hr />'
         .'<a href="./">'.$this->sandboxTitle
         .'</a> : <a href="'.$this->self.'">sandbox</a><pre>';
-        foreach ($this->sandboxVersions as $version) {
-            $foot .= str_pad($version, $this->sandboxVersionsIndent, ' ')
+        foreach ($this->versions as $version) {
+            $foot .= str_pad($version, $this->versionsPad, ' ')
                 .' v'.$version::VERSION
                 .'<br />';
         }
