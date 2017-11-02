@@ -13,7 +13,7 @@ use Attogram\SharedMedia\Api\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.10.2';
+    const VERSION = '0.10.3';
 
     const DEFAULT_LIMIT = 10;
 
@@ -233,8 +233,8 @@ class Sandbox
         if (!method_exists($class, $this->method)) {
             return 'ERROR: Class::method not found';
         }
-        $class->pageid = $this->pageids;
-        $class->title = $this->titles;
+        $class->setPageid($this->pageids);
+        $class->setTitle($this->titles);
         $class->setEndpoint($this->endpoint);
         $class->setLimit($this->limit);
         $results = $class->{$this->method}($this->arg);

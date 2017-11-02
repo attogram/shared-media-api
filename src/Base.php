@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Base extends Transport
 {
-    const VERSION = '0.10.2';
+    const VERSION = '0.10.3';
 
     const DEFAULT_LIMIT = 50;
 
@@ -17,12 +17,27 @@ class Base extends Transport
     const MEDIA_NAMESPACE = 6;
     const PAGE_NAMESPACE = 0;
 
-    public $pageid;
-    public $title;
-
     public $thumbnailWidth = 100;
 
+    private $pageid;
+    private $title;
     private $limit;
+
+    /**
+     * @param int|null $pageid
+     */
+    public function setPageid($pageid = null)
+    {
+        $this->pageid = $pageid;
+    }
+
+    /**
+     * @param string|null $title
+     */
+    public function setTitle($title = null)
+    {
+        $this->title = $title;
+    }
 
     /**
      * @param string|null $prefix
