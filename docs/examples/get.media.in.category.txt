@@ -34,24 +34,24 @@ Array
     [descriptionurl] => https://commons.wikimedia.org/wiki/File:Einstein_Lehrerdiplom_Bauzeitung.jpg
     [descriptionshorturl] => https://commons.wikimedia.org/w/index.php?curid=42335632
     [sha1] => 7550c9d6ba4f81a5f7494c1548786691cb6670d4
-    [ImageDescription] => Lehrerdiplome von Albert Einstein und Sinai Tschulok in der Schweizerischen Bauzeitung vom 4. August 1900
-    [ImageDescription.source] => commons-desc-page
-    [DateTimeOriginal] => 1900-08-04
-    [DateTimeOriginal.source] => commons-desc-page
-    [Artist] => <span lang="en">Unknown</span><a href="https://www.wikidata.org/wiki/Q4233718" title="wikidata:Q4233718"><img alt="wikidata:Q4233718" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/20px-Wikidata-logo.svg.png" width="20" height="11" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/30px-Wikidata-logo.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/40px-Wikidata-logo.svg.png 2x" data-file-width="1050" data-file-height="590"></a>
-    [Artist.source] => commons-desc-page
-    [LicenseShortName] => Public domain
-    [LicenseShortName.source] => commons-desc-page
-    [LicenseShortName.hidden] => 
-    [UsageTerms] => Public domain
-    [UsageTerms.source] => commons-desc-page
-    [UsageTerms.hidden] => 
-    [AttributionRequired] => false
-    [AttributionRequired.source] => commons-desc-page
-    [AttributionRequired.hidden] => 
-    [Restrictions] => 
-    [Restrictions.source] => commons-desc-page
-    [Restrictions.hidden] => 
+    [imagedescription] => Lehrerdiplome von Albert Einstein und Sinai Tschulok in der Schweizerischen Bauzeitung vom 4. August 1900
+    [imagedescription.source] => commons-desc-page
+    [datetimeoriginal] => 1900-08-04
+    [datetimeoriginal.source] => commons-desc-page
+    [artist] => <span lang="en">Unknown</span><a href="https://www.wikidata.org/wiki/Q4233718" title="wikidata:Q4233718"><img alt="wikidata:Q4233718" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/20px-Wikidata-logo.svg.png" width="20" height="11" srcset="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/30px-Wikidata-logo.svg.png 1.5x, https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/40px-Wikidata-logo.svg.png 2x" data-file-width="1050" data-file-height="590"></a>
+    [artist.source] => commons-desc-page
+    [licenseshortname] => Public domain
+    [licenseshortname.source] => commons-desc-page
+    [licenseshortname.hidden] => 
+    [usageterms] => Public domain
+    [usageterms.source] => commons-desc-page
+    [usageterms.hidden] => 
+    [attributionrequired] => false
+    [attributionrequired.source] => commons-desc-page
+    [attributionrequired.hidden] => 
+    [restrictions] => 
+    [restrictions.source] => commons-desc-page
+    [restrictions.hidden] => 
     [mime] => image/jpeg
 )
 Array
@@ -75,25 +75,25 @@ Array
     [descriptionurl] => https://commons.wikimedia.org/wiki/File:Einstein_Dissertation_eth-30378-01.pdf
     [descriptionshorturl] => https://commons.wikimedia.org/w/index.php?curid=45542076
     [sha1] => 176d25c8850c0b93bd598b37f4e06a0f97836f5b
-    [ImageDescription] => <p>Albert Einstein, Dissertation Zürich, 30. April 1905, abgedruckt in <a rel="nofollow" class="external text" href="http://zs.thulb.uni-jena.de/receive/jportal_jparticle_00125834">Annalen der Physik <b>324</b>, 289-305 (1906).</a>
+    [imagedescription] => <p>Albert Einstein, Dissertation Zürich, 30. April 1905, abgedruckt in <a rel="nofollow" class="external text" href="http://zs.thulb.uni-jena.de/receive/jportal_jparticle_00125834">Annalen der Physik <b>324</b>, 289-305 (1906).</a>
 </p>
-    [ImageDescription.source] => commons-desc-page
-    [DateTimeOriginal] => 1905-04-30
-    [DateTimeOriginal.source] => commons-desc-page
-    [Artist] => <bdi><a href="https://en.wikipedia.org/wiki/en:Albert_Einstein" class="extiw" title="w:en:Albert Einstein">Albert Einstein</a>
+    [imagedescription.source] => commons-desc-page
+    [datetimeoriginal] => 1905-04-30
+    [datetimeoriginal.source] => commons-desc-page
+    [artist] => <bdi><a href="https://en.wikipedia.org/wiki/en:Albert_Einstein" class="extiw" title="w:en:Albert Einstein">Albert Einstein</a>
 </bdi>
-    [Artist.source] => commons-desc-page
-    [LicenseShortName] => Public domain
-    [LicenseShortName.source] => commons-desc-page
-    [LicenseShortName.hidden] => 
-    [UsageTerms] => Public domain
-    [UsageTerms.source] => commons-desc-page
-    [UsageTerms.hidden] => 
-    [AttributionRequired] => false
-    [AttributionRequired.source] => commons-desc-page
-    [AttributionRequired.hidden] => 
-    [Restrictions] => 
-    [Restrictions.source] => commons-desc-page
-    [Restrictions.hidden] => 
+    [artist.source] => commons-desc-page
+    [licenseshortname] => Public domain
+    [licenseshortname.source] => commons-desc-page
+    [licenseshortname.hidden] => 
+    [usageterms] => Public domain
+    [usageterms.source] => commons-desc-page
+    [usageterms.hidden] => 
+    [attributionrequired] => false
+    [attributionrequired.source] => commons-desc-page
+    [attributionrequired.hidden] => 
+    [restrictions] => 
+    [restrictions.source] => commons-desc-page
+    [restrictions.hidden] => 
     [mime] => application/pdf
 )

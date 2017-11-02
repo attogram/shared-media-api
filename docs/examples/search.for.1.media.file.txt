@@ -21,24 +21,24 @@ Array
             [descriptionurl] => https://commons.wikimedia.org/wiki/File:Albert_Einstein_Head.jpg
             [descriptionshorturl] => https://commons.wikimedia.org/w/index.php?curid=925243
             [sha1] => 51f46ff9897d9125b0d0a513fb5099d2a9462282
-            [ImageDescription] => <a href="https://en.wikipedia.org/wiki/Albert_Einstein" class="extiw" title="en:Albert Einstein">Albert Einstein</a>
-            [ImageDescription.source] => commons-desc-page
-            [DateTimeOriginal] => Copyrighted 1947, copyright not renewed. Einstein's estate may still claim copyright on this image, but any such claim would be considered illegitimate by the Library of Congress. No known restrictions.<a rel="nofollow" class="external autonumber" href="http://www.loc.gov/pictures/item/2004671908/">[1]</a>
-            [DateTimeOriginal.source] => commons-desc-page
-            [Artist] => Photograph by <a href="//commons.wikimedia.org/w/index.php?title=Orren_Jack_Turner&amp;action=edit&amp;redlink=1" class="new" title="Orren Jack Turner (page does not exist)">Orren Jack Turner</a>, Princeton, N.J. <br>Modified with Photoshop by <a href="https://en.wikipedia.org/wiki/User:PM_Poon" class="extiw" title="en:User:PM Poon">PM_Poon</a> and later by <a href="//commons.wikimedia.org/wiki/User:Dantadd" title="User:Dantadd">Dantadd</a>.
-            [Artist.source] => commons-desc-page
-            [LicenseShortName] => Public domain
-            [LicenseShortName.source] => commons-desc-page
-            [LicenseShortName.hidden] => 
-            [UsageTerms] => Public domain
-            [UsageTerms.source] => commons-desc-page
-            [UsageTerms.hidden] => 
-            [AttributionRequired] => false
-            [AttributionRequired.source] => commons-desc-page
-            [AttributionRequired.hidden] => 
-            [Restrictions] => 
-            [Restrictions.source] => commons-desc-page
-            [Restrictions.hidden] => 
+            [imagedescription] => <a href="https://en.wikipedia.org/wiki/Albert_Einstein" class="extiw" title="en:Albert Einstein">Albert Einstein</a>
+            [imagedescription.source] => commons-desc-page
+            [datetimeoriginal] => Copyrighted 1947, copyright not renewed. Einstein's estate may still claim copyright on this image, but any such claim would be considered illegitimate by the Library of Congress. No known restrictions.<a rel="nofollow" class="external autonumber" href="http://www.loc.gov/pictures/item/2004671908/">[1]</a>
+            [datetimeoriginal.source] => commons-desc-page
+            [artist] => Photograph by <a href="//commons.wikimedia.org/w/index.php?title=Orren_Jack_Turner&amp;action=edit&amp;redlink=1" class="new" title="Orren Jack Turner (page does not exist)">Orren Jack Turner</a>, Princeton, N.J. <br>Modified with Photoshop by <a href="https://en.wikipedia.org/wiki/User:PM_Poon" class="extiw" title="en:User:PM Poon">PM_Poon</a> and later by <a href="//commons.wikimedia.org/wiki/User:Dantadd" title="User:Dantadd">Dantadd</a>.
+            [artist.source] => commons-desc-page
+            [licenseshortname] => Public domain
+            [licenseshortname.source] => commons-desc-page
+            [licenseshortname.hidden] => 
+            [usageterms] => Public domain
+            [usageterms.source] => commons-desc-page
+            [usageterms.hidden] => 
+            [attributionrequired] => false
+            [attributionrequired.source] => commons-desc-page
+            [attributionrequired.hidden] => 
+            [restrictions] => 
+            [restrictions.source] => commons-desc-page
+            [restrictions.hidden] => 
             [mime] => image/jpeg
         )
 
