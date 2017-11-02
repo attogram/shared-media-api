@@ -13,7 +13,7 @@ use Attogram\SharedMedia\Api\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.10.3';
+    const VERSION = '0.10.4';
 
     const DEFAULT_LIMIT = 10;
 
@@ -230,7 +230,7 @@ class Sandbox
             return 'ERROR: Missing Arg: '.$action[2];
         }
         $class = $this->getClass();
-        if (!method_exists($class, $this->method)) {
+        if (!is_callable([$class, $this->method])) {
             return 'ERROR: Class::method not found';
         }
         $class->setPageid($this->pageids);
