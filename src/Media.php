@@ -75,7 +75,7 @@ class Media extends Base
      */
     public function format(array $response)
     {
-        $cr = '<br />';
+        $car = '<br />';
         $format = '';
         foreach ($response as $media) {
             $format .= '<div class="media">'
@@ -84,8 +84,8 @@ class Media extends Base
             . ' width="' . Tools::getFromArray($media, 'thumbwidth') . '"'
             . ' height="' . Tools::getFromArray($media, 'thumbheight') . '"'
             . ' title="'.htmlentities(print_r($media,true)).'">'
-            . $cr . '<span class="pageid">' . Tools::getFromArray($media, 'pageid') . '</span>'
-            . $cr . '<span class="title">' . Tools::getFromArray($media, 'title') . '</span>'
+            . $car . '<span class="pageid">' . Tools::getFromArray($media, 'pageid') . '</span>'
+            . $car . '<span class="title">' . Tools::getFromArray($media, 'title') . '</span>'
             . '</div>';
         }
         return $format;

@@ -38,13 +38,13 @@ class Page extends Base
      */
     public function format(array $response)
     {
-        $cr = '<br />';
+        $car = '<br />';
         $format = '';
         foreach ($response as $page) {
             $format .= '<div class="page">'
             .'<span class="title">' . Tools::getFromArray($page, 'title') . '</span>'
-            .$cr.'<span class="pageid">' . Tools::getFromArray($page, 'pageid') . '</span>'
-            .$cr.Tools::getFromArray($page, 'page_image_free')
+            .$car.'<span class="pageid">' . Tools::getFromArray($page, 'pageid') . '</span>'
+            .$car.Tools::getFromArray($page, 'page_image_free')
             .'</div>';
         }
         return $format;

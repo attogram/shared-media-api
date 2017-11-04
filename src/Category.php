@@ -67,27 +67,27 @@ class Category extends Base
         return $this->getCategorymemberResponse('subcat');
     }
 
-	/**
-	 * format a category response as a simple string
-	 *
-	 * @param array $response
-	 * @return string
-	 */
-	public function format(array $response)
-	{
-		$cr = '<br />';
-		$format = '';
-		foreach ($response as $category) {
-			$format .= '<div class="category">'
-			. '<span class="title">' . Tools::getFromArray($category, 'title') . '</span>'
-			.$cr.'pageid: ' . '<span class="pageid">' . Tools::getFromArray($category, 'pageid') . '</span>'
-			.$cr.'files: ' . Tools::getFromArray($category, 'files')
-			.$cr.'pages: ' . Tools::getFromArray($category, 'pages')
-			.$cr.'subcats: ' . Tools::getFromArray($category, 'subcats')
-			.$cr.'size: ' . Tools::getFromArray($category, 'size')
-			.$cr.'hidden: ' . (isset($category['hidden']) && $category['hidden'] ? 'true' : 'false')
-			.'</div>';
-		}
-		return $format;
-	}
+    /**
+     * format a category response as a simple string
+     *
+     * @param array $response
+     * @return string
+     */
+    public function format(array $response)
+    {
+        $car = '<br />';
+        $format = '';
+        foreach ($response as $category) {
+            $format .= '<div class="category">'
+            . '<span class="title">' . Tools::getFromArray($category, 'title') . '</span>'
+            .$car.'pageid: ' . '<span class="pageid">' . Tools::getFromArray($category, 'pageid') . '</span>'
+            .$car.'files: ' . Tools::getFromArray($category, 'files')
+            .$car.'pages: ' . Tools::getFromArray($category, 'pages')
+            .$car.'subcats: ' . Tools::getFromArray($category, 'subcats')
+            .$car.'size: ' . Tools::getFromArray($category, 'size')
+            .$car.'hidden: ' . (isset($category['hidden']) && $category['hidden'] ? 'true' : 'false')
+            .'</div>';
+        }
+        return $format;
+    }
 }
