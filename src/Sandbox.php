@@ -13,7 +13,7 @@ use Attogram\SharedMedia\Api\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.10.6';
+    const VERSION = '0.10.7';
 
     const DEFAULT_LIMIT = 10;
 
@@ -35,6 +35,7 @@ class Sandbox
     public $endpoint;
     public $limit;
     public $logLevel;
+    public $format;
     public $logger;
     public $isSubmitted;
     public $pageids;
@@ -254,12 +255,12 @@ class Sandbox
         $results = $class->{$this->method}($this->arg); // get results as an array or arrays
         switch ($this->format) {
             case 'raw':
-                return '<pre>'.var_dump($results, true).'</pre>'; // format for result: as PHP Array
+                $response = '<pre>'.var_dump($results, true).'</pre>'; // format for result: as PHP Array
             case 'html':
             default:
-                return $class->format($results); // format for result: as HTML
+                $response = $class->format($results); // format for result: as HTML
         }
-
+		return $response;
     }
 
     public function getClass()

@@ -28,7 +28,7 @@ class Base extends Transport
      */
     public function setPageid($pageid = null)
     {
-		$this->logger->debug('Base:setPageid', [$pageid]);
+        $this->logger->debug('Base:setPageid', [$pageid]);
         $this->pageid = $pageid;
     }
 
@@ -37,7 +37,7 @@ class Base extends Transport
      */
     public function setTitle($title = null)
     {
-		$this->logger->debug('Base:setTitle', [$title]);
+        $this->logger->debug('Base:setTitle', [$title]);
         $this->title = $title;
     }
 
@@ -79,7 +79,7 @@ class Base extends Transport
      */
     public function setLimit($limit)
     {
-		$this->logger->debug('Base:setLimit', [$limit]);
+        $this->logger->debug('Base:setLimit', [$limit]);
         $this->limit = $limit;
     }
 
