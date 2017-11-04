@@ -79,9 +79,9 @@ class Category extends Base
         $format = '';
         foreach ($response as $category) {
             $format .= '<div class="category">'
-            . '<span class="title">' 
-			. Tools::safeString(Tools::getFromArray($category, 'title'))
-			. '</span>'
+            . '<span class="title">'
+            . Tools::safeString(Tools::getFromArray($category, 'title'))
+            . '</span>'
             .$car.'pageid: ' . '<span class="pageid">' . Tools::getFromArray($category, 'pageid') . '</span>'
             .$car.'files: ' . Tools::getFromArray($category, 'files')
             .$car.'pages: ' . Tools::getFromArray($category, 'pages')

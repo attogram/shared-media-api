@@ -85,9 +85,9 @@ class Media extends Base
             . ' height="' . Tools::getFromArray($media, 'thumbheight') . '"'
             . ' title="'.Tools::safeString(print_r($media, true)).'">'
             . $car . '<span class="pageid">' . Tools::getFromArray($media, 'pageid') . '</span>'
-            . $car . '<span class="title">' 
-			. Tools::safeString(Tools::getFromArray($category, 'title'))
-			. '</span>'
+            . $car . '<span class="title">'
+            . Tools::safeString(Tools::getFromArray($media, 'title'))
+            . '</span>'
             . '</div>';
         }
         return $format;

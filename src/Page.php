@@ -42,9 +42,9 @@ class Page extends Base
         $format = '';
         foreach ($response as $page) {
             $format .= '<div class="page">'
-            . '<span class="title">' 
-			. Tools::safeString(Tools::getFromArray($category, 'title'))
-			. '</span>'
+            . '<span class="title">'
+            . Tools::safeString(Tools::getFromArray($page, 'title'))
+            . '</span>'
             .$car.'<span class="pageid">' . Tools::getFromArray($page, 'pageid') . '</span>'
             .$car.Tools::getFromArray($page, 'page_image_free')
             .'</div>';
