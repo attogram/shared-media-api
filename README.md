@@ -8,6 +8,7 @@ Fine-tuned for WikiMedia Commmons.
 [![Issue Count](https://codeclimate.com/github/attogram/shared-media-api/badges/issue_count.svg)](https://codeclimate.com/github/attogram/shared-media-api)
 [![Latest Stable Version](https://poser.pugx.org/attogram/shared-media-api/v/stable)](https://packagist.org/packages/attogram/shared-media-api)
 [![Latest Unstable Version](https://poser.pugx.org/attogram/shared-media-api/v/unstable)](https://packagist.org/packages/attogram/shared-media-api)
+[![Total Downloads](https://poser.pugx.org/attogram/shared-media-api/downloads)](https://packagist.org/packages/attogram/shared-media-api)
 
 * project home: https://github.com/attogram/shared-media-api
 * documentation: https://shared-media-api.readthedocs.io/
