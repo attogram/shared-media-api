@@ -13,7 +13,7 @@ use Attogram\SharedMedia\Api\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.10.9';
+    const VERSION = '0.10.10';
 
     const DEFAULT_LIMIT = 10;
 
@@ -37,7 +37,6 @@ class Sandbox
     public $logLevel;
     public $format;
     public $logger;
-    public $play;
     public $pageids;
     public $titles;
 
@@ -59,7 +58,7 @@ class Sandbox
     {
         $this->sandboxInit();
         print $this->getHeader().'<br />'.$this->menu().$this->form();
-        if ($this->play) {
+        if (Tools::hasGet('play')) {
             print $this->getResponse();
         }
         print $this->getFooter();
@@ -74,7 +73,6 @@ class Sandbox
         $this->arg = Tools::getGet('arg');
         $this->pageids = Tools::getGet('pageids');
         $this->titles = Tools::getGet('titles');
-        $this->play = isset($_GET['play']) ? true : false;
         $this->limit = Tools::getGet('limit');
         if (!$this->limit) {
             $this->limit = self::DEFAULT_LIMIT;
@@ -135,9 +133,6 @@ class Sandbox
 
     public function getMethodInfo()
     {
-        if (!$this->class || !$this->method) {
-            return false;
-        }
         foreach ($this->methods as $key => $val) {
             if ($val[0] == $this->class && $val[1] == $this->method) {
                 return $this->methods[$key];

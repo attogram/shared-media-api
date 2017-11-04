@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '0.10.6';
+    const VERSION = '0.10.7';
 
     /**
      * @param array $arrays
@@ -129,6 +129,15 @@ class Tools
     public static function getGet($name)
     {
         return isset($_GET[$name]) ? trim(urldecode($_GET[$name])) : null;
+    }
+
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    public static function hasGet($name)
+    {
+        return isset($_GET[$name]) ? true : false;
     }
 
     /**

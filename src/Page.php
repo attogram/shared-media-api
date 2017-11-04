@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Page extends Base
 {
-    const VERSION = '0.10.1';
+    const VERSION = '0.10.2';
 
     /**
      * search for Pages
@@ -42,7 +42,9 @@ class Page extends Base
         $format = '';
         foreach ($response as $page) {
             $format .= '<div class="page">'
-            .'<span class="title">' . Tools::getFromArray($page, 'title') . '</span>'
+            . '<span class="title">' 
+			. Tools::safeString(Tools::getFromArray($category, 'title'))
+			. '</span>'
             .$car.'<span class="pageid">' . Tools::getFromArray($page, 'pageid') . '</span>'
             .$car.Tools::getFromArray($page, 'page_image_free')
             .'</div>';

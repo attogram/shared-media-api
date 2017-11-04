@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Media extends Base
 {
-    const VERSION = '0.10.5';
+    const VERSION = '0.10.6';
 
     /**
      * search for Media files
@@ -83,9 +83,11 @@ class Media extends Base
             . ' src="' . Tools::getFromArray($media, 'thumburl') . '"'
             . ' width="' . Tools::getFromArray($media, 'thumbwidth') . '"'
             . ' height="' . Tools::getFromArray($media, 'thumbheight') . '"'
-            . ' title="'.htmlentities(print_r($media, true)).'">'
+            . ' title="'.Tools::safeString(print_r($media, true)).'">'
             . $car . '<span class="pageid">' . Tools::getFromArray($media, 'pageid') . '</span>'
-            . $car . '<span class="title">' . Tools::getFromArray($media, 'title') . '</span>'
+            . $car . '<span class="title">' 
+			. Tools::safeString(Tools::getFromArray($category, 'title'))
+			. '</span>'
             . '</div>';
         }
         return $format;
