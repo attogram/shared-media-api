@@ -231,6 +231,7 @@ class Sandbox
         if (!is_callable([$class, $this->method])) {
             return 'SANDBOX ERROR: Class::method not found';
         }
+		$class->logger->debug('SANDBOX: class: '.get_class($class));
         $class->setPageid($this->pageids);              // Set the pageid identifier
         $class->setTitle($this->titles);                // Set the title identifier
         $class->setEndpoint($this->endpoint);           // Set the API endpoint
