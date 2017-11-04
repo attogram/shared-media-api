@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
  */
 class Transport implements LoggerAwareInterface
 {
-    const VERSION = '0.10.2';
+    const VERSION = '0.10.3';
 
     public $logger;
 
@@ -54,7 +54,9 @@ class Transport implements LoggerAwareInterface
     public function setEndpoint($endpoint)
     {
         $this->endpoint = $endpoint;
-        $this->logger->debug('Transport::setEndpoint:', [$endpoint]);
+        $this->logger->debug(
+			'Transport::setEndpoint: <a target="commons" href="'.$this->endpoint.'">'.$this->endpoint.'</a>'
+		);
     }
 
     /**
