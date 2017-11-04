@@ -13,7 +13,7 @@ use Attogram\SharedMedia\Api\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.10.8';
+    const VERSION = '0.10.9';
 
     const DEFAULT_LIMIT = 10;
 
@@ -37,7 +37,7 @@ class Sandbox
     public $logLevel;
     public $format;
     public $logger;
-    public $isSubmitted;
+    public $play;
     public $pageids;
     public $titles;
 
@@ -58,9 +58,8 @@ class Sandbox
     public function play()
     {
         $this->sandboxInit();
-        $this->sandboxDefaults();
         print $this->getHeader().'<br />'.$this->menu().$this->form();
-        if ($this->isSubmitted) {
+        if ($this->play) {
             print $this->getResponse();
         }
         print $this->getFooter();
@@ -70,25 +69,21 @@ class Sandbox
     {
         $this->self = isset($_SERVER['PHP_SELF']) ? $_SERVER['PHP_SELF'] : null;
         $this->endpoint = Tools::getGet('endpoint');
-        $this->limit = Tools::getGet('limit');
         $this->class = Tools::getGet('class');
         $this->method = Tools::getGet('method');
         $this->arg = Tools::getGet('arg');
         $this->pageids = Tools::getGet('pageids');
         $this->titles = Tools::getGet('titles');
-        $this->logLevel = Tools::getGet('logLevel');
-        $this->format = Tools::getGet('format');
-        $this->isSubmitted = isset($_GET['play']) ? true : false;
-    }
-
-    public function sandboxDefaults()
-    {
+        $this->play = isset($_GET['play']) ? true : false;
+        $this->limit = Tools::getGet('limit');
         if (!$this->limit) {
             $this->limit = self::DEFAULT_LIMIT;
         }
+        $this->logLevel = Tools::getGet('logLevel');
         if (!$this->logLevel) {
             $this->logLevel = 'NOTICE';
         }
+        $this->format = Tools::getGet('format');
         if (!$this->format) {
             $this->format = 'html';
         }
@@ -140,7 +135,7 @@ class Sandbox
 
     public function getMethodInfo()
     {
-        if (!$this->hasMethodInfo()) {
+        if (!$this->class || !$this->method) {
             return false;
         }
         foreach ($this->methods as $key => $val) {
@@ -148,14 +143,6 @@ class Sandbox
                 return $this->methods[$key];
             }
         }
-    }
-
-    public function hasMethodInfo()
-    {
-        if ($this->class && $this->method) {
-            return true;
-        }
-        return false;
     }
 
     public function form()
@@ -246,7 +233,7 @@ class Sandbox
         if (!is_callable([$class, $this->method])) {
             return 'SANDBOX ERROR: Class::method not found';
         }
-        $class->logger->debug('SANDBOX: class: '.get_class($class));
+        $this->logger->debug('SANDBOX: class: '.get_class($class));
         $class->setPageid($this->pageids);              // Set the pageid identifier
         $class->setTitle($this->titles);                // Set the title identifier
         $class->setEndpoint($this->endpoint);           // Set the API endpoint
