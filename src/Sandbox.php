@@ -13,7 +13,7 @@ use Attogram\SharedMedia\Api\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.10.5';
+    const VERSION = '0.10.6';
 
     const DEFAULT_LIMIT = 10;
 
@@ -76,6 +76,7 @@ class Sandbox
         $this->pageids = Tools::getGet('pageids');
         $this->titles = Tools::getGet('titles');
         $this->logLevel = Tools::getGet('logLevel');
+        $this->format = Tools::getGet('format');
         $this->isSubmitted = isset($_GET['play']) ? true : false;
     }
 
@@ -86,6 +87,9 @@ class Sandbox
         }
         if (!$this->logLevel) {
             $this->logLevel = 'NOTICE';
+        }
+        if (!$this->format) {
+            $this->format = 'html';
         }
         $this->logger = new Logger($this->logLevel);
     }
@@ -179,7 +183,10 @@ class Sandbox
     {
         return 'endpoint:'.$this->endpointSelect()
         .'&nbsp; <nobr>limit:<input name="limit" value="'.$this->limit.'" type="text" size="5" /></nobr>'
-        .'&nbsp; <nobr>logLevel:'.$this->logLevelSelect().'</nobr>';
+        .'&nbsp; <nobr>logLevel:'.$this->logLevelSelect().'</nobr>'
+        .'&nbsp; <nobr>format:'.$this->formatSelect().'</nobr>'
+        ;
+
     }
 
     public function identifierForm()
@@ -218,6 +225,14 @@ class Sandbox
         .'</select>';
     }
 
+    public function formatSelect()
+    {
+        return '<select name="format">'
+        .'<option value="html"'.Tools::isSelected('html', $this->format).'>HTML</option>'
+        .'<option value="raw"'.Tools::isSelected('raw', $this->format).'>Raw</option>'
+        .'</select>';
+    }
+
     public function getResponse()
     {
         $action = $this->getMethodInfo();               // get all allowed actions
@@ -231,13 +246,20 @@ class Sandbox
         if (!is_callable([$class, $this->method])) {
             return 'SANDBOX ERROR: Class::method not found';
         }
-		$class->logger->debug('SANDBOX: class: '.get_class($class));
+        $class->logger->debug('SANDBOX: class: '.get_class($class));
         $class->setPageid($this->pageids);              // Set the pageid identifier
         $class->setTitle($this->titles);                // Set the title identifier
         $class->setEndpoint($this->endpoint);           // Set the API endpoint
         $class->setLimit($this->limit);                 // Set the # of responses to get
         $results = $class->{$this->method}($this->arg); // get results as an array or arrays
-        return $class->format($results);                // format the results as a string
+        switch ($this->format) {
+            case 'raw':
+                return '<pre>'.var_dump($results, true).'</pre>'; // format for result: as PHP Array
+            case 'html':
+            default:
+                return $class->format($results); // format for result: as HTML
+        }
+
     }
 
     public function getClass()
