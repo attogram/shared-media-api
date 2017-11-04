@@ -83,7 +83,7 @@ class Media extends Base
             . ' src="' . Tools::getFromArray($media, 'thumburl') . '"'
             . ' width="' . Tools::getFromArray($media, 'thumbwidth') . '"'
             . ' height="' . Tools::getFromArray($media, 'thumbheight') . '"'
-            . ' title="'.htmlentities(print_r($media,true)).'">'
+            . ' title="'.htmlentities(print_r($media, true)).'">'
             . $car . '<span class="pageid">' . Tools::getFromArray($media, 'pageid') . '</span>'
             . $car . '<span class="title">' . Tools::getFromArray($media, 'title') . '</span>'
             . '</div>';

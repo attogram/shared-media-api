@@ -137,7 +137,8 @@ class Tools
      * @param array $array
      * @param mixed|string $value
      */
-    public static function getFromArray(array $array, string $value) {
+    public static function getFromArray(array $array, string $value)
+    {
         if (isset($array[$value])) {
             return $array[$value];
         }
