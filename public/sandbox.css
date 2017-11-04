@@ -1,4 +1,4 @@
-/* attogram/shared-media-api - sandbox.css - v0.10.2 */
+/* attogram/shared-media-api - sandbox.css - v0.10.3 */
 body {
     background-color:#ddd;
     color:#000;
@@ -97,6 +97,7 @@ ul {
     background-color:black;
 	color:white;
 	font-family:monospace;
+    font-weight:bold;
 	margin:2px;
 	padding:2px;
 }
