@@ -55,8 +55,8 @@ class Transport implements LoggerAwareInterface
     {
         $this->endpoint = $endpoint;
         $this->logger->debug(
-			'Transport::setEndpoint: <a target="commons" href="'.$this->endpoint.'">'.$this->endpoint.'</a>'
-		);
+            'Transport::setEndpoint: <a target="commons" href="'.$this->endpoint.'">'.$this->endpoint.'</a>'
+        );
     }
 
     /**
