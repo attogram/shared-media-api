@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
  */
 class Transport implements LoggerAwareInterface
 {
-    const VERSION = '0.10.1';
+    const VERSION = '0.10.2';
 
     public $logger;
 
@@ -54,7 +54,7 @@ class Transport implements LoggerAwareInterface
     public function setEndpoint($endpoint)
     {
         $this->endpoint = $endpoint;
-        $this->logger->debug('Api::setEndpoint:', [$endpoint]);
+        $this->logger->debug('Transport::setEndpoint:', [$endpoint]);
     }
 
     /**
@@ -75,7 +75,7 @@ class Transport implements LoggerAwareInterface
     {
         $this->params[$paramName] = $paramValue;
         $this->logger->debug(
-            Tools::safeString('Api::setParam: '.$paramName.':'),
+            Tools::safeString('Transport::setParam: '.$paramName.':'),
             [Tools::safeString($paramValue)]
         );
     }
@@ -86,7 +86,7 @@ class Transport implements LoggerAwareInterface
     private function hasParams()
     {
         if (!$this->params || !is_array($this->params)) {
-            $this->logger->error('Api::hasParams: params Not Found');
+            $this->logger->error('Transport::hasParams: params Not Found');
             return false;
         }
         return true;
@@ -98,13 +98,13 @@ class Transport implements LoggerAwareInterface
     public function send()
     {
         if (!$this->hasParams()) {
-            $this->logger->error('Api::send: params Not Found');
+            $this->logger->error('Transport::send: params Not Found');
             return false;
         }
         $this->setParam('action', 'query');
         $this->setParam('format', 'json');
         $this->setParam('formatversion', 2);
-        $this->logger->info('Api::send: <a target="commons" href="'.$this->getUrl().'">'.$this->getUrl().'</a>');
+        $this->logger->info('Transport::send: <a target="commons" href="'.$this->getUrl().'">'.$this->getUrl().'</a>');
         try {
             $this->request = $this->getClient()->request(
                 'GET',
@@ -112,12 +112,12 @@ class Transport implements LoggerAwareInterface
                 ['query' => $this->params]
             );
         } catch (ConnectException $exception) {
-            $this->logger->error('Api::send: ConnectException: '.$exception->getMessage());
+            $this->logger->error('Transport::send: ConnectException: '.$exception->getMessage());
             return false;
         }
-        $this->logger->info('Api::send: '.$this->request->getStatusCode().': '.$this->request->getReasonPhrase());
+        $this->logger->info('Transport::send: '.$this->request->getStatusCode().': '.$this->request->getReasonPhrase());
         if (!$this->decodeRequest()) {
-            $this->logger->error('Api::send: decode failed');
+            $this->logger->error('Transport::send: decode failed');
             return false;
         };
         return true;
@@ -139,35 +139,35 @@ class Transport implements LoggerAwareInterface
      */
     public function getResponse($keys = null)
     {
-        $this->logger->debug('Api::getResponse', [$this->response]);
+        $this->logger->debug('Transport::getResponse', [$this->response]);
         if (!$this->response) {
-            $this->logger->error('Api::getResponse: No Response Found');
+            $this->logger->error('Transport::getResponse: No Response Found');
             return [];
         }
         if (!is_array($this->response)) {
-            $this->logger->error('Api::getResponse: Response Not Array');
+            $this->logger->error('Transport::getResponse: Response Not Array');
             return [$this->response];
         }
         $response = $this->getResponseFromKeys($keys);
-        $this->logger->info('Api::getResponse: count: '.count($response));
+        $this->logger->info('Transport::getResponse: count: '.count($response));
         return $response;
     }
 
     private function getResponseFromKeys($keys)
     {
         if (!$keys) {
-            $this->logger->debug('Api::getResponseFromKeys: Keys Not Found.');
+            $this->logger->debug('Transport::getResponseFromKeys: Keys Not Found.');
             return $this->response;
         }
         if (!is_array($keys)) {
-            $this->logger->debug('Api::getResponseFromKeys: Keys Not Array.');
+            $this->logger->debug('Transport::getResponseFromKeys: Keys Not Array.');
             return $this->response;
         }
         $found = $this->response;
         foreach ($keys as $key) {
             if (!isset($found[$key])) {
-                $this->logger->error('Api::getResponseFromKeys: Key Not Found: '.$key);
-                return $this->response;
+                $this->logger->error('Transport::getResponseFromKeys: Key Not Found: '.$key);
+                return [];
             }
             $found = $found[$key];
         }

@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Media extends Base
 {
-    const VERSION = '0.10.4';
+    const VERSION = '0.10.5';
 
     /**
      * search for Media files
@@ -65,5 +65,29 @@ class Media extends Base
     public function getMediaInCategory()
     {
         return $this->getCategorymemberResponse('file');
+    }
+
+    /**
+     * format a media file response as a simple string
+     *
+     * @param array $response
+     * @return string
+     */
+    public function format(array $response)
+    {
+        $cr = '<br />';
+        $format = '';
+        foreach ($response as $media) {
+            $format .= '<div class="media">'
+            . '<img'
+            . ' src="' . Tools::getFromArray($media, 'thumburl') . '"'
+            . ' width="' . Tools::getFromArray($media, 'thumbwidth') . '"'
+            . ' height="' . Tools::getFromArray($media, 'thumbheight') . '"'
+            . ' title="'.htmlentities(print_r($media,true)).'">'
+            . $cr . '<span class="pageid">' . Tools::getFromArray($media, 'pageid') . '</span>'
+            . $cr . '<span class="title">' . Tools::getFromArray($media, 'title') . '</span>'
+            . '</div>';
+        }
+        return $format;
     }
 }

@@ -1,4 +1,4 @@
-/* attogram/shared-media-api - sandbox.css - v0.10.1 */
+/* attogram/shared-media-api - sandbox.css - v0.10.2 */
 body {
     background-color:#ddd;
     color:#000;
@@ -30,6 +30,11 @@ form {
     font-family:monospace;
     padding:10px;
 }
+img {
+    background-clip:content-box;
+    background-color:white;
+    border:1px solid black;
+}
 input {
     font-family:monospace;
     padding:2;
@@ -57,4 +62,41 @@ ul {
     font-weight:bold;
     margin:1px;
     padding:5px;
+}
+.log {
+    display:block;
+    font-family:monospace;
+    padding:2px;
+}
+.logDEBUG {
+    background-color:lightyellow;
+}
+.logINFO {
+    background-color:yellow;
+}
+.logWARNING, .logERROR, .logCRITICAL, .logALERT, .logEMERGENCY {
+    background-color:orange;
+    font-weight:bold;
+}
+.category, .media, .page {
+	background-color:white;
+    border:1px solid black;
+    display:inline-block;
+    margin:6px;
+    padding:4px;
+}
+.media {
+    font-size:12px;
+}
+.title {
+    background-color:#ff9;
+    font-weight:bold;
+	margin:2px;
+}
+.pageid {
+    background-color:black;
+	color:white;
+	font-family:monospace;
+	margin:2px;
+	padding:2px;
 }

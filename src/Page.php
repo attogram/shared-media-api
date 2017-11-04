@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Page extends Base
 {
-    const VERSION = '0.10.0';
+    const VERSION = '0.10.1';
 
     /**
      * search for Pages
@@ -28,5 +28,25 @@ class Page extends Base
         $this->setParam('prop', 'pageprops');
         $this->send();
         return Tools::flatten($this->getResponse(['query', 'pages']));
+    }
+
+    /**
+     * format a page response as a simple string
+     *
+     * @param array $response
+     * @return string
+     */
+    public function format(array $response)
+    {
+        $cr = '<br />';
+        $format = '';
+        foreach ($response as $page) {
+            $format .= '<div class="page">'
+            .'<span class="title">' . Tools::getFromArray($page, 'title') . '</span>'
+            .$cr.'<span class="pageid">' . Tools::getFromArray($page, 'pageid') . '</span>'
+            .$cr.Tools::getFromArray($page, 'page_image_free')
+            .'</div>';
+        }
+        return $format;
     }
 }

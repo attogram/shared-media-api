@@ -9,7 +9,7 @@ use Psr\Log\AbstractLogger;
  */
 class Logger extends AbstractLogger
 {
-    const VERSION = '0.10.0';
+    const VERSION = '0.10.1';
 
     private $level;
     private $levelKey;
@@ -55,7 +55,7 @@ class Logger extends AbstractLogger
             return;
         }
         $level = strtoupper($level);
-        $out = '<div class="log">'."$level: $message";
+        $out = '<div class="log log'.$level.'">'."$level: $message";
         if (!empty($context)) {
             $out .= ' '.htmlentities(json_encode($context));
         }

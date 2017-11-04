@@ -13,7 +13,7 @@ use Attogram\SharedMedia\Api\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.10.4';
+    const VERSION = '0.10.5';
 
     const DEFAULT_LIMIT = 10;
 
@@ -60,9 +60,7 @@ class Sandbox
         $this->sandboxDefaults();
         print $this->getHeader().'<br />'.$this->menu().$this->form();
         if ($this->isSubmitted) {
-            print '<pre>';
             print $this->getResponse();
-            print '</pre>';
         }
         print $this->getFooter();
     }
@@ -222,23 +220,23 @@ class Sandbox
 
     public function getResponse()
     {
-        $action = $this->getMethodInfo();
+        $action = $this->getMethodInfo();               // get all allowed actions
         if (!$action) {
-            return 'ERROR: Class::method not allowed';
+            return 'SANDBOX ERROR: Class::method not allowed';
         }
         if ($action[2] && !$this->arg) {
-            return 'ERROR: Missing Arg: '.$action[2];
+            return 'SANDBOX ERROR: Missing Arg: '.$action[2];
         }
-        $class = $this->getClass();
+        $class = $this->getClass();                     // get the requested class
         if (!is_callable([$class, $this->method])) {
-            return 'ERROR: Class::method not found';
+            return 'SANDBOX ERROR: Class::method not found';
         }
-        $class->setPageid($this->pageids);
-        $class->setTitle($this->titles);
-        $class->setEndpoint($this->endpoint);
-        $class->setLimit($this->limit);
-        $results = $class->{$this->method}($this->arg);
-        return htmlentities(var_dump($results, true));
+        $class->setPageid($this->pageids);              // Set the pageid identifier
+        $class->setTitle($this->titles);                // Set the title identifier
+        $class->setEndpoint($this->endpoint);           // Set the API endpoint
+        $class->setLimit($this->limit);                 // Set the # of responses to get
+        $results = $class->{$this->method}($this->arg); // get results as an array or arrays
+        return $class->format($results);                // format the results as a string
     }
 
     public function getClass()
