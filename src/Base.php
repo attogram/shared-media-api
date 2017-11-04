@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Base extends Transport
 {
-    const VERSION = '0.10.4';
+    const VERSION = '0.10.5';
 
     const DEFAULT_LIMIT = 10;
 
@@ -89,6 +89,7 @@ class Base extends Transport
     public function getLimit()
     {
         if (!is_numeric($this->limit) || !$this->limit) {
+            $this->logger->info('Base:getLimit: setting DEFAULT_LIMIT');
             $this->setLimit(self::DEFAULT_LIMIT);
         }
         return $this->limit;
