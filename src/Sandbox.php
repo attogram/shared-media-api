@@ -13,7 +13,7 @@ use Attogram\SharedMedia\Api\Logger;
 
 class Sandbox
 {
-    const VERSION = '0.10.7';
+    const VERSION = '0.10.8';
 
     const DEFAULT_LIMIT = 10;
 
@@ -187,7 +187,6 @@ class Sandbox
         .'&nbsp; <nobr>logLevel:'.$this->logLevelSelect().'</nobr>'
         .'&nbsp; <nobr>format:'.$this->formatSelect().'</nobr>'
         ;
-
     }
 
     public function identifierForm()
@@ -260,7 +259,7 @@ class Sandbox
             default:
                 $response = $class->format($results); // format for result: as HTML
         }
-		return $response;
+        return $response;
     }
 
     public function getClass()
