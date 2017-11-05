@@ -32,7 +32,6 @@ See more :doc:`examples`
     page
     base
     transport
-    sandbox
     tools
     sources
     other

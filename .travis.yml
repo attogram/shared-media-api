@@ -1,4 +1,4 @@
-# attogram/shared-media-api - .travis.yml - v0.10.12
+# attogram/shared-media-api - .travis.yml - v0.10.13
 
 language: php
 
@@ -16,8 +16,7 @@ matrix:
     - php: nightly
 
 before_script:
-  - composer install --no-dev
-  - phpunit --version
+  - composer install
 
 script:
   - if find docs/ -name "*.php" -exec php -l {} 2>&1 \; | grep "error,"; then exit 1; fi;
