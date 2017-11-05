@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '0.10.7';
+    const VERSION = '0.10.8';
 
     /**
      * @param array $arrays
@@ -85,17 +85,6 @@ class Tools
     }
 
     /**
-     * @param string $str1
-     * @param string $str2
-     */
-    public static function isSelected($str1, $str2)
-    {
-        if ($str1 == $str2) {
-            return ' selected ';
-        }
-    }
-
-    /**
      * implode an array, using | as the glue
      *
      * @param array|mixed $values
@@ -120,24 +109,6 @@ class Tools
             return $string;
         }
         return htmlentities($string);
-    }
-
-    /**
-     * @param string $name
-     * @return mixed
-     */
-    public static function getGet($name)
-    {
-        return isset($_GET[$name]) ? trim(urldecode($_GET[$name])) : null;
-    }
-
-    /**
-     * @param string $name
-     * @return mixed
-     */
-    public static function hasGet($name)
-    {
-        return isset($_GET[$name]) ? true : false;
     }
 
     /**
