@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Media extends Base
 {
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
 
     /**
      * search for Media files
@@ -20,6 +20,7 @@ class Media extends Base
      */
     public function search($query)
     {
+        $this->logger->debug('Meda:search');
         if (!Tools::isGoodString($query)) {
             $this->logger->error('Media::search: invalid query');
             return [];
@@ -35,6 +36,7 @@ class Media extends Base
      */
     public function info()
     {
+        $this->logger->debug('Meda:info');
         if (!$this->setIdentifier('', 's')) {
             return [];
         }
@@ -49,6 +51,7 @@ class Media extends Base
      */
     public function getMediaOnPage()
     {
+        $this->logger->debug('Meda:getMediaOnPage');
         if (!$this->setIdentifier('', 's')) {
             return [];
         }
@@ -64,6 +67,7 @@ class Media extends Base
      */
     public function getMediaInCategory()
     {
+        $this->logger->debug('Meda:getMediaInCategory');
         return $this->getCategorymemberResponse('file');
     }
 
@@ -75,6 +79,7 @@ class Media extends Base
      */
     public function format(array $response)
     {
+        $this->logger->debug('Meda:format');
         $car = '<br />';
         $format = '';
         foreach ($response as $media) {

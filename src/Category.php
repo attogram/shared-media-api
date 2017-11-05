@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Base
 {
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
 
     /**
      * search for categories
@@ -20,6 +20,7 @@ class Category extends Base
      */
     public function search($query)
     {
+        $this->logger->debug('Category:search');
         if (!Tools::isGoodString($query)) {
             $this->logger->error('Category::search: invalid query');
             return [];
@@ -35,6 +36,7 @@ class Category extends Base
      */
     public function info()
     {
+        $this->logger->debug('Category:info');
         if (!$this->setIdentifier('', 's')) {
             return [];
         }
@@ -49,6 +51,7 @@ class Category extends Base
      */
     public function getCategoryfromPage()
     {
+        $this->logger->debug('Category:getCategoryfromPage');
         if (!$this->setIdentifier('', 's')) {
             return [];
         }
@@ -64,6 +67,7 @@ class Category extends Base
      */
     public function subcats()
     {
+        $this->logger->debug('Category:subcats');
         return $this->getCategorymemberResponse('subcat');
     }
 
@@ -75,6 +79,7 @@ class Category extends Base
      */
     public function format(array $response)
     {
+        $this->logger->debug('Category:format');
         $car = '<br />';
         $format = '';
         foreach ($response as $category) {

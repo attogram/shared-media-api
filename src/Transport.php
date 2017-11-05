@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
  */
 class Transport implements LoggerAwareInterface
 {
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
 
     public $logger;
 
@@ -55,7 +55,7 @@ class Transport implements LoggerAwareInterface
     {
         $this->endpoint = $endpoint;
         $this->logger->debug(
-            'Transport::setEndpoint: <a target="commons" href="'.$this->endpoint.'">'.$this->endpoint.'</a>'
+            'Transport:setEndpoint: <a target="commons" href="'.$this->endpoint.'">'.$this->endpoint.'</a>'
         );
     }
 
@@ -77,7 +77,7 @@ class Transport implements LoggerAwareInterface
     {
         $this->params[$paramName] = $paramValue;
         $this->logger->debug(
-            Tools::safeString('Transport::setParam: '.$paramName.':'),
+            Tools::safeString('Transport:setParam: '.$paramName.':'),
             [Tools::safeString($paramValue)]
         );
     }
@@ -88,7 +88,7 @@ class Transport implements LoggerAwareInterface
     private function hasParams()
     {
         if (!$this->params || !is_array($this->params)) {
-            $this->logger->error('Transport::hasParams: params Not Found');
+            $this->logger->error('Transport:hasParams: params Not Found');
             return false;
         }
         return true;
@@ -99,6 +99,7 @@ class Transport implements LoggerAwareInterface
      */
     public function send()
     {
+        $this->logger->debug('Transport:send');
         if (!$this->hasParams()) {
             $this->logger->error('Transport::send: params Not Found');
             return false;
@@ -130,6 +131,7 @@ class Transport implements LoggerAwareInterface
      */
     private function decodeRequest()
     {
+        $this->logger->debug('Transport:decodeRequest');
         if ($this->response = json_decode($this->request->getBody(), /*assoc array*/true)) {
             return true;
         }
@@ -157,6 +159,7 @@ class Transport implements LoggerAwareInterface
 
     private function getResponseFromKeys($keys)
     {
+        $this->logger->debug('Transport:getResponseFromKeys:', [$keys]);
         if (!$keys) {
             $this->logger->debug('Transport::getResponseFromKeys: Keys Not Found.');
             return $this->response;
@@ -189,6 +192,7 @@ class Transport implements LoggerAwareInterface
      */
     private function getClient()
     {
+        $this->logger->debug('Transport:getClient');
         return $this->client ?: new Client();
     }
 }

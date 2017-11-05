@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Page extends Base
 {
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
 
     /**
      * search for Pages
@@ -20,6 +20,7 @@ class Page extends Base
      */
     public function search($query)
     {
+        $this->logger->debug('Page:search');
         if (!Tools::isGoodString($query)) {
             $this->logger->error('Page::search: invalid query');
             return [];
@@ -38,6 +39,7 @@ class Page extends Base
      */
     public function format(array $response)
     {
+        $this->logger->debug('Page:format');
         $car = '<br />';
         $format = '';
         foreach ($response as $page) {
