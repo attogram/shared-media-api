@@ -1,5 +1,6 @@
-<?php // attogram/shared-media-api - sandbox.php - v0.10.1
+<?php // attogram/shared-media-api - sandbox.php - v0.10.2
 
+use Attogram\SharedMedia\Api\Sources;
 use Attogram\SharedMedia\Sandbox\Sandbox;
 
 $autoload = '../vendor/autoload.php';
@@ -40,6 +41,6 @@ $sandbox->setVersions([
     'Attogram\SharedMedia\Sandbox\Logger',
 ]);
 
-$sandbox->setSources(Source::$sources);
+$sandbox->setSources(Sources::$sources);
 
 $sandbox->play();
