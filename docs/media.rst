@@ -1,12 +1,12 @@
 Media object
 ============
 
-public $width = 100;
-
 public function search($query)
 
 public function info()
 
-public function onPage()
+public function getMediaOnPage()
 
-public function inCategory()
+public function getMediaInCategory()
+	
+public function format(array $response)

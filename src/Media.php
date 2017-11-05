@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Media extends Base
 {
-    const VERSION = '0.10.6';
+    const VERSION = '1.0.0';
 
     /**
      * search for Media files

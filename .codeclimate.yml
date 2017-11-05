@@ -1,4 +1,4 @@
-# attogram/shared-media-api - codeclimate.yml - v0.10.2
+# attogram/shared-media-api - codeclimate.yml - v1.0.0
 version: "2"
 exclude_patterns:
 - "vendor/"

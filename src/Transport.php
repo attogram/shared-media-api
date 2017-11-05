@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
  */
 class Transport implements LoggerAwareInterface
 {
-    const VERSION = '0.10.3';
+    const VERSION = '1.0.0';
 
     public $logger;
 

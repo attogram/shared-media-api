@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Base extends Transport
 {
-    const VERSION = '0.10.5';
+    const VERSION = '1.0.0';
 
     const DEFAULT_LIMIT = 10;
 

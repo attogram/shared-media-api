@@ -31,7 +31,4 @@ See more :doc:`examples`
     media
     page
     base
-    transport
-    tools
-    sources
     other

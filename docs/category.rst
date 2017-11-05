@@ -5,8 +5,8 @@ public function search($query)
 
 public function info()
 
-public function fromPage()
-
 public function subcats()
 
-public function members()
+public function getCategoryfromPage()
+
+public function format(array $response)

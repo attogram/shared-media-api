@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- attogram/shared-media-api - phpunit.xml - v0.10.0 -->
+<!-- attogram/shared-media-api - phpunit.xml - v1.0.0 -->
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
          bootstrap="vendor/autoload.php"

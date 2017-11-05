@@ -1,9 +1,11 @@
 Base object
 ===========
 
-public $pageid;
+Extended by Category, Media, and Page objects.
 
-public $title;
+public function setPageid($pageid = null)
+
+public function setTitle($title = null)
 
 public function setIdentifier($prefix = '', $postfix = '')
 
@@ -11,12 +13,23 @@ public function setLimit($limit)
 
 public function getLimit()
 
-public function isBatchcomplete()
 
-public function getTotalhits()
+Transport object
+================
 
-public function getWarnings()
+Extended by Base object
 
-public function getContinue()
+public function setLogger(LoggerInterface $logger = null)
 
-public function getSroffset()
+public function setEndpoint($endpoint)
+
+public function getEndpoint()
+
+public function setParam($paramName, $paramValue)
+
+public function send()
+
+public function getResponse($keys = null)
+
+public function getUrl()
+	

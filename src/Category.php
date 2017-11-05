@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Base
 {
-    const VERSION = '0.10.5';
+    const VERSION = '1.0.0';
 
     /**
      * search for categories
