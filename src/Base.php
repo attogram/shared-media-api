@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Base extends Transport
 {
-    const VERSION = '1.1.0';
+    const VERSION = '1.1.1';
 
     const DEFAULT_LIMIT = 10;
 
@@ -83,7 +83,7 @@ class Base extends Transport
      */
     public function setResponseLimit($limit)
     {
-        $this->logger->debug('Base:setLimit', [$limit]);
+        $this->logger->debug('Base:setResponseLimit', [$limit]);
         $this->limit = $limit;
     }
 
@@ -95,7 +95,7 @@ class Base extends Transport
         $this->logger->debug('Base:getLimit', [$this->limit]);
         if (!$this->limit) {
             $this->logger->info('Base:getLimit: setting DEFAULT_LIMIT');
-            $this->setLimit(self::DEFAULT_LIMIT);
+            $this->setResponseLimit(self::DEFAULT_LIMIT);
         }
         return $this->limit;
     }
