@@ -9,7 +9,7 @@ public function setTitle($title = null)
 
 public function setIdentifier($prefix = '', $postfix = '')
 
-public function setLimit($limit)
+public function setResponseLimit($limit)
 
 public function getLimit()
 

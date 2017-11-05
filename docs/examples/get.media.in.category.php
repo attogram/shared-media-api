@@ -17,7 +17,7 @@ print_r($myCategory);
 
 // Get the first 2 Media files in a category
 $media = new Media();
-$media->setLimit(2);
+$media->setResponseLimit(2);
 $media->setPageid($myCategory[0]['pageid']);
 $myMedias = $media->getMediaInCategory();
 if (empty($myMedias)) {
