@@ -1,4 +1,4 @@
-<?php // attogram/shared-media-api - sandbox.php - v0.10.2
+<?php // attogram/shared-media-api - sandbox.php - v0.10.3
 
 use Attogram\SharedMedia\Api\Sources;
 use Attogram\SharedMedia\Sandbox\Sandbox;
@@ -16,15 +16,15 @@ $sandbox->setTitle('shared-media-api');
 
 $sandbox->setMethods([
     // Class, Method, Arg, Identifiers
-    ['Category', 'search',              'query',  false],
-    ['Category', 'info',                false,    true],
-    ['Category', 'subcats',             false,    true],
-    ['Category', 'getCategoryfromPage', false,    true],
-    ['Media',    'search',              'query',  false],
-    ['Media',    'info',                false,    true],
-    ['Media',    'getMediaInCategory',  false,    true],
-    ['Media',    'getMediaOnPage',      false,    true],
-    ['Page',     'search',              'query',  false],
+    ['Attogram\SharedMedia\Api\Category', 'search',              'query',  false],
+    ['Attogram\SharedMedia\Api\Category', 'info',                false,    true],
+    ['Attogram\SharedMedia\Api\Category', 'subcats',             false,    true],
+    ['Attogram\SharedMedia\Api\Category', 'getCategoryfromPage', false,    true],
+    ['Attogram\SharedMedia\Api\Media',    'search',              'query',  false],
+    ['Attogram\SharedMedia\Api\Media',    'info',                false,    true],
+    ['Attogram\SharedMedia\Api\Media',    'getMediaInCategory',  false,    true],
+    ['Attogram\SharedMedia\Api\Media',    'getMediaOnPage',      false,    true],
+    ['Attogram\SharedMedia\Api\Page',     'search',              'query',  false],
 ]);
 
 $sandbox->setVersions([
@@ -35,7 +35,6 @@ $sandbox->setVersions([
     'Attogram\SharedMedia\Api\Page',
     'Attogram\SharedMedia\Api\Tools',
     'Attogram\SharedMedia\Api\Sources',
-    'Attogram\SharedMedia\Api\Logger',
     'Attogram\SharedMedia\Sandbox\Sandbox',
     'Attogram\SharedMedia\Sandbox\Tools',
     'Attogram\SharedMedia\Sandbox\Logger',
