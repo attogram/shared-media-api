@@ -17,5 +17,9 @@
         "psr-4": {
             "Attogram\\SharedMedia\\Api\\": "src/"
         }
-    }
+    },
+	"suggest": {
+		"attogram/shared-media-orm": "ORM for attogram/shared-media-api",
+		"attogram/shared-media-sandbox": "Web Sandbox for testing attogram/shared-media-* packages"
+	}
 }
