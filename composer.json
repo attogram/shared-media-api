@@ -2,7 +2,7 @@
     "name": "attogram/shared-media-api",
     "description": "MediaWiki Query API wrapper to easily get Category and Media file information into simple PHP arrays. Fine-tuned for WikiMedia Commmons.",
     "type": "library",
-    "license": "(MIT or GPL-3.0+)",
+    "license": "MIT",
     "homepage": "https://github.com/attogram/shared-media-api",
     "minimum-stability": "dev",
     "require": {
@@ -11,11 +11,16 @@
         "psr/log": "~1.0"
     },
     "require-dev": {
-        "attogram/shared-media-sandbox": "^1.0.1"
+        "attogram/shared-media-sandbox": "^1.0.1@dev"
     },
     "autoload": {
         "psr-4": {
             "Attogram\\SharedMedia\\Api\\": "src/"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
         }
     },
 	"suggest": {
