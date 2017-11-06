@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Category extends Base
 {
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     /**
      * search for categories
@@ -20,7 +20,7 @@ class Category extends Base
      */
     public function search($query)
     {
-        $this->logger->debug('Category:search');
+        $this->logger->debug('Category:search:', [$query]);
         if (!Tools::isGoodString($query)) {
             $this->logger->error('Category::search: invalid query');
             return [];
@@ -72,7 +72,7 @@ class Category extends Base
     }
 
     /**
-     * format a category response as a simple string
+     * format a category response as an HTML string
      *
      * @param array $response
      * @return string

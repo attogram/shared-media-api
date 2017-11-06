@@ -7,7 +7,7 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
 
     /**
      * @param array $arrays
@@ -73,7 +73,7 @@ class Tools
     }
 
     /**
-     * @param string $strin
+     * @param string $string
      * @return boolean
      */
     public static function isGoodString($string)
@@ -117,8 +117,11 @@ class Tools
      * @param array $array
      * @param mixed|string $value
      */
-    public static function getFromArray(array $array, string $value)
+    public static function getFromArray($array, $value)
     {
+		if (!is_array($array)) {
+			return '';
+		}
         if (isset($array[$value])) {
             return $array[$value];
         }
