@@ -119,9 +119,9 @@ class Tools
      */
     public static function getFromArray($array, $value)
     {
-		if (!is_array($array)) {
-			return '';
-		}
+        if (!is_array($array)) {
+            return '';
+        }
         if (isset($array[$value])) {
             return $array[$value];
         }
