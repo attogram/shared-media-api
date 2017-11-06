@@ -7,7 +7,7 @@ use Attogram\SharedMedia\Api\Media;
 
 // Get the first result from a search of the category namespace
 $category = new Category();
-$category->setLimit(1);
+$category->setResponseLimit(1);
 $myCategory = $category->search('Albert Einstein');
 if (empty($myCategory)) {
     print 'Category Not Found';
