@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
  */
 class TransportTest extends TestCase
 {
-    const VERSION = '1.0.0';
+    const VERSION = '1.0.1';
 
     public $defaultEndpoint;
     public $testingUrl;
@@ -34,19 +34,6 @@ class TransportTest extends TestCase
         $this->assertClassHasAttribute('endpoint', \Attogram\SharedMedia\Api\Transport::class);
         $transport = new \Attogram\SharedMedia\Api\Transport();
         $this->assertObjectHasAttribute('endpoint', $transport);
-    }
-
-    /**
-     */
-    public function testSetEndpoint()
-    {
-        $call = new \Attogram\SharedMedia\Api\Transport();
-        $call->setEndpoint($this->testingUrl);
-        $this->assertEquals(
-            $call->getEndpoint(),
-            $this->testingUrl,
-            'setEndpoint()/getEndpoint() failed'
-        );
     }
 
     /**
