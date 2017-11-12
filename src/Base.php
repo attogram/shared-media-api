@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Base extends Transport
 {
-    const VERSION = '1.1.1';
+    const VERSION = '1.1.2';
 
     const DEFAULT_LIMIT = 10;
 
@@ -17,7 +17,7 @@ class Base extends Transport
     const MEDIA_NAMESPACE = 6;
     const PAGE_NAMESPACE = 0;
 
-    public $thumbnailWidth = 125;
+    protected $thumbnailWidth = 125;
 
     private $pageid;
     private $title;
@@ -46,7 +46,7 @@ class Base extends Transport
      * @param string|null $postfix
      * @return bool
      */
-    public function setIdentifier($prefix = '', $postfix = '')
+    protected function setIdentifier($prefix = '', $postfix = '')
     {
         $this->logger->debug('Base:setIdentifier');
         if (!$this->pageid && !$this->title) {
@@ -107,7 +107,7 @@ class Base extends Transport
      * @param int|null $namespace
      * @return void
      */
-    public function setGeneratorSearch($query, $namespace = null)
+    protected function setGeneratorSearch($query, $namespace = null)
     {
         $this->logger->debug('Base:setGeneratorSearch');
         $this->setParam('generator', 'search');
@@ -123,7 +123,7 @@ class Base extends Transport
      *
      * @return void
      */
-    public function setGeneratorCategorymembers()
+    protected function setGeneratorCategorymembers()
     {
         $this->logger->debug('Base:setGeneratorCategorymembers');
         $this->setParam('generator', 'categorymembers');
@@ -136,7 +136,7 @@ class Base extends Transport
      *
      * @return void
      */
-    public function setGeneratorCategories()
+    protected function setGeneratorCategories()
     {
         $this->logger->debug('Base:setGeneratorCategories');
         $this->setParam('generator', 'categories');
@@ -149,7 +149,7 @@ class Base extends Transport
      *
      * @return void
      */
-    public function setGeneratorImages()
+    protected function setGeneratorImages()
     {
         $this->logger->debug('Base:setGeneratorImages');
         $this->setParam('generator', 'images');
@@ -162,7 +162,7 @@ class Base extends Transport
      * @see https://www.mediawiki.org/wiki/API:Imageinfo
      * @return void
      */
-    public function setImageinfoParams()
+    protected function setImageinfoParams()
     {
         $this->logger->debug('Base:setImageinfoParams');
         $this->setParam('prop', 'imageinfo');
@@ -177,7 +177,7 @@ class Base extends Transport
      *
      * @return array
      */
-    public function getImageinfoResponse()
+    protected function getImageinfoResponse()
     {
         $this->logger->debug('Base:getImageinfoResponse');
         $this->setImageinfoParams();
@@ -189,7 +189,7 @@ class Base extends Transport
      * @param string $cmtype 'file' or 'subcat'
      * @return array
      */
-    public function getCategorymemberResponse($cmtype)
+    protected function getCategorymemberResponse($cmtype)
     {
         $this->logger->debug('Base:getCategorymemberResponse');
         if (!$this->setIdentifier('gcm', '')) {
@@ -210,7 +210,7 @@ class Base extends Transport
      *
      * @return array
      */
-    public function getCategoryinfoResponse()
+    protected function getCategoryinfoResponse()
     {
         $this->logger->debug('Base:getCategoryinfoResponse');
         $this->setParam('prop', 'categoryinfo');

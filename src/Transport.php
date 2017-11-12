@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
  */
 class Transport implements LoggerAwareInterface
 {
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     public $logger;
 
@@ -62,7 +62,7 @@ class Transport implements LoggerAwareInterface
     /**
      * @return string
      */
-    public function getEndpoint()
+    private function getEndpoint()
     {
         if (!is_string($this->endpoint) || !$this->endpoint) {
             $this->setEndpoint(Sources::getSource());
@@ -73,7 +73,7 @@ class Transport implements LoggerAwareInterface
     /**
      * @return void
      */
-    public function setParam($paramName, $paramValue)
+    protected function setParam($paramName, $paramValue)
     {
         $this->params[$paramName] = $paramValue;
         $this->logger->debug(
@@ -97,7 +97,7 @@ class Transport implements LoggerAwareInterface
     /**
      * @return bool
      */
-    public function send()
+    protected function send()
     {
         $this->logger->debug('Transport:send');
         if (!$this->hasParams()) {
@@ -141,7 +141,7 @@ class Transport implements LoggerAwareInterface
     /**
      * @return array|mixed
      */
-    public function getResponse($keys = null)
+    protected function getResponse($keys = null)
     {
         $this->logger->debug('Transport::getResponse', [$this->response]);
         if (!$this->response) {
