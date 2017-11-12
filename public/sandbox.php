@@ -1,4 +1,4 @@
-<?php // attogram/shared-media-api - sandbox.php - v1.0.0
+<?php // attogram/shared-media-api - sandbox.php - v1.1.0
 
 use Attogram\SharedMedia\Api\Sources;
 use Attogram\SharedMedia\Sandbox\Sandbox;
@@ -15,12 +15,9 @@ if (!class_exists('Attogram\SharedMedia\Sandbox\Sandbox')) {
     return false;
 }
 
-$sandbox = new Sandbox();
-
-$sandbox->setTitle('shared-media-api');
+$sandbox = new Sandbox('shared-media-api');
 
 $sandbox->setMethods([
-    // Class, Method, Arg, Identifiers
     ['Attogram\SharedMedia\Api\Category', 'search',              'query',  false],
     ['Attogram\SharedMedia\Api\Category', 'info',                false,    true],
     ['Attogram\SharedMedia\Api\Category', 'subcats',             false,    true],
@@ -32,19 +29,13 @@ $sandbox->setMethods([
     ['Attogram\SharedMedia\Api\Page',     'search',              'query',  false],
 ]);
 
-$sandbox->setVersions([
-    'Attogram\SharedMedia\Api\Transport',
-    'Attogram\SharedMedia\Api\Base',
-    'Attogram\SharedMedia\Api\Category',
-    'Attogram\SharedMedia\Api\Media',
-    'Attogram\SharedMedia\Api\Page',
-    'Attogram\SharedMedia\Api\Tools',
-    'Attogram\SharedMedia\Api\Sources',
-    'Attogram\SharedMedia\Sandbox\Sandbox',
-    'Attogram\SharedMedia\Sandbox\Tools',
-    'Attogram\SharedMedia\Sandbox\Logger',
-]);
-
 $sandbox->setSources(Sources::$sources);
+
+$sandbox->setPreCall([
+    ['setPageid', 'pageids'],      // Set the pageid identifier
+    ['setTitle', 'titles'],        // Set the title identifier
+    ['setEndpoint', 'endpoint'],   // Set the API endpoint
+    ['setResponseLimit', 'limit'], // Set the # of responses to get
+]);
 
 $sandbox->play();
