@@ -1,4 +1,4 @@
-# shared-media-api v1.0.x
+# shared-media-api v1.0
 
 MediaWiki Query API wrapper that easily gets Category and Media file information into simple PHP arrays. 
 Fine-tuned for WikiMedia Commmons. 
@@ -15,4 +15,4 @@ Fine-tuned for WikiMedia Commmons.
 * packagist: https://packagist.org/packages/attogram/shared-media-api
 * travis-ci: https://travis-ci.org/attogram/shared-media-api
 * codeclimate: https://codeclimate.com/github/attogram/shared-media-api
-* shared-media-api is Dual Licensed under the MIT or GPL-3.0+, at your choosing.
+* shared-media-api is licensed under The MIT License.

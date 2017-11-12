@@ -11,7 +11,7 @@
         "psr/log": "~1.0"
     },
     "require-dev": {
-        "attogram/shared-media-sandbox": "^1.0@dev"
+        "attogram/shared-media-sandbox": "^1.1.2@dev"
     },
     "autoload": {
         "psr-4": {
@@ -24,7 +24,6 @@
         }
     },
 	"suggest": {
-		"attogram/shared-media-orm": "ORM for attogram/shared-media-api",
-		"attogram/shared-media-sandbox": "Web Sandbox for testing attogram/shared-media-* packages"
+		"attogram/shared-media-orm": "ORM for attogram/shared-media-api"
 	}
 }
