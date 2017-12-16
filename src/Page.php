@@ -9,7 +9,7 @@ use Attogram\SharedMedia\Api\Tools;
  */
 class Page extends Base
 {
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     /**
      * search for Pages
@@ -32,6 +32,22 @@ class Page extends Base
     }
 
     /**
+     * get page information
+     *
+     * @return array
+     */
+    public function info()
+    {
+        $this->logger->debug('Page:info');
+        if (!$this->setIdentifier('', 's')) {
+            return [];
+        }
+        $this->setParam('prop', 'pageprops');
+        $this->send();
+        return Tools::flatten($this->getResponse(['query', 'pages']));
+    }
+
+    /**
      * format a page response as a simple string
      *
      * @param array $response
@@ -47,8 +63,9 @@ class Page extends Base
             . '<span class="title">'
             . Tools::safeString(Tools::getFromArray($page, 'title'))
             . '</span>'
-            .$car.'<span class="pageid">' . Tools::getFromArray($page, 'pageid') . '</span>'
-            .$car.Tools::getFromArray($page, 'page_image_free')
+            . $car . '<span class="pageid">' . Tools::getFromArray($page, 'pageid') . '</span>'
+            . $car . Tools::getFromArray($page, 'page_image_free')
+            . $car . Tools::getFromArray($page, 'wikibase_item')
             .'</div>';
         }
         return $format;
