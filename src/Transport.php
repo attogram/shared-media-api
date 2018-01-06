@@ -14,7 +14,7 @@ use Psr\Log\NullLogger;
  */
 class Transport implements LoggerAwareInterface
 {
-    const VERSION = '1.0.2';
+    const VERSION = '1.0.3';
 
     public $logger;
 
@@ -25,8 +25,7 @@ class Transport implements LoggerAwareInterface
     private $response;
 
     /**
-     * @param LoggerInterface $logger PSR3 logger
-     * @return void
+     * @param LoggerInterface|null - $logger PSR3 logger
      */
     public function __construct(LoggerInterface $logger = null)
     {
@@ -36,7 +35,7 @@ class Transport implements LoggerAwareInterface
     /**
      * Set a PSR3 logger, or the NullLogger by default
      *
-     * @param mixed $log
+     * @param LoggerInterface|null $log
      * @return void
      */
     public function setLogger(LoggerInterface $logger = null)
