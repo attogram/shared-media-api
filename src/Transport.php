@@ -25,7 +25,7 @@ class Transport implements LoggerAwareInterface
     private $response;
 
     /**
-     * @param LoggerInterface|null - $logger PSR3 logger
+     * @param LoggerInterface|null $logger - PSR3 logger
      */
     public function __construct(LoggerInterface $logger = null)
     {
@@ -35,7 +35,7 @@ class Transport implements LoggerAwareInterface
     /**
      * Set a PSR3 logger, or the NullLogger by default
      *
-     * @param LoggerInterface|null $log
+     * @param LoggerInterface|null $logger - PSR3 logger
      * @return void
      */
     public function setLogger(LoggerInterface $logger = null)
