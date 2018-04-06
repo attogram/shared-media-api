@@ -2,14 +2,12 @@
 
 namespace Attogram\SharedMedia\Api;
 
-use Attogram\SharedMedia\Api\Tools;
-
 /**
  * Media file object
  */
 class Media extends Base
 {
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     /**
      * search for Media files

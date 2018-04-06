@@ -2,14 +2,12 @@
 
 namespace Attogram\SharedMedia\Api;
 
-use Attogram\SharedMedia\Api\Tools;
-
 /**
  * Base Object
  */
 class Base extends Transport
 {
-    const VERSION = '1.1.3';
+    const VERSION = '1.1.4';
 
     const DEFAULT_LIMIT = 10;
 
@@ -79,6 +77,7 @@ class Base extends Transport
     /**
      * Set limit on # of responses for an API call
      *
+     * @param int $limit
      * @return void
      */
     public function setLimit($limit)
@@ -202,6 +201,8 @@ class Base extends Transport
                 return $this->getCategoryinfoResponse();
             case 'file':
                 return $this->getImageinfoResponse();
+            default:
+                return [];
         }
     }
 

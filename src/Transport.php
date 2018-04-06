@@ -2,8 +2,7 @@
 
 namespace Attogram\SharedMedia\Api;
 
-use Attogram\SharedMedia\Api\Sources;
-use GuzzleHttp\Client;
+use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\ConnectException;
 use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerInterface;
@@ -14,14 +13,20 @@ use Psr\Log\NullLogger;
  */
 class Transport implements LoggerAwareInterface
 {
-    const VERSION = '1.0.3';
+    const VERSION = '1.0.4';
 
+    /** @var LoggerInterface $logger */
     public $logger;
 
+    /** @var string $endpoint  */
     private $endpoint;
+    /** @var GuzzleClient $client */
     private $client;
+    /** @var array $params */
     private $params = [];
+    /** @var \GuzzleHttp\Psr7\Request $request */
     private $request;
+    /** @var array $response */
     private $response;
 
     /**
@@ -48,13 +53,13 @@ class Transport implements LoggerAwareInterface
     }
 
     /**
-     * @return void
+     * @param $endpoint
      */
     public function setEndpoint($endpoint)
     {
         $this->endpoint = $endpoint;
         $this->logger->debug(
-            'Transport:setEndpoint: <a target="commons" href="'.$this->endpoint.'">'.$this->endpoint.'</a>'
+            'Transport:setEndpoint: <a target="commons" href="' . $this->endpoint.'">' . $this->endpoint . '</a>'
         );
     }
 
@@ -70,13 +75,14 @@ class Transport implements LoggerAwareInterface
     }
 
     /**
-     * @return void
+     * @param string $paramName
+     * @param string $paramValue
      */
     protected function setParam($paramName, $paramValue)
     {
         $this->params[$paramName] = $paramValue;
         $this->logger->debug(
-            Tools::safeString('Transport:setParam: '.$paramName.':'),
+            Tools::safeString('Transport:setParam: ' . $paramName . ':'),
             [Tools::safeString($paramValue)]
         );
     }
@@ -106,7 +112,9 @@ class Transport implements LoggerAwareInterface
         $this->setParam('action', 'query');
         $this->setParam('format', 'json');
         $this->setParam('formatversion', 2);
-        $this->logger->info('Transport::send: <a target="commons" href="'.$this->getUrl().'">'.$this->getUrl().'</a>');
+        $this->logger->info(
+            'Transport::send: <a target="commons" href="' . $this->getUrl() . '">' . $this->getUrl() . '</a>'
+        );
         try {
             $this->request = $this->getClient()->request(
                 'GET',
@@ -117,7 +125,9 @@ class Transport implements LoggerAwareInterface
             $this->logger->error('Transport::send: ConnectException: '.$exception->getMessage());
             return false;
         }
-        $this->logger->info('Transport::send: '.$this->request->getStatusCode().': '.$this->request->getReasonPhrase());
+        $this->logger->info(
+            'Transport::send: ' . $this->request->getStatusCode() . ': ' . $this->request->getReasonPhrase()
+        );
         if (!$this->decodeRequest()) {
             $this->logger->error('Transport::send: decode failed');
             return false;
@@ -131,14 +141,15 @@ class Transport implements LoggerAwareInterface
     private function decodeRequest()
     {
         $this->logger->debug('Transport:decodeRequest');
-        if ($this->response = json_decode($this->request->getBody(), /*assoc array*/true)) {
+        if (($this->response = json_decode($this->request->getBody(), true))) {
             return true;
         }
         return false;
     }
 
     /**
-     * @return array|mixed
+     * @param null $keys
+     * @return array|\GuzzleHttp\Psr7\Response
      */
     protected function getResponse($keys = null)
     {
@@ -152,10 +163,14 @@ class Transport implements LoggerAwareInterface
             return [$this->response];
         }
         $response = $this->getResponseFromKeys($keys);
-        $this->logger->info('Transport::getResponse: count: '.count($response));
+        $this->logger->info('Transport::getResponse: count: ' . count($response));
         return $response;
     }
 
+    /**
+     * @param $keys
+     * @return array
+     */
     private function getResponseFromKeys($keys)
     {
         $this->logger->debug('Transport:getResponseFromKeys:', [$keys]);
@@ -170,7 +185,7 @@ class Transport implements LoggerAwareInterface
         $found = $this->response;
         foreach ($keys as $key) {
             if (!isset($found[$key])) {
-                $this->logger->error('Transport::getResponseFromKeys: Key Not Found: '.$key);
+                $this->logger->error('Transport::getResponseFromKeys: Key Not Found: ' . $key);
                 return [];
             }
             $found = $found[$key];
@@ -183,15 +198,15 @@ class Transport implements LoggerAwareInterface
      */
     public function getUrl()
     {
-        return $this->getEndpoint().'?'.http_build_query($this->params);
+        return $this->getEndpoint() . '?' . http_build_query($this->params);
     }
 
     /**
-     * @return object \GuzzleHttp\Client
+     * @return GuzzleClient
      */
     private function getClient()
     {
         $this->logger->debug('Transport:getClient');
-        return $this->client ?: new Client();
+        return $this->client ?: new GuzzleClient();
     }
 }

@@ -2,14 +2,12 @@
 
 namespace Attogram\SharedMedia\Api;
 
-use Attogram\SharedMedia\Api\Tools;
-
 /**
  * Page Object
  */
 class Page extends Base
 {
-    const VERSION = '1.0.2';
+    const VERSION = '1.0.3';
 
     /**
      * search for Pages

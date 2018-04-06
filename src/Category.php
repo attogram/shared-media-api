@@ -2,14 +2,12 @@
 
 namespace Attogram\SharedMedia\Api;
 
-use Attogram\SharedMedia\Api\Tools;
-
 /**
  * Category object
  */
 class Category extends Base
 {
-    const VERSION = '1.0.2';
+    const VERSION = '1.0.3';
 
     /**
      * search for categories
@@ -87,12 +85,12 @@ class Category extends Base
             . '<span class="title">'
             . Tools::safeString(Tools::getFromArray($category, 'title'))
             . '</span>'
-            .$car.'pageid: ' . '<span class="pageid">' . Tools::getFromArray($category, 'pageid') . '</span>'
-            .$car.'files: ' . Tools::getFromArray($category, 'files')
-            .$car.'pages: ' . Tools::getFromArray($category, 'pages')
-            .$car.'subcats: ' . Tools::getFromArray($category, 'subcats')
-            .$car.'size: ' . Tools::getFromArray($category, 'size')
-            .$car.'hidden: ' . (isset($category['hidden']) && $category['hidden'] ? 'true' : 'false')
+            . $car . 'pageid: ' . '<span class="pageid">' . Tools::getFromArray($category, 'pageid') . '</span>'
+            . $car . 'files: ' . Tools::getFromArray($category, 'files')
+            . $car . 'pages: ' . Tools::getFromArray($category, 'pages')
+            . $car . 'subcats: ' . Tools::getFromArray($category, 'subcats')
+            . $car . 'size: ' . Tools::getFromArray($category, 'size')
+            . $car . 'hidden: ' . (isset($category['hidden']) && $category['hidden'] ? 'true' : 'false')
             .'</div>';
         }
         return $format;

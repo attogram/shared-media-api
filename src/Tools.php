@@ -7,10 +7,11 @@ namespace Attogram\SharedMedia\Api;
  */
 class Tools
 {
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     /**
      * @param array $arrays
+     * @return array
      */
     public static function flatten($arrays)
     {
@@ -102,6 +103,7 @@ class Tools
      * make a string safe for web output
      *
      * @param string|mixed $string
+     * @return string
      */
     public static function safeString($string)
     {
@@ -116,6 +118,7 @@ class Tools
      *
      * @param array $array
      * @param mixed|string $value
+     * @return mixed|string
      */
     public static function getFromArray($array, $value)
     {
