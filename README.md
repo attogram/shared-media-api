@@ -1,5 +1,7 @@
 # shared-media-api v1.0
 
+[![Logo](https://raw.githubusercontent.com/attogram/attogram-docs/master/shared-media-api/shared-media-api.png)](https://gihub.com/attogram/shared-media-api)
+
 MediaWiki Query API wrapper that easily gets Category and Media file information into simple PHP arrays. 
 Fine-tuned for WikiMedia Commmons. 
 
