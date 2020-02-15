@@ -8,12 +8,12 @@ use PHPUnit\Framework\TestCase;
  */
 class TransportTest extends TestCase
 {
-    const VERSION = '1.0.1';
+    const VERSION = '1.0.2';
 
     public $defaultEndpoint;
     public $testingUrl;
 
-    public function setUp()
+    public function setVars()
     {
         $this->defaultEndpoint = 'https://commons.wikimedia.org/w/api.php';
         $this->testingUrl = 'https://example.com/api';
@@ -23,6 +23,7 @@ class TransportTest extends TestCase
      */
     public function testConstruct()
     {
+        $this->setVars();
         $this->assertTrue(
             class_exists('\Attogram\SharedMedia\Api\Transport'),
             'class \Attogram\SharedMedia\Api\Transport not found'
@@ -40,6 +41,7 @@ class TransportTest extends TestCase
      */
     public function testClient()
     {
+        $this->setVars();
         $this->assertTrue(
             class_exists('\GuzzleHttp\Client'),
             'class \GuzzleHttp\Client not found'
